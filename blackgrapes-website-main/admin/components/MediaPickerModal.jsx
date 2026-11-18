@@ -58,7 +58,7 @@ export default function MediaPickerModal({ isOpen, onClose, onSelectMedia, media
 
   const handleConfirmSelect = () => {
     if (selectedItem && onSelectMedia) {
-      onSelectMedia(selectedItem.url, selectedItem);
+      onSelectMedia(selectedItem.url || selectedItem.file_url, selectedItem);
       onClose();
     }
   };
@@ -190,7 +190,7 @@ export default function MediaPickerModal({ isOpen, onClose, onSelectMedia, media
                     </div>
                   ) : (
                     <img
-                      src={item.url}
+                      src={item.url || item.file_url}
                       alt={item.originalName || item.filename}
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e) => {

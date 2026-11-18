@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparkles, Compass, ShieldCheck } from 'lucide-react';
 import { useHomePage } from '@backend/useContent';
+import { resolveMediaUrl } from '@backend/dataService';
 import '../styles/ClockPhilosophy.css';
 
 export default function ClockPhilosophy() {
@@ -24,7 +25,7 @@ export default function ClockPhilosophy() {
     'Whether launching a complex ERP system, validating property for a ₹50-crore bank facility, or securing municipal Naksha Pass approvals, we make every second of execution count.'
   ];
   const quoteText = clock.quoteText || 'Every great vision deserves its defining moment. At Black Grapes, we ensure that moment leads to unquestioned market leadership.';
-  const emblemImage = clock.emblemImage || '/images/black_grapes_emblem.jpg';
+  const emblemImage = resolveMediaUrl(clock.emblemImage || clock.image || '/images/black_grapes_emblem.jpg');
   const emblemTitle = clock.emblemTitle || 'BLACK GRAPES';
   const emblemSubtitle = clock.emblemSubtitle || 'PRECISION • INNOVATION • SCALE';
 

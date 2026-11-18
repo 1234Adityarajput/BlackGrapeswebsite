@@ -2,10 +2,13 @@
 import React from 'react';
 import { COMPANY_INFO } from '../data/siteData';
 import { useHomePage } from '@backend/useContent';
+import { resolveMediaUrl } from '@backend/dataService';
 
 export default function HeroSection({ onOpenModal }) {
   const { home } = useHomePage();
   const hero = home?.hero || {};
+  const rawImage = hero.image || hero.badge_image || hero.hero_image || '';
+  const heroImage = rawImage ? resolveMediaUrl(rawImage) : '';
 
   const badgeText = hero.badge || '10+ Years of Proven IT Excellence • Indore, India';
   const prefix = hero.prefix || 'Innovate. Integrate. Elevate.';
@@ -104,7 +107,7 @@ export default function HeroSection({ onOpenModal }) {
           </div>
         </div>
 
-        {/* Right Column: Interactive Tech Showcase Card */}
+        {/* Right Column: Interactive Tech Showcase Card / Custom Hero Visual */}
         <div className="hero-visual">
           <div className="hero-glass-card">
             {/* Card Header with Mock Window Controls */}
@@ -114,17 +117,59 @@ export default function HeroSection({ onOpenModal }) {
                 <span className="dot dot-yellow"></span>
                 <span className="dot dot-green"></span>
               </div>
+              <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontFamily: 'monospace' }}>
+                {heroImage ? 'Featured Architecture' : 'FullStackApp.tsx'}
+              </span>
             </div>
 
             {/* Showcase Card Content */}
-            <div className="glass-card-body">
-              <div className="tab-pane">
-                <div className="code-header">
-                  <span className="code-lang">FullStackApp.tsx</span>
-                  <span className="code-status">● Live Production</span>
+            <div className="glass-card-body" style={heroImage ? { padding: 0 } : {}}>
+              {heroImage ? (
+                <div style={{ position: 'relative', width: '100%', minHeight: '360px', maxHeight: '420px', overflow: 'hidden' }}>
+                  <img
+                    src={heroImage}
+                    alt="Black Grapes Softech"
+                    style={{ width: '100%', height: '100%', minHeight: '360px', objectFit: 'cover', display: 'block' }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(to top, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.3) 50%, transparent 100%)'
+                  }} />
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '1.25rem',
+                    left: '1.25rem',
+                    right: '1.25rem',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                    <div>
+                      <strong style={{ color: '#fff', fontSize: '1rem', display: 'block' }}>Black Grapes Softech</strong>
+                      <span style={{ color: '#f86200', fontSize: '0.78rem', fontWeight: 600 }}>Enterprise Software & IT Solutions</span>
+                    </div>
+                    <span style={{
+                      background: 'rgba(248, 98, 0, 0.2)',
+                      border: '1px solid rgba(248, 98, 0, 0.4)',
+                      color: '#f86200',
+                      fontSize: '0.7rem',
+                      padding: '0.2rem 0.5rem',
+                      borderRadius: '4px',
+                      fontWeight: 700
+                    }}>
+                      LIVE
+                    </span>
+                  </div>
                 </div>
-                <pre className="code-block">
-                  <code>{`// Modern React + Cloud Integration
+              ) : (
+                <div className="tab-pane">
+                  <div className="code-header">
+                    <span className="code-lang">FullStackApp.tsx</span>
+                    <span className="code-status">● Live Production</span>
+                  </div>
+                  <pre className="code-block">
+                    <code>{`// Modern React + Cloud Integration
 import { BlackGrapesSoftech } from '@bgst/core';
 
 export const EnterprisePortal = () => {
@@ -136,23 +181,24 @@ export const EnterprisePortal = () => {
 
   return <DigitalTransformation success={true} />;
 };`}</code>
-                </pre>
+                  </pre>
 
-                <div className="card-kpis">
-                  <div className="kpi-box">
-                    <span className="kpi-val">99 / 100</span>
-                    <span className="kpi-label">Lighthouse Score</span>
-                  </div>
-                  <div className="kpi-box">
-                    <span className="kpi-val">&lt; 0.6s</span>
-                    <span className="kpi-label">Load Time</span>
-                  </div>
-                  <div className="kpi-box">
-                    <span className="kpi-val">100%</span>
-                    <span className="kpi-label">Responsive</span>
+                  <div className="card-kpis">
+                    <div className="kpi-box">
+                      <span className="kpi-val">99 / 100</span>
+                      <span className="kpi-label">Lighthouse Score</span>
+                    </div>
+                    <div className="kpi-box">
+                      <span className="kpi-val">&lt; 0.6s</span>
+                      <span className="kpi-label">Load Time</span>
+                    </div>
+                    <div className="kpi-box">
+                      <span className="kpi-val">100%</span>
+                      <span className="kpi-label">Responsive</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 

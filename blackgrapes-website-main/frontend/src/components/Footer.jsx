@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/siteData';
 import { useSiteSettings } from '@backend/useContent';
+import { submitEnquiry } from '@backend/dataService';
 
 // Social Channel SVG Icons
 const LinkedinIcon = () => (
@@ -72,6 +73,16 @@ export default function Footer({ onOpenModal, onOpenInquiry }) {
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
     if (newsletterEmail.trim()) {
+      const emailToSubmit = newsletterEmail.trim();
+      submitEnquiry({
+        name: 'Newsletter Subscriber',
+        email: emailToSubmit,
+        phone: 'Via Newsletter Form',
+        service: 'Newsletter Subscription & Tech Updates',
+        message: `User subscribed to Black Grapes newsletter updates with email: ${emailToSubmit}`,
+        source: 'Footer Newsletter Widget'
+      }).catch(() => {});
+
       setSubscribed(true);
       setTimeout(() => {
         setNewsletterEmail('');

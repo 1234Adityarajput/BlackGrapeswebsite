@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHomePage } from '@backend/useContent';
+import { resolveMediaUrl } from '@backend/dataService';
 import { ABOUT_CONTENT } from '../data/siteData';
 
 export default function AboutSection({ onOpenModal }) {
@@ -23,12 +24,12 @@ export default function AboutSection({ onOpenModal }) {
     ? about.qaItems
     : ABOUT_CONTENT.qaItems;
 
-  const showcaseImage = about.showcaseImage || '/images/blackgrapes-1.png';
+  const showcaseImage = resolveMediaUrl(about.showcaseImage || about.image || about.image1 || '/images/blackgrapes-1.png');
   const experienceYears = about.experienceYears || '10+ Years';
   const experienceLabel = about.experienceLabel || 'of IT & Software Innovation';
   const techBadgeText = about.techBadgeText || 'Web • Mobile • Cloud • AI';
 
-  const innovationImage = about.innovationImage || '/images/tech-innovation.jpg';
+  const innovationImage = resolveMediaUrl(about.innovationImage || about.image2 || '/images/tech-innovation.jpg');
   const innovationTag = about.innovationTag || 'AI & CLOUD ARCHITECTURE';
   const innovationKpi = about.innovationKpi || '⚡ 99.9% Uptime • Global Data Flow';
   const innovationTitle = about.innovationTitle || 'High-Velocity Software Ecosystems';

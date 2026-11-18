@@ -22,6 +22,7 @@ import {
   Copy
 } from 'lucide-react';
 import '../styles/CyberServices.css';
+import { submitEnquiry } from '@backend/dataService';
 
 export default function EcommercePage({ onOpenContact }) {
   const [activeTab, setActiveTab] = useState('all'); // 'all', 'new', 'used'
@@ -42,8 +43,20 @@ export default function EcommercePage({ onOpenContact }) {
     setTimeout(() => setCopiedDomain(false), 2000);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await submitEnquiry({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        service: `NayaPuranaBazaar Ecommerce (${formData.interest || 'Lead'})`,
+        message: `Product Category: ${formData.productCategory || 'N/A'}\nInterest Type: ${formData.interest || 'buyer'}`,
+        source: 'Ecommerce Page (/ecommerce)'
+      });
+    } catch {
+      // fallback
+    }
     setWaitlistSubmitted(true);
   };
 

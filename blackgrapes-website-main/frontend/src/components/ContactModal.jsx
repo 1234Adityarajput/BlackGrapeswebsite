@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { COMPANY_INFO, REQUIREMENT_OPTIONS } from '../data/siteData';
+import { submitEnquiry } from '@backend/dataService';
 
 export default function ContactModal({ isOpen, onClose, modalTitle = 'Request a Demo' }) {
   const [formData, setFormData] = useState({
@@ -14,14 +15,24 @@ export default function ContactModal({ isOpen, onClose, modalTitle = 'Request a 
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate submission
-    setTimeout(() => {
+    try {
+      await submitEnquiry({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        service: formData.requirement,
+        message: formData.message,
+        source: `Contact Modal (${modalTitle})`
+      });
+    } catch (err) {
+      console.warn('[ContactModal] Submit warning:', err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 900);
+    }
   };
 
   const handleReset = () => {

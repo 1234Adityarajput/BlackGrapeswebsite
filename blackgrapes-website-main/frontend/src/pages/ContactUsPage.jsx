@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { COMPANY_INFO, CONTACT_PAGE_DATA, REQUIREMENT_OPTIONS } from '../data/siteData';
+import { submitEnquiry } from '@backend/dataService';
 
 export default function ContactUsPage({ onOpenModal }) {
   const [formData, setFormData] = useState({
@@ -44,13 +45,25 @@ export default function ContactUsPage({ onOpenModal }) {
     setTimeout(() => setCopiedKey(null), 2000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    try {
+      await submitEnquiry({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        service: formData.requirement,
+        timeline: formData.timeline,
+        message: formData.message,
+        source: 'Contact Us Page Form'
+      });
+    } catch (err) {
+      console.warn('[ContactUsPage] Submit error:', err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 800);
+    }
   };
 
   const handleReset = () => {

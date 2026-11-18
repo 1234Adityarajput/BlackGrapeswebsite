@@ -3,6 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dbService from './dbService.js';
+import MediaItem from './models/MediaItem.js';
+import { isCloudinaryReady, uploadToCloudinary, deleteFromCloudinary } from './config/cloudinary.js';
+import { sendEnquiryNotification, sendClientConfirmation } from './config/emailService.js';
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -83,25 +86,48 @@ router.put('/content/:module', async (req, res) => {
   }
 });
 
-// 5. Inquiries / Leads Submission
-router.post('/inquiries', async (req, res) => {
-  const { name, email, phone, service, message, scope } = req.body;
+// 5. Inquiries / Leads Submission (with Real-Time SMTP Email Dispatch)
+router.post(['/inquiries', '/enquiries'], async (req, res) => {
+  const { name, email, phone, service, requirement, message, scope, company, budget, timeline, source } = req.body;
 
-  if (!name || !phone) {
+  // Lead must have a name and at least one contact method (phone or email)
+  if (!name || (!phone && !email)) {
     return res.status(400).json({
       success: false,
-      message: 'Name and phone number are required.'
+      message: 'Name and at least a phone number or email address are required.'
     });
   }
 
+  const payload = {
+    name: (name || '').trim(),
+    email: (email || '').trim(),
+    phone: (phone || '').trim(),
+    service: service || requirement || 'General Software / IT Inquiry',
+    company: (company || '').trim(),
+    budget: (budget || '').trim(),
+    timeline: (timeline || '').trim(),
+    source: source || 'Website Lead Form',
+    message: message || scope || ''
+  };
+
   try {
-    const newEnquiry = await dbService.createInquiry({ name, email, phone, service, message, scope });
+    const newEnquiry = await dbService.createInquiry(payload);
 
     if (req.app?.locals?.broadcastContentUpdate) {
       req.app.locals.broadcastContentUpdate('enquiries', newEnquiry);
     }
 
-    console.log(`[Black Grapes Lead] Ticket #${newEnquiry.ticket_id} created for ${name} (${phone})`);
+    console.log(`[Black Grapes Lead] Ticket #${newEnquiry.ticket_id} created for ${payload.name} (${payload.phone || payload.email})`);
+
+    // 📧 Real-Time SMTP Email Alert to blackgrapes.arpitjain@gmail.com
+    sendEnquiryNotification(newEnquiry).catch((e) => {
+      console.error('[SMTP Notification Background Notice]:', e.message);
+    });
+
+    // Optional confirmation to client
+    if (payload.email && payload.email.includes('@')) {
+      sendClientConfirmation(newEnquiry).catch(() => { });
+    }
 
     res.status(201).json({
       success: true,
@@ -110,6 +136,7 @@ router.post('/inquiries', async (req, res) => {
       data: newEnquiry
     });
   } catch (err) {
+    console.error('[Inquiry Error]:', err);
     res.status(500).json({ success: false, error: err.message });
   }
 });
@@ -195,59 +222,186 @@ router.post('/auth/login', (req, res) => {
   });
 });
 
-// 10. File / Image Upload
-router.post('/upload', express.json({ limit: '25mb' }), (req, res) => {
+// 10. File / Image Upload (Cloudinary Cloud Storage First, Local Disk Fallback)
+router.post('/upload', express.json({ limit: '25mb' }), async (req, res) => {
   try {
     const { fileName, base64Data, altText } = req.body;
     if (!fileName || !base64Data) {
       return res.status(400).json({ success: false, message: 'fileName and base64Data are required' });
     }
 
-    const cleanBase64 = base64Data.replace(/^data:image\/\w+;base64,/, '');
-    const buffer = Buffer.from(cleanBase64, 'base64');
-    const safeName = `${Date.now()}-${fileName.replace(/[^a-zA-Z0-9._-]/g, '')}`;
-    const filePath = path.join(UPLOADS_DIR, safeName);
+    let publicUrl = '';
+    let publicId = null;
+    let storageProvider = 'local_disk';
+    let cloudWidth = 0;
+    let cloudHeight = 0;
 
-    fs.writeFileSync(filePath, buffer);
-    const host = req.get('host') || 'blackgrapeswebsite.onrender.com';
-    const protocol = req.headers['x-forwarded-proto'] || (host.includes('localhost') ? 'http' : 'https');
-    const publicUrl = `${protocol}://${host}/uploads/${safeName}`;
+    // 1. Try Cloudinary Cloud Upload first
+    if (isCloudinaryReady()) {
+      try {
+        console.log(`[Cloudinary Upload] Uploading "${fileName}" to Cloudinary...`);
+        const cloudResult = await uploadToCloudinary(base64Data, {
+          folder: 'blackgrapes_media',
+          resource_type: 'auto'
+        });
 
-    const localDb = dbService.readLocalDb();
-    if (!localDb.media_library) localDb.media_library = [];
+        if (cloudResult && cloudResult.secure_url) {
+          publicUrl = cloudResult.secure_url;
+          publicId = cloudResult.public_id;
+          storageProvider = 'cloudinary';
+          cloudWidth = cloudResult.width || 0;
+          cloudHeight = cloudResult.height || 0;
+          console.log(`\x1b[32m%s\x1b[0m`, `[Cloudinary Success] Live asset uploaded: ${publicUrl}`);
+        }
+      } catch (cloudErr) {
+        console.error('[Cloudinary Upload Error, falling back to server disk]:', cloudErr.message);
+      }
+    }
+
+    // 2. Server Disk Fallback if Cloudinary is not configured or failed
+    if (!publicUrl) {
+      const cleanBase64 = base64Data.replace(/^data:[^;]+;base64,/, '');
+      const buffer = Buffer.from(cleanBase64, 'base64');
+      const safeName = `${Date.now()}-${fileName.replace(/[^a-zA-Z0-9._-]/g, '')}`;
+      const filePath = path.join(UPLOADS_DIR, safeName);
+
+      fs.writeFileSync(filePath, buffer);
+      const host = req.get('host') || 'blackgrapeswebsite.onrender.com';
+      const protocol = req.headers['x-forwarded-proto'] || (host.includes('localhost') ? 'http' : 'https');
+      publicUrl = `${protocol}://${host}/uploads/${safeName}`;
+      storageProvider = 'local_disk';
+    }
 
     const newMedia = {
       id: `med-${Date.now()}`,
       name: fileName,
+      filename: fileName,
+      originalName: fileName,
       url: publicUrl,
+      publicId: publicId,
+      public_id: publicId,
+      storage_provider: storageProvider,
       file_type: fileName.endsWith('.png') ? 'image/png' : 'image/jpeg',
-      file_size: buffer.length,
+      width: cloudWidth,
+      height: cloudHeight,
       alt_text: altText || fileName,
-      uploaded_at: new Date().toISOString()
+      uploaded_at: new Date().toISOString(),
+      createdAt: new Date().toISOString()
     };
 
-    localDb.media_library.unshift(newMedia);
-    dbService.writeLocalDb(localDb);
+    // Save to MongoDB MediaItem collection if available
+    try {
+      const status = dbService.getStatus ? dbService.getStatus() : {};
+      if (status.mongodb_connected) {
+        await MediaItem.create({
+          filename: fileName,
+          originalName: fileName,
+          mimeType: newMedia.file_type,
+          url: publicUrl,
+          publicId: publicId,
+          resourceType: 'image',
+          width: cloudWidth,
+          height: cloudHeight,
+          uploadedBy: req.headers['x-admin-email'] || 'Admin'
+        });
+      }
+    } catch (mErr) {
+      console.warn('[MediaItem Save Notice]:', mErr.message);
+    }
 
-    res.json({ success: true, url: publicUrl, item: newMedia });
+    // Persist to media_library module in MongoDB Atlas (and local db.json)
+    try {
+      const currentList = (await dbService.getModule('media_library')) || [];
+      const updatedList = [newMedia, ...currentList.filter((m) => m.id !== newMedia.id)];
+      await dbService.saveModule('media_library', updatedList, req.headers['x-admin-email'] || 'admin@blackgrapessoftech.com');
+    } catch (dbErr) {
+      console.warn('[dbService Save Media Notice]:', dbErr.message);
+    }
+
+    // Also persist to local db.json
+    try {
+      const localDb = dbService.readLocalDb();
+      if (!localDb.media_library) localDb.media_library = [];
+      localDb.media_library.unshift(newMedia);
+      dbService.writeLocalDb(localDb);
+    } catch (locErr) {
+      // ignore
+    }
+
+    // WebSocket Broadcast to notify Admin and Website instantly
+    if (req.app?.locals?.broadcastContentUpdate) {
+      req.app.locals.broadcastContentUpdate('media', newMedia);
+    }
+
+    res.json({
+      success: true,
+      url: publicUrl,
+      storage_provider: storageProvider,
+      item: newMedia,
+      data: newMedia
+    });
   } catch (err) {
     console.error('Upload Error:', err);
-    res.status(500).json({ success: false, message: 'Failed to upload image' });
+    res.status(500).json({ success: false, message: 'Failed to upload image: ' + err.message });
   }
 });
 
 // 11. Media Library
-router.get('/media', (req, res) => {
-  const localDb = dbService.readLocalDb();
-  res.json({ success: true, data: localDb.media_library || [] });
+router.get('/media', async (req, res) => {
+  try {
+    let list = await dbService.getModule('media_library');
+    if (!list || !Array.isArray(list) || list.length === 0) {
+      const localDb = dbService.readLocalDb();
+      list = localDb.media_library || [];
+    }
+    res.json({
+      success: true,
+      cloudinaryActive: isCloudinaryReady(),
+      data: list
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
-router.delete('/media/:id', (req, res) => {
+router.delete('/media/:id', async (req, res) => {
   const { id } = req.params;
-  const localDb = dbService.readLocalDb();
-  localDb.media_library = (localDb.media_library || []).filter((m) => String(m.id) !== String(id));
-  dbService.writeLocalDb(localDb);
-  res.json({ success: true, message: 'Media item deleted' });
+  try {
+    let list = (await dbService.getModule('media_library')) || [];
+    const itemToDelete = list.find((m) => String(m.id) === String(id) || String(m._id) === String(id));
+
+    // Delete from Cloudinary if publicId exists
+    if (itemToDelete && (itemToDelete.publicId || itemToDelete.public_id)) {
+      try {
+        await deleteFromCloudinary(itemToDelete.publicId || itemToDelete.public_id);
+      } catch (cErr) {
+        console.warn('[Cloudinary Delete Notice]:', cErr.message);
+      }
+    }
+
+    const updated = list.filter((m) => String(m.id) !== String(id) && String(m._id) !== String(id));
+    await dbService.saveModule('media_library', updated);
+
+    // Also remove from local db.json
+    const localDb = dbService.readLocalDb();
+    localDb.media_library = (localDb.media_library || []).filter((m) => String(m.id) !== String(id));
+    dbService.writeLocalDb(localDb);
+
+    // Remove from MongoDB MediaItem collection if exists
+    try {
+      await MediaItem.deleteOne({ $or: [{ _id: id }, { filename: id }] });
+    } catch {
+      // ignore
+    }
+
+    if (req.app?.locals?.broadcastContentUpdate) {
+      req.app.locals.broadcastContentUpdate('media', { deletedId: id });
+    }
+
+    res.json({ success: true, message: 'Media item deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 export default router;

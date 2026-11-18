@@ -27,7 +27,8 @@ import {
   Briefcase,
   ShoppingBag,
   Handshake,
-  Building2
+  Building2,
+  Sparkles
 } from 'lucide-react';
 import { getCurrentSession, logoutAdmin } from '@backend/authService';
 import { getEnquiries, checkBackendHealth } from '@backend/dataService';
@@ -112,6 +113,7 @@ export default function AdminLayout() {
     {
       group: 'Operations & Media',
       items: [
+        { label: 'Page Images Manager', path: '/admin/page-images', icon: Sparkles, highlight: true },
         { label: 'Media Library', path: '/admin/media', icon: ImageIcon },
         { label: 'SEO Management', path: '/admin/seo', icon: Search },
         { label: 'Enquiries & Leads', path: '/admin/enquiries', icon: Inbox, badge: newEnquiriesCount }

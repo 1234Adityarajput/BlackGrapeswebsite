@@ -245,22 +245,45 @@ export default function ITStaffingPage({ onOpenContact }) {
         }
       ];
 
-  const handleHeroFormSubmit = (e) => {
+  const handleHeroFormSubmit = async (e) => {
     e.preventDefault();
     setHeroFormSubmitting(true);
-    setTimeout(() => {
+    try {
+      await submitEnquiry({
+        name: heroForm.fullName,
+        company: heroForm.companyName,
+        email: heroForm.companyEmail,
+        phone: heroForm.mobileNumber,
+        service: `IT Staffing - ${heroForm.service} (${heroForm.mandates} hires)`,
+        message: `Hiring Mandates: ${heroForm.mandates} Staff\nService Type: ${heroForm.service}`,
+        source: 'IT Staffing Page Hero Form'
+      });
+    } catch (err) {
+      console.warn('[ITStaffing Hero Submit]:', err);
+    } finally {
       setHeroFormSubmitting(false);
       setHeroFormSuccess(true);
-    }, 700);
+    }
   };
 
-  const handleModalSubmit = (e) => {
+  const handleModalSubmit = async (e) => {
     e.preventDefault();
     setModalSubmitting(true);
-    setTimeout(() => {
+    try {
+      await submitEnquiry({
+        name: modalForm.name,
+        email: modalForm.email,
+        phone: modalForm.contact,
+        service: `IT Staffing - ${modalForm.requirement}`,
+        message: modalForm.message,
+        source: `IT Staffing Modal (${modalType})`
+      });
+    } catch (err) {
+      console.warn('[ITStaffing Modal Submit]:', err);
+    } finally {
       setModalSubmitting(false);
       setModalSuccess(true);
-    }, 700);
+    }
   };
 
   const openInquiryModal = (type = 'Enquiry') => {

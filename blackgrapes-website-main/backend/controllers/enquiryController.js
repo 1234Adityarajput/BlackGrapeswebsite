@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import Enquiry from '../models/Enquiry.js';
 import ActivityLog from '../models/ActivityLog.js';
+import { sendEnquiryNotification, sendClientConfirmation } from '../config/emailService.js';
 
 // @desc    Submit New Enquiry / Lead
 // @route   POST /api/enquiries
@@ -33,6 +34,9 @@ export const createEnquiry = async (req, res, next) => {
         status: 'new',
         createdAt: new Date().toISOString()
       };
+
+      sendEnquiryNotification(fallbackEnquiry).catch(() => {});
+
       return res.status(201).json({
         success: true,
         message: 'Thank you! Your enquiry has been received.',
@@ -55,6 +59,11 @@ export const createEnquiry = async (req, res, next) => {
       source: source || 'website',
       ipAddress: req.ip || ''
     });
+
+    sendEnquiryNotification(enquiry).catch(() => {});
+    if (email && email.includes('@')) {
+      sendClientConfirmation(enquiry).catch(() => {});
+    }
 
     res.status(201).json({
       success: true,

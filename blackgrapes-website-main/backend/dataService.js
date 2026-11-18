@@ -752,6 +752,7 @@ export async function getEnquiries() {
 }
 
 export async function submitEnquiry(enquiry) {
+  // 1. Try central backend server on Render port 5000
   try {
     const res = await fetch(getApiUrl('/api/inquiries'), {
       method: 'POST',
@@ -762,6 +763,22 @@ export async function submitEnquiry(enquiry) {
       const json = await res.json();
       notifyContentUpdated('enquiries', json.data);
       return json;
+    }
+  } catch {
+    // fallback to relative path
+  }
+
+  // 2. Try relative path (Vite proxy / same host)
+  try {
+    const res2 = await fetch('/api/inquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(enquiry)
+    });
+    if (res2.ok) {
+      const json2 = await res2.json();
+      notifyContentUpdated('enquiries', json2.data);
+      return json2;
     }
   } catch {
     // offline fallback
@@ -826,10 +843,11 @@ export async function getMediaLibrary() {
     const res = await fetch(getApiUrl('/api/media'));
     if (res.ok) {
       const json = await res.json();
-      if (json.success && json.data) {
-        const normalized = json.data.map((item) => ({
+      if (json && json.data) {
+        const rawArray = Array.isArray(json.data) ? json.data : [];
+        const normalized = rawArray.map((item) => ({
           ...item,
-          url: resolveMediaUrl(item.url)
+          url: resolveMediaUrl(item?.url || item?.file_url)
         }));
         setLocal(STORAGE_KEYS.MEDIA, normalized);
         return normalized;
@@ -839,7 +857,8 @@ export async function getMediaLibrary() {
     // fallback
   }
   const local = getLocal(STORAGE_KEYS.MEDIA, []);
-  return local.map((item) => ({ ...item, url: resolveMediaUrl(item.url) }));
+  const localArray = Array.isArray(local) ? local : [];
+  return localArray.map((item) => ({ ...item, url: resolveMediaUrl(item?.url || item?.file_url) }));
 }
 
 export async function uploadMediaItem(file, altText = '') {
@@ -859,9 +878,9 @@ export async function uploadMediaItem(file, altText = '') {
         if (res.ok) {
           const json = await res.json();
           notifyContentUpdated('media');
-          const uploadedItem = json.item || { url: json.url };
+          const uploadedItem = json.item || json.data || { url: json.url };
           if (uploadedItem.url) uploadedItem.url = resolveMediaUrl(uploadedItem.url);
-          return resolve(uploadedItem);
+          return resolve({ ...uploadedItem, success: true, data: uploadedItem });
         }
       } catch {
         // local base64 fallback
@@ -880,7 +899,7 @@ export async function uploadMediaItem(file, altText = '') {
       items.unshift(localItem);
       setLocal(STORAGE_KEYS.MEDIA, items);
       notifyContentUpdated('media');
-      resolve(localItem);
+      resolve({ ...localItem, success: true, data: localItem });
     };
     reader.readAsDataURL(file);
   });
@@ -893,9 +912,10 @@ export async function deleteMediaItem(id) {
     // fallback
   }
   const items = getLocal(STORAGE_KEYS.MEDIA, []);
-  const filtered = items.filter((m) => m.id !== id);
+  const localArray = Array.isArray(items) ? items : [];
+  const filtered = localArray.filter((m) => m && String(m.id) !== String(id) && String(m._id) !== String(id));
   setLocal(STORAGE_KEYS.MEDIA, filtered);
-  notifyContentUpdated('media');
+  notifyContentUpdated('media', { deletedId: id });
   return filtered;
 }
 

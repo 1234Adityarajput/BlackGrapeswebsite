@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHomePage } from '@backend/useContent';
+import { resolveMediaUrl } from '@backend/dataService';
 
 export default function CtaBanner({ onOpenModal }) {
   const { home } = useHomePage();
@@ -11,13 +12,45 @@ export default function CtaBanner({ onOpenModal }) {
   const primaryBtnText = cta.primaryBtnText || 'Get Started Now!';
   const secondaryBtnText = cta.secondaryBtnText || 'Get Free Consultation';
 
+  const rawBg = cta.image || cta.bg_image || '';
+  const bannerImage = rawBg ? resolveMediaUrl(rawBg) : '';
+
   return (
     <section className="cta-banner-section">
       <div className="container">
-        <div className="cta-banner-card">
+        <div className="cta-banner-card" style={bannerImage ? { position: 'relative', overflow: 'hidden' } : {}}>
+          {bannerImage && (
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `url(${bannerImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                opacity: 0.18,
+                zIndex: 1,
+                pointerEvents: 'none'
+              }}
+            />
+          )}
           <div className="cta-banner-glow"></div>
 
-          <div className="cta-banner-content">
+          <div className="cta-banner-content" style={{ position: 'relative', zIndex: 2 }}>
+            {bannerImage && (
+              <div style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'center' }}>
+                <img
+                  src={bannerImage}
+                  alt="Black Grapes Softech"
+                  style={{
+                    maxHeight: '120px',
+                    maxWidth: '240px',
+                    objectFit: 'contain',
+                    borderRadius: '12px',
+                    filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.6))'
+                  }}
+                />
+              </div>
+            )}
             <span className="cta-badge">{badge}</span>
             <h2 className="cta-banner-title" style={{ whiteSpace: 'pre-line' }}>
               {title}

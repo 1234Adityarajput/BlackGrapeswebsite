@@ -9,6 +9,7 @@ import {
   Building, 
   FileText 
 } from 'lucide-react';
+import { submitEnquiry } from '@backend/dataService';
 import '../styles/Modal.css';
 
 export default function InquiryModal({ isOpen, onClose, initialService = '' }) {
@@ -32,13 +33,25 @@ export default function InquiryModal({ isOpen, onClose, initialService = '' }) {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
+    try {
+      await submitEnquiry({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        service: formData.service || 'General Inquiry',
+        message: `Urgency: ${formData.urgency || 'Normal'}\n\n${formData.message}`,
+        source: 'Global Navbar Inquiry Modal'
+      });
+    } catch (err) {
+      console.warn('[InquiryModal] Submit error:', err);
+    } finally {
       setSubmitting(false);
       setIsSubmitted(true);
-    }, 800);
+    }
   };
 
   const handleReset = () => {

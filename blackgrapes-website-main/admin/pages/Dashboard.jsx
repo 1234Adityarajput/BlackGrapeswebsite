@@ -93,7 +93,11 @@ export default function Dashboard() {
             Real-time control and metrics overview for Black Grapes Softech web platform.
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <Link to="/admin/page-images" className="admin-btn admin-btn-secondary" style={{ borderColor: 'rgba(248, 98, 0, 0.4)', color: 'var(--brand-orange)' }}>
+            <Sparkles size={16} />
+            <span>Page Images Manager</span>
+          </Link>
           <Link to="/admin/enquiries" className="admin-btn admin-btn-primary">
             <Inbox size={16} />
             <span>View All Enquiries</span>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { WHY_CHOOSE_US, COMPANY_INFO } from '../data/siteData';
 import { useHomePage } from '@backend/useContent';
+import { resolveMediaUrl } from '@backend/dataService';
 
 export default function WhyChooseUs({ onOpenModal }) {
   const { home } = useHomePage();
@@ -34,35 +35,46 @@ export default function WhyChooseUs({ onOpenModal }) {
 
         {/* 3 Pillars Grid */}
         <div className="why-us-grid home-why-us-grid">
-          {pillarsList.map((pillar, idx) => (
-            <div key={idx} className="why-us-card home-why-us-card">
-              <div className="why-us-img-container">
-                <img
-                  src={pillar.image || (WHY_CHOOSE_US.pillars[idx] && WHY_CHOOSE_US.pillars[idx].image) || '/images/enterprise-security.jpg'}
-                  alt={pillar.title}
-                  className={`why-us-img why-us-img-${idx + 1}`}
-                  loading="lazy"
-                />
-                <div className="why-us-img-gradient"></div>
-                <div className="pillar-number">0{idx + 1}</div>
-              </div>
+          {pillarsList.map((pillar, idx) => {
+            let rawImg = pillar.image;
+            if (idx === 1 && whyUs.innovationImage) {
+              rawImg = whyUs.innovationImage;
+            } else if (idx === 0 && whyUs.showcaseImage) {
+              rawImg = whyUs.showcaseImage;
+            } else if (!rawImg) {
+              rawImg = (WHY_CHOOSE_US.pillars[idx] && WHY_CHOOSE_US.pillars[idx].image) || '/images/enterprise-security.jpg';
+            }
 
-              <div className="why-us-card-body">
-                <span className="pillar-subtitle">{pillar.subtitle}</span>
-                <h3 className="pillar-title">{pillar.title}</h3>
-                <p className="pillar-description">{pillar.description}</p>
+            return (
+              <div key={idx} className="why-us-card home-why-us-card">
+                <div className="why-us-img-container">
+                  <img
+                    src={resolveMediaUrl(rawImg)}
+                    alt={pillar.title}
+                    className={`why-us-img why-us-img-${idx + 1}`}
+                    loading="lazy"
+                  />
+                  <div className="why-us-img-gradient"></div>
+                  <div className="pillar-number">0{idx + 1}</div>
+                </div>
 
-                <div className="pillar-points-list">
-                  {(pillar.points || []).map((pt, pIdx) => (
-                    <div key={pIdx} className="pillar-point-item">
-                      <span className="check-icon">✓</span>
-                      <span>{pt}</span>
-                    </div>
-                  ))}
+                <div className="why-us-card-body">
+                  <span className="pillar-subtitle">{pillar.subtitle}</span>
+                  <h3 className="pillar-title">{pillar.title}</h3>
+                  <p className="pillar-description">{pillar.description}</p>
+
+                  <div className="pillar-points-list">
+                    {(pillar.points || []).map((pt, pIdx) => (
+                      <div key={pIdx} className="pillar-point-item">
+                        <span className="check-icon">✓</span>
+                        <span>{pt}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Live Counters Banner */}

@@ -633,6 +633,19 @@
   animation: slideInToast 0.3s ease;
 }
 
+.admin-toast-error {
+  border-left-color: #ef4444 !important;
+}
+
+.spin {
+  animation: adminSpin 1s linear infinite;
+}
+
+@keyframes adminSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @keyframes slideInToast {
   from {
     transform: translateY(20px);
