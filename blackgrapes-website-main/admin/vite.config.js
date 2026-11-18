@@ -1,31 +1,25 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
-import { createApiMiddleware } from '../backend/apiMiddleware.js';
 
-function contentApiPlugin() {
-  return {
-    name: 'bgst-admin-content-api-plugin',
-    configureServer(server) {
-      server.middlewares.use(createApiMiddleware());
-    }
-  };
-}
+const BACKEND_URL = process.env.VITE_API_URL || 'https://blackgrapeswebsite.onrender.com';
 
 // Standalone Vite Configuration for Black Grapes Admin Panel
 export default defineConfig({
-  plugins: [react(), contentApiPlugin()],
+  plugins: [react()],
   server: {
     port: 5174,
     open: false,
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true
+        target: BACKEND_URL,
+        changeOrigin: true,
+        secure: false
       },
       '/uploads': {
-        target: 'http://localhost:5000',
-        changeOrigin: true
+        target: BACKEND_URL,
+        changeOrigin: true,
+        secure: false
       }
     }
   },

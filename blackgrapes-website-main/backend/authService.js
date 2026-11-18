@@ -1,4 +1,4 @@
-import { getAdminUsers, logActivity } from './dataService';
+import { getAdminUsers, logActivity, getApiUrl } from './dataService';
 
 const SESSION_KEY = 'bgst_admin_session';
 
@@ -8,7 +8,7 @@ export async function loginAdmin(email, password) {
 
   // Try API login first if backend is running
   try {
-    const res = await fetch('/api/auth/login', {
+    const res = await fetch(getApiUrl('/api/auth/login'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: cleanEmail, password: cleanPass })

@@ -1,30 +1,24 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
-import { createApiMiddleware } from '../backend/apiMiddleware.js';
 
-function contentApiPlugin() {
-  return {
-    name: 'bgst-frontend-content-api-plugin',
-    configureServer(server) {
-      server.middlewares.use(createApiMiddleware());
-    }
-  };
-}
+const BACKEND_URL = process.env.VITE_API_URL || 'https://blackgrapeswebsite.onrender.com';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), contentApiPlugin()],
+  plugins: [react()],
   server: {
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true
+        target: BACKEND_URL,
+        changeOrigin: true,
+        secure: false
       },
       '/uploads': {
-        target: 'http://localhost:5000',
-        changeOrigin: true
+        target: BACKEND_URL,
+        changeOrigin: true,
+        secure: false
       }
     }
   },

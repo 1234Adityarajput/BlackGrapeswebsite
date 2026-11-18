@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Send, CheckCircle2, Sparkles, Phone, Mail, User, Briefcase } from 'lucide-react';
 import { softechServices } from '../../data/softechServicesData';
+import { getApiUrl } from '@backend/dataService';
 
 export default function SoftechInquiryModal({ initialService, onClose }) {
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ export default function SoftechInquiryModal({ initialService, onClose }) {
     setLoading(true);
 
     try {
-      await fetch('http://localhost:5000/api/inquiries', {
+      await fetch(getApiUrl('/api/inquiries'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

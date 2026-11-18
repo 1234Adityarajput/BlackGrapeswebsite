@@ -18,6 +18,7 @@ import apiRouter from './apiRouter.js';
 import { connectToMongo } from './dbService.js';
 
 const app = express();
+app.enable('trust proxy');
 
 const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;

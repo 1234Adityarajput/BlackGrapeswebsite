@@ -8,11 +8,15 @@ let isConnecting = false;
 
 // Determine WebSocket URL
 function getWsUrl() {
-  if (typeof window === 'undefined') return 'ws://localhost:5000';
-  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const hostname = window.location.hostname || 'localhost';
-  // Backend server runs on port 5000
-  return `${protocol}//${hostname}:5000`;
+  if (typeof window === 'undefined') return 'wss://blackgrapeswebsite.onrender.com';
+  if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_WS_URL) {
+    return import.meta.env.VITE_WS_URL;
+  }
+  if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) {
+    const apiUrl = import.meta.env.VITE_API_URL.replace(/\/$/, '');
+    return apiUrl.replace(/^http/, 'ws');
+  }
+  return 'wss://blackgrapeswebsite.onrender.com';
 }
 
 export function initWebSocket() {

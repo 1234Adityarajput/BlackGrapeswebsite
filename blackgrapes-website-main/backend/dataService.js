@@ -94,12 +94,26 @@ function setLocal(key, val) {
   }
 }
 
-function getApiUrl(endpoint) {
+export const BACKEND_URL = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL)
+  ? import.meta.env.VITE_API_URL.replace(/\/$/, '')
+  : (typeof process !== 'undefined' && process.env?.VITE_API_URL)
+    ? process.env.VITE_API_URL.replace(/\/$/, '')
+    : 'https://blackgrapeswebsite.onrender.com';
+
+export function getApiUrl(endpoint) {
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  if (typeof window !== 'undefined' && window.location.hostname) {
-    return `http://${window.location.hostname}:5000${cleanEndpoint}`;
+  return `${BACKEND_URL}${cleanEndpoint}`;
+}
+
+export function resolveMediaUrl(url) {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
   }
-  return `http://localhost:5000${cleanEndpoint}`;
+  if (url.startsWith('/uploads/')) {
+    return `${BACKEND_URL}${url}`;
+  }
+  return url;
 }
 
 // Deep merge helper to ensure rich default fields are never lost if partial updates occur
@@ -813,14 +827,19 @@ export async function getMediaLibrary() {
     if (res.ok) {
       const json = await res.json();
       if (json.success && json.data) {
-        setLocal(STORAGE_KEYS.MEDIA, json.data);
-        return json.data;
+        const normalized = json.data.map((item) => ({
+          ...item,
+          url: resolveMediaUrl(item.url)
+        }));
+        setLocal(STORAGE_KEYS.MEDIA, normalized);
+        return normalized;
       }
     }
   } catch {
     // fallback
   }
-  return getLocal(STORAGE_KEYS.MEDIA, []);
+  const local = getLocal(STORAGE_KEYS.MEDIA, []);
+  return local.map((item) => ({ ...item, url: resolveMediaUrl(item.url) }));
 }
 
 export async function uploadMediaItem(file, altText = '') {
@@ -840,7 +859,9 @@ export async function uploadMediaItem(file, altText = '') {
         if (res.ok) {
           const json = await res.json();
           notifyContentUpdated('media');
-          return resolve(json.item || { url: json.url });
+          const uploadedItem = json.item || { url: json.url };
+          if (uploadedItem.url) uploadedItem.url = resolveMediaUrl(uploadedItem.url);
+          return resolve(uploadedItem);
         }
       } catch {
         // local base64 fallback

@@ -209,7 +209,9 @@ router.post('/upload', express.json({ limit: '25mb' }), (req, res) => {
     const filePath = path.join(UPLOADS_DIR, safeName);
 
     fs.writeFileSync(filePath, buffer);
-    const publicUrl = `/uploads/${safeName}`;
+    const host = req.get('host') || 'blackgrapeswebsite.onrender.com';
+    const protocol = req.headers['x-forwarded-proto'] || (host.includes('localhost') ? 'http' : 'https');
+    const publicUrl = `${protocol}://${host}/uploads/${safeName}`;
 
     const localDb = dbService.readLocalDb();
     if (!localDb.media_library) localDb.media_library = [];

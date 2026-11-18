@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Send, CheckCircle2, Sparkles, Phone, Mail, User } from 'lucide-react';
 import { servicesData } from '../../data/servicesData';
+import { getApiUrl } from '@backend/dataService';
 
 export default function InquiryQuoteModal({ initialService, onClose }) {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ export default function InquiryQuoteModal({ initialService, onClose }) {
     const generatedId = `BG-${Math.floor(100000 + Math.random() * 900000)}`;
 
     try {
-      const res = await fetch('http://localhost:5000/api/inquiries', {
+      const res = await fetch(getApiUrl('/api/inquiries'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
