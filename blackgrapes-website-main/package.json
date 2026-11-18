@@ -1,0 +1,23 @@
+{
+  "name": "blackgrapes-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:admin": "npm --prefix admin run dev",
+    "dev:all": "node dev-all.js",
+    "server": "npm --prefix backend start",
+    "start": "node dev-all.js",
+    "build": "npm --prefix frontend run build",
+    "build:admin": "npm --prefix admin run build",
+    "build:all": "npm --prefix frontend run build && npm --prefix admin run build",
+    "preview": "npm --prefix frontend run preview",
+    "seed": "npm --prefix backend run seed"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "mongoose": "^9.11.4"
+  }
+}

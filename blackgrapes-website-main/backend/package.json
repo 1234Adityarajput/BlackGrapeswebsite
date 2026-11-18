@@ -1,0 +1,19 @@
+{
+  "name": "blackgrapes-backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch-path=server.js --watch-path=apiRouter.js --watch-path=dbService.js --watch-path=models server.js",
+    "seed": "node seedToMongo.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "mongoose": "^9.11.4",
+    "ws": "^8.22.1"
+  }
+}

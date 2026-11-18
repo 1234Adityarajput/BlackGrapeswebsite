@@ -1,0 +1,111 @@
+import React from 'react';
+import { WHY_CHOOSE_US, COMPANY_INFO } from '../data/siteData';
+import { useHomePage } from '@backend/useContent';
+
+export default function WhyChooseUs({ onOpenModal }) {
+  const { home } = useHomePage();
+  const whyUs = home?.whyChooseUs || {};
+
+  const badge = whyUs.badge || 'WHY CHOOSE US ?';
+  const titlePrefix = whyUs.titlePrefix || 'Built On Security, Uncompromising Quality & ';
+  const titleHighlight = whyUs.titleHighlight || 'Lifelong Relationships';
+  const visionQuote = whyUs.visionQuote || WHY_CHOOSE_US.vision;
+
+  const pillarsList = (Array.isArray(whyUs.pillars) && whyUs.pillars.length > 0)
+    ? whyUs.pillars
+    : WHY_CHOOSE_US.pillars;
+
+  return (
+    <section id="why-us" className="section why-us-section">
+      <div className="container">
+        {/* Section Header */}
+        <div className="section-header text-center">
+          <div className="section-badge">
+            <span className="badge-sparkle">✦</span>
+            <span>{badge}</span>
+          </div>
+          <h2 className="section-title">
+            {titlePrefix}<span className="text-highlight">{titleHighlight}</span>
+          </h2>
+          <p className="vision-quote">
+            &ldquo;{visionQuote}&rdquo;
+          </p>
+        </div>
+
+        {/* 3 Pillars Grid */}
+        <div className="why-us-grid home-why-us-grid">
+          {pillarsList.map((pillar, idx) => (
+            <div key={idx} className="why-us-card home-why-us-card">
+              <div className="why-us-img-container">
+                <img
+                  src={pillar.image || (WHY_CHOOSE_US.pillars[idx] && WHY_CHOOSE_US.pillars[idx].image) || '/images/enterprise-security.jpg'}
+                  alt={pillar.title}
+                  className={`why-us-img why-us-img-${idx + 1}`}
+                  loading="lazy"
+                />
+                <div className="why-us-img-gradient"></div>
+                <div className="pillar-number">0{idx + 1}</div>
+              </div>
+
+              <div className="why-us-card-body">
+                <span className="pillar-subtitle">{pillar.subtitle}</span>
+                <h3 className="pillar-title">{pillar.title}</h3>
+                <p className="pillar-description">{pillar.description}</p>
+
+                <div className="pillar-points-list">
+                  {(pillar.points || []).map((pt, pIdx) => (
+                    <div key={pIdx} className="pillar-point-item">
+                      <span className="check-icon">✓</span>
+                      <span>{pt}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Live Counters Banner */}
+        <div className="counters-banner">
+          <div className="counter-card">
+            <div className="counter-icon-wrap">👥</div>
+            <div className="counter-data">
+              <span className="counter-number">{whyUs.clientsCount || COMPANY_INFO.clientsCount}</span>
+              <span className="counter-name">Happy Clients</span>
+            </div>
+          </div>
+
+          <div className="counter-divider"></div>
+
+          <div className="counter-card">
+            <div className="counter-icon-wrap">🚀</div>
+            <div className="counter-data">
+              <span className="counter-number">{whyUs.projectsCount || COMPANY_INFO.projectsCount}</span>
+              <span className="counter-name">Projects Delivered</span>
+            </div>
+          </div>
+
+          <div className="counter-divider"></div>
+
+          <div className="counter-card">
+            <div className="counter-icon-wrap">⚙️</div>
+            <div className="counter-data">
+              <span className="counter-number">{whyUs.experienceYears ? `${whyUs.experienceYears} Years` : COMPANY_INFO.servicesCount}</span>
+              <span className="counter-name">{whyUs.experienceYears ? 'IT Excellence' : 'Services & Modules'}</span>
+            </div>
+          </div>
+
+          <div className="counter-divider"></div>
+
+          <div className="counter-card">
+            <div className="counter-icon-wrap">👨‍💻</div>
+            <div className="counter-data">
+              <span className="counter-number">{COMPANY_INFO.teamMembersCount}</span>
+              <span className="counter-name">Tech Wizards</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

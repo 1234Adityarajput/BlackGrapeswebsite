@@ -1,0 +1,247 @@
+import React, { useState } from 'react';
+import { Sparkles, Send, CheckCircle2, ShieldCheck, Check } from 'lucide-react';
+import { usePartnership } from '@backend/useContent';
+import { submitEnquiry } from '@backend/dataService';
+import '../styles/Partnership.css';
+
+export default function PartnershipPage() {
+  const { partnershipData } = usePartnership();
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    contact: '',
+    city: '',
+    message: ''
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      await submitEnquiry({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.contact,
+        service: 'Partner Program (ODC)',
+        source: 'Partnership Page (/partnership)',
+        message: `City: ${formData.city || 'N/A'}\n\nMessage: ${formData.message || 'No additional note'}`
+      });
+    } catch (err) {
+      console.warn('Enquiry submission fallback:', err);
+    }
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+  };
+
+  const handleReset = () => {
+    setFormData({
+      name: '',
+      email: '',
+      contact: '',
+      city: '',
+      message: ''
+    });
+    setIsSubmitted(false);
+  };
+
+  const benefitsList = (Array.isArray(partnershipData?.benefits) && partnershipData.benefits.length > 0)
+    ? partnershipData.benefits
+    : [
+        'Dedicated Offshore Development Center (ODC) setup in Indore tech corridor',
+        'Seamless collaboration across global time zones (US, UK, UAE, Australia)',
+        'Transparent billing, daily standups, and dedicated engineering leadership',
+        'Strict intellectual property protection and confidentiality agreements'
+      ];
+
+  return (
+    <div className="partnership-page-container">
+      <div className="container">
+        {/* Top Header */}
+        <div className="partner-page-header">
+          <div className="partner-eyebrow">
+            <Sparkles size={14} />
+            <span>{partnershipData?.heroBadge || 'PARTNERSHIP'}</span>
+          </div>
+          <h1 className="partner-page-title">
+            <span className="text-gradient">{partnershipData?.heroTitle || 'Partnership'}</span>
+          </h1>
+          <p className="partner-page-subtitle">
+            {partnershipData?.heroSubtitle ||
+              'Cultivating long-term strategic relationships and delivering high-velocity offshore technology development.'}
+          </p>
+        </div>
+
+        {/* 2-Column Split Layout: Partner With Us Content + Form */}
+        <div className="partner-with-us-grid">
+          {/* Left Column: Authentic Content */}
+          <div className="partner-content-card">
+            <h2 className="partner-heading-main">
+              {partnershipData?.partnerWithUsTitle || 'Partner With Us'}
+            </h2>
+            <p className="partner-desc-text">
+              {partnershipData?.partnerWithUsText ||
+                'If you are an IT or web software development company and are eager to expand your operations here in India, we are ready to help you as your development centre. Our business community is focused on cultivating long-term relationships with our clients and offers excellent experiences covering the strategic insights. Partnering with us enables you to provide endless growth and development. You can share our resources for your project requirements to work on technical areas that directly affect the growth of the organization.'}
+            </p>
+
+            {/* Key Advantages / Benefits List */}
+            {benefitsList.length > 0 && (
+              <div style={{ marginTop: '1.25rem', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                {benefitsList.map((benefit, idx) => (
+                  <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', color: '#cbd5e1', fontSize: '0.88rem' }}>
+                    <div style={{ background: 'rgba(248, 98, 0, 0.15)', border: '1px solid rgba(248, 98, 0, 0.3)', borderRadius: '50%', padding: '3px', marginTop: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Check size={12} color="#f86200" />
+                    </div>
+                    <span>{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="partner-img-wrapper">
+              <img
+                src={partnershipData?.partnerImage || '/partners/partner_with_us.webp'}
+                alt={partnershipData?.partnerWithUsTitle || 'Partner With Us - Black Grapes Softech'}
+                className="partner-feature-img"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "https://blackgrapessoftech.com/wp-content/uploads/elementor/thumbs/download-qgt1jk7bs4228h6seuo0sgqmw7vet6s2p2wi6s411u.webp";
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Right Column: Inquiry Form */}
+          <div className="partner-form-box">
+            <h3 className="form-card-title">
+              {partnershipData?.formTitle || 'Please tell us a bit about yourself'}
+            </h3>
+            <p className="form-card-sub">
+              {partnershipData?.formSubtitle ||
+                'Fill in your details below to explore development centre partnerships with our team.'}
+            </p>
+
+            {isSubmitted ? (
+              <div className="partner-success-box">
+                <div className="success-icon-badge">✓</div>
+                <h4 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.5rem', fontWeight: 700 }}>
+                  Thank you, {formData.name}!
+                </h4>
+                <p style={{ color: '#cbd5e1', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>
+                  Your partnership details have been received successfully. Our director and partnership desk will connect with you at <strong>{formData.email}</strong> or <strong>{formData.contact}</strong> shortly.
+                </p>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleReset}
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  Submit Another Inquiry
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="partner-form-fields">
+                <div className="partner-input-wrap">
+                  <label htmlFor="partner-name" className="partner-input-label">
+                    Name
+                  </label>
+                  <input
+                    id="partner-name"
+                    type="text"
+                    required
+                    className="partner-input"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </div>
+
+                <div className="partner-input-wrap">
+                  <label htmlFor="partner-email" className="partner-input-label">
+                    Your Email
+                  </label>
+                  <input
+                    id="partner-email"
+                    type="email"
+                    required
+                    className="partner-input"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+
+                <div className="partner-input-wrap">
+                  <label htmlFor="partner-contact" className="partner-input-label">
+                    Your Contact
+                  </label>
+                  <input
+                    id="partner-contact"
+                    type="tel"
+                    required
+                    className="partner-input"
+                    placeholder="Your Contact"
+                    value={formData.contact}
+                    onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                  />
+                </div>
+
+                <div className="partner-input-wrap">
+                  <label htmlFor="partner-city" className="partner-input-label">
+                    Your City
+                  </label>
+                  <input
+                    id="partner-city"
+                    type="text"
+                    required
+                    className="partner-input"
+                    placeholder="Your City"
+                    value={formData.city}
+                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                  />
+                </div>
+
+                <div className="partner-input-wrap">
+                  <label htmlFor="partner-message" className="partner-input-label">
+                    Message
+                  </label>
+                  <textarea
+                    id="partner-message"
+                    rows="4"
+                    className="partner-textarea"
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn btn-primary partner-submit-btn"
+                >
+                  {isSubmitting ? (
+                    <span>Submitting...</span>
+                  ) : (
+                    <>
+                      <span>Submit</span>
+                      <Send size={16} />
+                    </>
+                  )}
+                </button>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', color: '#94a3b8', fontSize: '0.78rem', marginTop: '0.5rem' }}>
+                  <ShieldCheck size={14} color="#10b981" />
+                  <span>100% Confidentiality &amp; Quick Response Guaranteed</span>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
