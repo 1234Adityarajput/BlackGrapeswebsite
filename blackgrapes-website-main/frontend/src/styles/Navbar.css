@@ -311,14 +311,16 @@
   }
 
   .logo-glow-wrapper {
-    width: 38px !important;
-    height: 38px !important;
-    border-radius: 10px !important;
+    width: 44px !important;
+    height: 44px !important;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
   }
 
   .logo-img {
-    width: 28px !important;
-    height: 28px !important;
+    width: 44px !important;
+    height: 44px !important;
   }
 
   .brand-title {

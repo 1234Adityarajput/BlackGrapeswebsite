@@ -120,10 +120,6 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
                 <span className="pulse-dot"></span>
                 {settings?.top_bar_pill || 'Accepting New Projects'}
               </span>
-              <span className="top-divider">|</span>
-              <span className="top-badge">
-                {settings?.top_bar_badge || settings?.top_strip_text || 'Apprenticeship & Partner Program Open'}
-              </span>
             </div>
 
             <div className="top-bar-right">
