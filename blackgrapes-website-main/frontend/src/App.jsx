@@ -10,7 +10,6 @@ import ServiceDetailModal from './components/ServiceDetailModal';
 import FloatingWidgets from './components/FloatingWidgets';
 import ScrollToTop from './components/ScrollToTop';
 import { LoadingScreen, PageTransition } from './components/animations';
-import initScrollAnimations from './utils/initScrollAnimations';
 import initMotionSystem from './utils/motionEngine';
 
 import HomePage from './pages/HomePage';
@@ -39,10 +38,8 @@ export default function App() {
   const [selectedService, setSelectedService] = useState(null);
 
   useEffect(() => {
-    const cleanupScroll = initScrollAnimations();
     const cleanupMotion = initMotionSystem();
     return () => {
-      if (cleanupScroll) cleanupScroll();
       if (cleanupMotion) cleanupMotion();
     };
   }, []);

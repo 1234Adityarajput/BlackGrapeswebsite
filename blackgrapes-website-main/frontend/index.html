@@ -210,6 +210,45 @@
         </div>
       </div>
     </div>
+    <script>
+      (function() {
+        var loader = document.getElementById('bgst-initial-loader');
+        var bar = document.getElementById('init-loader-bar');
+        if (!loader) return;
+
+        var progress = 15;
+        var pInterval = setInterval(function() {
+          progress += Math.floor(Math.random() * 15) + 10;
+          if (progress >= 95) {
+            progress = 95;
+            clearInterval(pInterval);
+          }
+          if (bar) bar.style.width = progress + '%';
+        }, 90);
+
+        var isDismissed = false;
+        function dismissLoader() {
+          if (isDismissed) return;
+          isDismissed = true;
+          clearInterval(pInterval);
+          if (bar) bar.style.width = '100%';
+          setTimeout(function() {
+            if (loader) {
+              loader.classList.add('loader-hidden');
+              setTimeout(function() {
+                if (loader && loader.parentNode) {
+                  loader.parentNode.removeChild(loader);
+                }
+              }, 650);
+            }
+          }, 180);
+        }
+
+        window.__dismissBgstLoader = dismissLoader;
+        setTimeout(dismissLoader, 1400);
+        setTimeout(dismissLoader, 3000);
+      })();
+    </script>
 
     <!-- Main React Root -->
     <div id="root"></div>

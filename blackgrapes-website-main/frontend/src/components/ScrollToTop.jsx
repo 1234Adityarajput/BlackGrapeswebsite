@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { initMotionSystem } from '../utils/motionEngine';
 
 export default function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -20,6 +21,13 @@ export default function ScrollToTop() {
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
+
+    // Refresh animation triggers on route change for newly rendered route elements
+    const motionTimer = setTimeout(() => {
+      initMotionSystem();
+    }, 60);
+
+    return () => clearTimeout(motionTimer);
   }, [pathname, hash]);
 
   return null;
