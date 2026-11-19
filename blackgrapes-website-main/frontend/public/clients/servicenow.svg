@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" width="220" height="60">
+      <circle cx="35" cy="30" r="16" fill="none" stroke="#81B5A1" stroke-width="5"/>
+      <circle cx="35" cy="30" r="6" fill="#81B5A1"/>
+      <text x="60" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="#032D42">servicenow</text>
+    </svg>

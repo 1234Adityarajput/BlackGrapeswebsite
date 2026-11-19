@@ -333,6 +333,13 @@
   object-fit: contain;
 }
 
+.bp-fallback-initial {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #f86200;
+  letter-spacing: -0.02em;
+}
+
 .bp-partner-name {
   font-size: 0.92rem;
   font-weight: 700;

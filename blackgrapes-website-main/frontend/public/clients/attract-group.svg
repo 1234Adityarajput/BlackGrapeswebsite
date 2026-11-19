@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" width="220" height="60">
+      <circle cx="30" cy="30" r="14" fill="#F97316"/>
+      <polygon points="30,20 35,35 30,31 25,35" fill="#ffffff"/>
+      <text x="54" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" font-weight="800" fill="#7C2D12">Attract Group</text>
+    </svg>

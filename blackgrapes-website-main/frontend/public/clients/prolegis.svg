@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" width="220" height="60">
+      <rect x="20" y="17" width="26" height="26" rx="5" fill="#1E293B"/>
+      <path d="M25,23 L35,23 M27,24 L27,35 M33,24 L33,35 M24,36 L36,36" stroke="#ffffff" stroke-width="2"/>
+      <text x="56" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="800" fill="#0F172A">PROLEGIS</text>
+    </svg>

@@ -14,6 +14,7 @@ import {
 } from './clientsData';
 import { useClients, useClientsPage, useTestimonials } from '@backend/useContent';
 import ClientCaseStudyModal from './ClientCaseStudyModal';
+import ClientLogoImage from './ClientLogoImage';
 import clientsNetworkImg from '../../assets/clients-network.jpg';
 import './OurClients.css';
 
@@ -259,12 +260,7 @@ export default function OurClients({ onOpenDemoModal }) {
                 >
                   {/* Clean Logo Frame */}
                   <div className="client-logo-frame">
-                    <img
-                      src={client.logo || client.logo_url}
-                      alt={`${client.name} Logo`}
-                      className="client-brand-img"
-                      loading="lazy"
-                    />
+                    <ClientLogoImage client={client} />
                   </div>
 
                   {/* Meta Badges */}

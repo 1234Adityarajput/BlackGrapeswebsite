@@ -119,8 +119,13 @@ export default function BusinessPartnersPage() {
                       className="bp-logo-img"
                       loading="lazy"
                       onError={(e) => {
-                        if (partner.img && e.target.src !== partner.img) {
-                          e.target.src = partner.img;
+                        e.target.style.display = 'none';
+                        const parent = e.target.parentElement;
+                        if (parent && !parent.querySelector('.bp-fallback-initial')) {
+                          const span = document.createElement('span');
+                          span.className = 'bp-fallback-initial';
+                          span.textContent = (partner.name || 'P').charAt(0).toUpperCase();
+                          parent.appendChild(span);
                         }
                       }}
                     />
@@ -174,8 +179,13 @@ export default function BusinessPartnersPage() {
                       className="bp-logo-img"
                       loading="lazy"
                       onError={(e) => {
-                        if (partner.img && e.target.src !== partner.img) {
-                          e.target.src = partner.img;
+                        e.target.style.display = 'none';
+                        const parent = e.target.parentElement;
+                        if (parent && !parent.querySelector('.bp-fallback-initial')) {
+                          const span = document.createElement('span');
+                          span.className = 'bp-fallback-initial';
+                          span.textContent = (partner.name || 'P').charAt(0).toUpperCase();
+                          parent.appendChild(span);
                         }
                       }}
                     />

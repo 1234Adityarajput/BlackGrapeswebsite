@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, Sparkles, CheckCircle2, MessageCircle, ArrowRight, Globe, ShieldCheck, Building2 } from 'lucide-react';
+import ClientLogoImage from './ClientLogoImage';
 
 export default function ClientCaseStudyModal({ client, onClose, onOpenDemoModal }) {
   useEffect(() => {
@@ -42,11 +43,9 @@ export default function ClientCaseStudyModal({ client, onClose, onOpenDemoModal 
         {/* Header */}
         <div className="client-modal-header">
           <div className="client-modal-brand-row">
-            {logoSrc && (
-              <div className="client-modal-logo-frame">
-                <img src={logoSrc} alt={title} className="client-modal-logo-img" />
-              </div>
-            )}
+            <div className="client-modal-logo-frame">
+              <ClientLogoImage client={client} className="client-modal-logo-img" isModal={true} />
+            </div>
             <div>
               <span className={`client-modal-badge badge-${badgeColorClass}`}>
                 <Sparkles size={12} /> {client.badge || 'VERIFIED PARTNER'}

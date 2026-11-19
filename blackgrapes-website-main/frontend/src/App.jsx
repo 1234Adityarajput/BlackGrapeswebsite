@@ -141,6 +141,10 @@ export default function App() {
               path="/our-clients"
               element={<OurClients onOpenDemoModal={handleOpenDemoModal} />}
             />
+            <Route
+              path="/our_clients"
+              element={<OurClients onOpenDemoModal={handleOpenDemoModal} />}
+            />
 
             {/* IT Staffing Solutions (Abadh's full staffing page) */}
             <Route
