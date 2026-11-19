@@ -11,6 +11,7 @@ import FloatingWidgets from './components/FloatingWidgets';
 import ScrollToTop from './components/ScrollToTop';
 import { LoadingScreen, PageTransition } from './components/animations';
 import initScrollAnimations from './utils/initScrollAnimations';
+import initMotionSystem from './utils/motionEngine';
 
 import HomePage from './pages/HomePage';
 import About from './pages/About';
@@ -38,8 +39,12 @@ export default function App() {
   const [selectedService, setSelectedService] = useState(null);
 
   useEffect(() => {
-    const cleanup = initScrollAnimations();
-    return () => cleanup && cleanup();
+    const cleanupScroll = initScrollAnimations();
+    const cleanupMotion = initMotionSystem();
+    return () => {
+      if (cleanupScroll) cleanupScroll();
+      if (cleanupMotion) cleanupMotion();
+    };
   }, []);
 
   const handleOpenModal = (title = 'Request a Demo') => {
@@ -93,8 +98,8 @@ export default function App() {
         </div>
 
         {/* Top Navbar */}
-        <Navbar 
-          onOpenModal={handleOpenModal} 
+        <Navbar
+          onOpenModal={handleOpenModal}
           onOpenInquiry={handleOpenInquiry}
           onOpenDemoModal={handleOpenDemoModal}
         />
@@ -103,125 +108,125 @@ export default function App() {
         <main className="main-content">
           <PageTransition>
             <Routes>
-            {/* Home Page */}
-            <Route
-              path="/"
-              element={
-                <HomePage
-                  onOpenModal={handleOpenModal}
-                  onOpenInquiry={handleOpenInquiry}
-                  onSelectService={(service) => setSelectedService(service)}
-                />
-              }
-            />
+              {/* Home Page */}
+              <Route
+                path="/"
+                element={
+                  <HomePage
+                    onOpenModal={handleOpenModal}
+                    onOpenInquiry={handleOpenInquiry}
+                    onSelectService={(service) => setSelectedService(service)}
+                  />
+                }
+              />
 
-            {/* About Us Pages (Mahesh's complete page) */}
-            <Route
-              path="/about"
-              element={<About onOpenDemoModal={handleOpenDemoModal} />}
-            />
-            <Route
-              path="/about-us"
-              element={<About onOpenDemoModal={handleOpenDemoModal} />}
-            />
+              {/* About Us Pages (Mahesh's complete page) */}
+              <Route
+                path="/about"
+                element={<About onOpenDemoModal={handleOpenDemoModal} />}
+              />
+              <Route
+                path="/about-us"
+                element={<About onOpenDemoModal={handleOpenDemoModal} />}
+              />
 
-            {/* Services Overview & Individual Service Detail Pages */}
-            <Route
-              path="/services"
-              element={<SoftechServicesPage onOpenInquiry={handleOpenInquiry} />}
-            />
-            <Route
-              path="/services/:slug"
-              element={<ServiceDetailPage onOpenInquiry={handleOpenInquiry} />}
-            />
-            <Route
-              path="/softech-services"
-              element={<SoftechServicesPage onOpenInquiry={handleOpenInquiry} />}
-            />
-            <Route
-              path="/group-services"
-              element={<ServicesPage onOpenInquiry={handleOpenInquiry} />}
-            />
+              {/* Services Overview & Individual Service Detail Pages */}
+              <Route
+                path="/services"
+                element={<SoftechServicesPage onOpenInquiry={handleOpenInquiry} />}
+              />
+              <Route
+                path="/services/:slug"
+                element={<ServiceDetailPage onOpenInquiry={handleOpenInquiry} />}
+              />
+              <Route
+                path="/softech-services"
+                element={<SoftechServicesPage onOpenInquiry={handleOpenInquiry} />}
+              />
+              <Route
+                path="/group-services"
+                element={<ServicesPage onOpenInquiry={handleOpenInquiry} />}
+              />
 
-            {/* Portfolio & Projects Showcase */}
-            <Route
-              path="/portfolio"
-              element={<ProjectsPage onOpenModal={handleOpenModal} />}
-            />
-            <Route
-              path="/projects"
-              element={<ProjectsPage onOpenModal={handleOpenModal} />}
-            />
+              {/* Portfolio & Projects Showcase */}
+              <Route
+                path="/portfolio"
+                element={<ProjectsPage onOpenModal={handleOpenModal} />}
+              />
+              <Route
+                path="/projects"
+                element={<ProjectsPage onOpenModal={handleOpenModal} />}
+              />
 
-            {/* Products Pages (Mahesh's proprietary catalog) */}
-            <Route
-              path="/products"
-              element={<OurProducts onOpenDemoModal={handleOpenDemoModal} />}
-            />
-            <Route
-              path="/our-products"
-              element={<OurProducts onOpenDemoModal={handleOpenDemoModal} />}
-            />
+              {/* Products Pages (Mahesh's proprietary catalog) */}
+              <Route
+                path="/products"
+                element={<OurProducts onOpenDemoModal={handleOpenDemoModal} />}
+              />
+              <Route
+                path="/our-products"
+                element={<OurProducts onOpenDemoModal={handleOpenDemoModal} />}
+              />
 
-            {/* Clients Pages (Mahesh's global portfolio) */}
-            <Route
-              path="/clients"
-              element={<OurClients onOpenDemoModal={handleOpenDemoModal} />}
-            />
-            <Route
-              path="/our-clients"
-              element={<OurClients onOpenDemoModal={handleOpenDemoModal} />}
-            />
-            <Route
-              path="/our_clients"
-              element={<OurClients onOpenDemoModal={handleOpenDemoModal} />}
-            />
+              {/* Clients Pages (Mahesh's global portfolio) */}
+              <Route
+                path="/clients"
+                element={<OurClients onOpenDemoModal={handleOpenDemoModal} />}
+              />
+              <Route
+                path="/our-clients"
+                element={<OurClients onOpenDemoModal={handleOpenDemoModal} />}
+              />
+              <Route
+                path="/our_clients"
+                element={<OurClients onOpenDemoModal={handleOpenDemoModal} />}
+              />
 
-            {/* IT Staffing Solutions (Abadh's full staffing page) */}
-            <Route
-              path="/it-staffing"
-              element={<ITStaffingPage onOpenContact={() => handleOpenInquiry('IT Staffing')} />}
-            />
-            <Route
-              path="/staffing"
-              element={<ITStaffingPage onOpenContact={() => handleOpenInquiry('IT Staffing')} />}
-            />
+              {/* IT Staffing Solutions (Abadh's full staffing page) */}
+              <Route
+                path="/it-staffing"
+                element={<ITStaffingPage onOpenContact={() => handleOpenInquiry('IT Staffing')} />}
+              />
+              <Route
+                path="/staffing"
+                element={<ITStaffingPage onOpenContact={() => handleOpenInquiry('IT Staffing')} />}
+              />
 
-            {/* E-Commerce Solutions (Abadh's full ecommerce page) */}
-            <Route
-              path="/ecommerce"
-              element={<EcommercePage onOpenContact={() => handleOpenInquiry('E-Commerce Solutions')} />}
-            />
+              {/* E-Commerce Solutions (Abadh's full ecommerce page) */}
+              <Route
+                path="/ecommerce"
+                element={<EcommercePage onOpenContact={() => handleOpenInquiry('E-Commerce Solutions')} />}
+              />
 
-            {/* Contact Pages (Abadh's full contact page) */}
-            <Route
-              path="/contact"
-              element={<ContactPage />}
-            />
-            <Route
-              path="/contact-us"
-              element={<ContactPage />}
-            />
+              {/* Contact Pages (Abadh's full contact page) */}
+              <Route
+                path="/contact"
+                element={<ContactPage />}
+              />
+              <Route
+                path="/contact-us"
+                element={<ContactPage />}
+              />
 
-            {/* Partnership Pages */}
-            <Route
-              path="/partnership"
-              element={<PartnershipPage onOpenModal={handleOpenModal} />}
-            />
-            <Route
-              path="/business-partners"
-              element={<BusinessPartnersPage onOpenModal={handleOpenModal} />}
-            />
+              {/* Partnership Pages */}
+              <Route
+                path="/partnership"
+                element={<PartnershipPage onOpenModal={handleOpenModal} />}
+              />
+              <Route
+                path="/business-partners"
+                element={<BusinessPartnersPage onOpenModal={handleOpenModal} />}
+              />
 
-            {/* Fallback to Home */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+              {/* Fallback to Home */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
           </PageTransition>
         </main>
 
         {/* Universal Footer */}
-        <Footer 
-          onOpenModal={handleOpenModal} 
+        <Footer
+          onOpenModal={handleOpenModal}
           onOpenInquiry={handleOpenInquiry}
         />
 
