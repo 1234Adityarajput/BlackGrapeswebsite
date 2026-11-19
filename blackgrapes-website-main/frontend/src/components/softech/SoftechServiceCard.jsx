@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ExternalLink, Send, CheckCircle2, Sparkles, Layers, ArrowRight } from 'lucide-react';
 
 export default function SoftechServiceCard({ service, onOpenDetails, onOpenInquiry }) {
@@ -65,15 +66,14 @@ export default function SoftechServiceCard({ service, onOpenDetails, onOpenInqui
 
         {/* Card Footer Actions */}
         <div className="softech-card-footer">
-          <button
-            type="button"
+          <Link
+            to={`/services/${service.id}`}
             className="btn-softech-details"
-            onClick={() => onOpenDetails(service)}
-            title={`View inside content & technical specifications for ${service.title}`}
+            title={`View full specifications & details for ${service.title}`}
           >
-            <span>View Inside Details</span>
+            <span>Learn More</span>
             <ArrowRight size={14} />
-          </button>
+          </Link>
 
           <button
             type="button"

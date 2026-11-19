@@ -1,0 +1,561 @@
+/**
+ * BLACK GRAPES SOFTECH - PREMIUM ANIMATION SYSTEM
+ * High-performance, GPU-accelerated motion styles
+ */
+
+/* ========================================================
+   1. BRANDED LOADING SCREEN
+   ======================================================== */
+
+.bgst-loader-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background: radial-gradient(circle at center, #0a0614 0%, #030206 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              visibility 0.5s ease;
+  overflow: hidden;
+}
+
+.bgst-loader-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-ambient-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(248, 98, 0, 0.18) 0%, rgba(147, 51, 234, 0.12) 50%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  animation: bgstPulseGlow 4s ease-in-out infinite;
+}
+
+.loader-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 380px;
+  padding: 2rem;
+}
+
+.loader-logo-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  animation: bgstLogoReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.loader-logo-glow {
+  position: absolute;
+  inset: -8px;
+  border-radius: 24px;
+  background: radial-gradient(circle, rgba(248, 98, 0, 0.3) 0%, rgba(147, 51, 234, 0.2) 60%, transparent 100%);
+  filter: blur(14px);
+  animation: bgstPulseGlow 3s infinite ease-in-out;
+}
+
+.loader-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6));
+}
+
+.loader-brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.loader-brand-title .brand-primary {
+  color: #ffffff;
+}
+
+.loader-brand-title .brand-accent {
+  background: linear-gradient(135deg, #f86200 0%, #ff9e42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.loader-tagline {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  margin: 0 0 1.75rem;
+}
+
+.loader-progress-container {
+  width: 100%;
+  max-width: 260px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.85rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.loader-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #9333ea 0%, #f86200 50%, #ff9e42 100%);
+  border-radius: 8px;
+  transition: width 0.12s ease-out;
+  box-shadow: 0 0 12px rgba(248, 98, 0, 0.8);
+}
+
+.loader-status-text {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 260px;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: #64748b;
+  font-family: monospace;
+}
+
+.loader-percentage {
+  color: #ff9e42;
+  font-weight: 700;
+}
+
+/* ========================================================
+   2. KEYFRAME DEFINITIONS
+   ======================================================== */
+
+@keyframes bgstLogoReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(12px);
+    filter: blur(8px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes bgstLogoGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(248, 98, 0, 0.35), 0 0 50px rgba(147, 51, 234, 0.2);
+    border-color: rgba(248, 98, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(248, 98, 0, 0.65), 0 0 80px rgba(147, 51, 234, 0.4);
+    border-color: rgba(248, 98, 0, 0.8);
+  }
+}
+
+@keyframes bgstShimmer {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes bgstPageEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bgstFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes bgstPulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+/* ========================================================
+   2. GLOBAL PAGE TRANSITION
+   ======================================================== */
+
+.page-transition-wrapper {
+  animation: bgstPageEnter 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, transform;
+  width: 100%;
+}
+
+/* ========================================================
+   3. SCROLL REVEAL UTILITY CLASSES
+   ======================================================== */
+
+.reveal-base {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 0.7s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* Reveal Styles */
+.reveal-fade-up {
+  opacity: 0;
+  transform: translate3d(0, 36px, 0);
+}
+
+.reveal-fade-down {
+  opacity: 0;
+  transform: translate3d(0, -36px, 0);
+}
+
+.reveal-fade-in {
+  opacity: 0;
+}
+
+.reveal-slide-left {
+  opacity: 0;
+  transform: translate3d(-45px, 0, 0);
+}
+
+.reveal-slide-right {
+  opacity: 0;
+  transform: translate3d(45px, 0, 0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92) translate3d(0, 20px, 0);
+}
+
+/* Active Revealed State */
+.reveal-base.is-revealed,
+.reveal-fade-up.is-revealed,
+.reveal-fade-down.is-revealed,
+.reveal-fade-in.is-revealed,
+.reveal-slide-left.is-revealed,
+.reveal-slide-right.is-revealed,
+.reveal-scale.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+}
+
+/* ========================================================
+   4. STAGGER DELAYS
+   ======================================================== */
+
+.stagger-1 { transition-delay: 0.08s !important; }
+.stagger-2 { transition-delay: 0.16s !important; }
+.stagger-3 { transition-delay: 0.24s !important; }
+.stagger-4 { transition-delay: 0.32s !important; }
+.stagger-5 { transition-delay: 0.40s !important; }
+.stagger-6 { transition-delay: 0.48s !important; }
+.stagger-7 { transition-delay: 0.56s !important; }
+.stagger-8 { transition-delay: 0.64s !important; }
+
+/* ========================================================
+   5. AUTOMATED SCROLL REVEAL & UNIVERSAL CARD ENHANCEMENTS
+   ======================================================== */
+
+.reveal-init {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-init.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+/* Universal Card Transitions & Micro-Interactions */
+.service-card,
+.project-card,
+.process-step-card,
+.why-us-capsule-card,
+.counter-card,
+.testimonial-card,
+.industry-card,
+.stat-strip-card,
+.vm-card,
+.founder-card,
+.value-card,
+.domain-card,
+.timeline-card,
+.product-card,
+.client-logo-card,
+.client-case-card,
+.staffing-model-card,
+.talent-card,
+.hiring-step-card,
+.ecommerce-feature-card,
+.contact-info-card,
+.partner-tier-card,
+.tendering-callout-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease,
+              border-color 0.3s ease,
+              background 0.3s ease !important;
+  will-change: transform, box-shadow;
+}
+
+.service-card:hover,
+.project-card:hover,
+.process-step-card:hover,
+.counter-card:hover,
+.industry-card:hover,
+.stat-strip-card:hover,
+.vm-card:hover,
+.founder-card:hover,
+.value-card:hover,
+.domain-card:hover,
+.timeline-card:hover,
+.product-card:hover,
+.client-logo-card:hover,
+.client-case-card:hover,
+.staffing-model-card:hover,
+.talent-card:hover,
+.hiring-step-card:hover,
+.ecommerce-feature-card:hover,
+.contact-info-card:hover,
+.partner-tier-card:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  border-color: rgba(248, 98, 0, 0.55) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 24px rgba(248, 98, 0, 0.2) !important;
+}
+
+/* Image Zoom in Card Media */
+.service-card-img-wrapper,
+.motion-card-img-wrap,
+.project-card-top,
+.product-card-img-wrap,
+.founder-img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+
+.service-card:hover .service-card-img,
+.motion-card:hover .motion-card-img,
+.product-card:hover img,
+.founder-card:hover img {
+  transform: scale(1.06);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* ========================================================
+   6. INTERACTIVE BUTTONS & MICRO-INTERACTIONS
+   ======================================================== */
+
+.btn,
+.btn-primary,
+.btn-outline,
+.service-details-btn,
+.nav-cta-btn,
+.cta-button {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s ease,
+              background 0.25s ease,
+              border-color 0.25s ease !important;
+  will-change: transform;
+}
+
+.btn:hover,
+.btn-primary:hover,
+.service-details-btn:hover,
+.nav-cta-btn:hover,
+.cta-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(248, 98, 0, 0.45) !important;
+}
+
+.btn:active,
+.btn-primary:active {
+  transform: translateY(1px) !important;
+}
+
+/* Subtle Shimmer on Primary Action Buttons */
+.btn-primary::after,
+.nav-cta-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 100%
+  );
+  transform: translateX(-180%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.btn-primary:hover::after,
+.nav-cta-btn:hover::after {
+  animation: bgstShimmer 0.75s ease-in-out forwards;
+}
+
+/* Form Inputs Focus Aura */
+.form-control:focus,
+.contact-input:focus,
+.contact-textarea:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #f86200 !important;
+  box-shadow: 0 0 0 3px rgba(248, 98, 0, 0.25), 0 0 15px rgba(248, 98, 0, 0.2) !important;
+  outline: none !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+/* Floating Elements */
+.float-subtle {
+  animation: bgstFloat 4s ease-in-out infinite;
+}
+
+.pulse-ambient {
+  animation: bgstPulseGlow 5s ease-in-out infinite;
+}
+
+/* ========================================================
+   7. NAVBAR & FOOTER ANIMATIONS
+   ======================================================== */
+
+.main-navbar {
+  transition: background 0.35s ease,
+              backdrop-filter 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease !important;
+}
+
+.main-navbar.navbar-scrolled {
+  background: rgba(3, 7, 18, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Nav Link Hover Underline Indicator */
+.nav-link {
+  position: relative;
+  transition: color 0.25s ease !important;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #f86200;
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Footer Social Icon Glowing Micro-Interaction */
+.footer-social-link,
+.social-icon-btn,
+.social-pill {
+  transition: transform 0.25s ease,
+              color 0.25s ease,
+              background 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease !important;
+}
+
+.footer-social-link:hover,
+.social-icon-btn:hover,
+.social-pill:hover {
+  transform: translateY(-3px) scale(1.1) !important;
+  color: #ffffff !important;
+  border-color: #f86200 !important;
+  background: rgba(248, 98, 0, 0.2) !important;
+  box-shadow: 0 0 16px rgba(248, 98, 0, 0.5) !important;
+}
+
+/* ========================================================
+   7. ACCESSIBILITY: REDUCED MOTION PREFERENCE
+   ======================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-base,
+  .reveal-fade-up,
+  .reveal-fade-down,
+  .reveal-fade-in,
+  .reveal-slide-left,
+  .reveal-slide-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .page-transition-wrapper {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

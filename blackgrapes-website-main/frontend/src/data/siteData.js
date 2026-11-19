@@ -35,18 +35,19 @@ export const NAV_LINKS = [
     name: "Services",
     href: "/services",
     dropdown: [
-      { name: "Software Development", desc: "Custom enterprise software & cloud backends", href: "/services" },
-      { name: "Mobile App Development", desc: "Native iOS, Android & Flutter cross-platform", href: "/services" },
-      { name: "Digital Marketing", desc: "ROI-driven SEO, SEM, and social growth", href: "/services" },
-      { name: "Graphic Designing", desc: "UI/UX, branding identities & visual media", href: "/services" },
-      { name: "Web Designing and Development", desc: "Responsive, high-conversion web platforms", href: "/services" },
-      { name: "CRM Software Development", desc: "Custom lead & relationship tracking tools", href: "/services" },
-      { name: "MLM Software Development", desc: "Binary, matrix, generation plans & digital wallets", href: "/services" },
-      { name: "Game Development", desc: "Immersive 2D & 3D gaming experiences", href: "/services" },
-      { name: "Government Tender Services", desc: "GeM & e-Procurement technical bidding", href: "/services" },
-      { name: "Private Tender Services", desc: "Corporate RFP execution & compliance", href: "/services" }
+      { name: "Software Development", desc: "Custom enterprise software & cloud backends", href: "/services/software-development" },
+      { name: "Mobile App Development", desc: "Native iOS, Android & Flutter cross-platform", href: "/services/mobile-app-development" },
+      { name: "Digital Marketing", desc: "ROI-driven SEO, SEM, and social growth", href: "/services/digital-marketing" },
+      { name: "Graphic Designing", desc: "UI/UX, branding identities & visual media", href: "/services/graphic-designing" },
+      { name: "Web Designing and Development", desc: "Responsive, high-conversion web platforms", href: "/services/web-development" },
+      { name: "CRM Software Development", desc: "Custom lead & relationship tracking tools", href: "/services/crm-software-development" },
+      { name: "MLM Software Development", desc: "Binary, matrix, generation plans & digital wallets", href: "/services/mlm-software-development" },
+      { name: "Game Development", desc: "Immersive 2D & 3D gaming experiences", href: "/services/game-development" },
+      { name: "Government Tender Services", desc: "GeM & e-Procurement technical bidding", href: "/services/tender-services" },
+      { name: "Private Tender Services", desc: "Corporate RFP execution & compliance", href: "/services/tender-services" }
     ]
   },
+  { name: "Portfolio", href: "/portfolio" },
   { name: "Our Products", href: "/our-products" },
   { name: "Ecommerce", href: "/ecommerce" },
   { name: "Our Clients", href: "/our-clients" },
@@ -63,37 +64,37 @@ export const NAV_LINKS = [
 ];
 
 export const ABOUT_CONTENT = {
-  badge: "ABOUT COMPANY",
-  mainTitle: "Best Website Development Company | Best IT Software Company | Best Mobile App Development Company",
-  subtitle: "Black Grapes Softech – Best Website Development Company, App Development, MLM Software, Digital Marketing Services in Indore at Affordable price and best services",
-  primaryParagraph: "Black Grapes Softech is an IT Company extending its services in the field of Software Development. We’re not just another company; we’re your innovation partner. With a passion for coding and a commitment to excellence, we craft solutions that push the boundaries of what’s possible. Our team of techsavvy wizards brings diverse expertise to the table. From web and mobile apps to cutting-edge AI and IoT solutions, we’ve got it all covered. Our customization prowess knows no bounds. We take your vision and turn it into reality, creating software that aligns perfectly with your goals.",
-  secondaryParagraph: "Searching a company/agency for best customized IT solutions at affordable price, then your search ends here. With more than 10+ Years of experience in IT development field with energetic team of IT professionals, we feel privileged to meet our clients' digital needs in the best professional way. Our dedicated developers are always in search for the development by using latest technologies for app and website developing services to present the best product. Our company has served lots of Startups, Small and Big Organizations to build scalable, enterprise-level apps, websites, and software.",
+  badge: "ABOUT BLACK GRAPES SOFTECH",
+  mainTitle: "Your Strategic Partner for Digital Innovation & Enterprise Software",
+  subtitle: "We transform complex business requirements into high-velocity digital products with clean code, scalable architecture, and reliable delivery.",
+  primaryParagraph: "Black Grapes Softech is an enterprise IT consulting and custom software development company based in Indore, India. We specialize in architecting modern web platforms, iOS & Android applications, CRM & ERP systems, and cloud-native solutions that empower global enterprises to innovate faster and scale with confidence.",
+  secondaryParagraph: "With over 10 years of software engineering expertise and 150+ successful client deployments worldwide, our dedicated engineers deliver scalable, secure, and business-focused software tailored precisely to your operational requirements.",
   coreValues: [
     {
-      title: "Passionate Craftsmanship",
+      title: "Engineering Rigor",
       desc: "Relentless attention to code quality, modern UX patterns, and zero compromises on software reliability."
     },
     {
-      title: "End-to-End Customization",
-      desc: "Tailored architecture built specifically around your enterprise workflows rather than cookie-cutter templates."
+      title: "Customized Architecture",
+      desc: "Tailored systems built specifically around your enterprise workflows rather than cookie-cutter templates."
     },
     {
-      title: "Affordable Enterprise Tech",
-      desc: "High-grade engineering delivered at competitive rates, giving startups and SMBs an unfair advantage."
+      title: "Transparent Collaboration",
+      desc: "Clear timelines, daily communication, and continuous delivery with zero hidden overheads."
     }
   ],
   qaItems: [
     {
-      q: "The purpose of life coaching & IT strategy?",
-      a: "Strategic alignment between your commercial vision and technical infrastructure. We formulate tech roadmaps that empower teams and maximize business viability."
+      q: "What makes Black Grapes Softech different?",
+      a: "We combine deep technical expertise with business focus, ensuring every digital product we engineer drives measurable operational efficiency and revenue growth."
     },
     {
-      q: "Past, present & future digital exercise",
-      a: "Reviewing legacy blockers, optimizing current workflows, and future-proofing architectures with cloud scalability and AI readiness."
+      q: "What development methodology do you follow?",
+      a: "We run agile two-week sprints with transparent milestones, automated CI/CD pipelines, and active stakeholder feedback at every stage."
     },
     {
-      q: "How do you perceive value & ROI?",
-      a: "Value is measured in operational hours saved, conversions multiplied, and systems that seamlessly scale without compounding overhead."
+      q: "Do you offer post-deployment support?",
+      a: "Yes, we provide SLA-backed maintenance, proactive monitoring, security updates, and feature scaling to ensure continuous system reliability."
     }
   ]
 };
@@ -174,42 +175,54 @@ export const SERVICES = [
 ];
 
 export const WHY_CHOOSE_US = {
-  vision: "To be the most admired creative and affordable IT solutions company in the world.",
+  vision: "To be the most reliable IT development partner for ambitious businesses by delivering high-impact software, scalable architecture, and transparent collaboration.",
   pillars: [
     {
-      title: "Security Assurance",
-      subtitle: "Uncompromised Data & Infrastructure Safety",
-      description: "We never compromise with security. We use best technology with expert developers to develop your product or service. Never worry about vulnerabilities with our rigorous code audits and encryption protocols.",
+      title: "Customized Solutions",
+      subtitle: "Tailored Architecture",
+      description: "Bespoke software and applications designed specifically around your operational workflows and business objectives.",
       image: "/images/Security-1.jpg",
       points: [
-        "End-to-End Data Encryption",
-        "Rigorous Code Audits & Pen-testing",
-        "OWASP Compliance & Secure Auth",
-        "Automated Vulnerability Monitoring"
+        "Custom UI/UX & Flow Design",
+        "Tailored Business Logic",
+        "Scalable Microservices",
+        "Zero Cookie-Cutter Templates"
       ]
     },
     {
-      title: "Quality Assurance",
-      subtitle: "Software Built Like Modern Craftsmanship",
-      description: "We are known for providing best services and developing top notch quality of software in the market. For us maintaining quality of software is same as maintaining yourself in a society.",
+      title: "Experienced Team",
+      subtitle: "10+ Years Proven Track",
+      description: "Seasoned full-stack developers, mobile engineers, and architects delivering battle-tested digital products.",
+      image: "/images/founders.jpg",
+      points: [
+        "Senior Software Engineers",
+        "Cross-Platform Expertise",
+        "Agile Sprint Management",
+        "Dedicated Tech Leads"
+      ]
+    },
+    {
+      title: "Quality Development",
+      subtitle: "Industry-Standard Code",
+      description: "Clean, maintainable codebases built with modern frameworks, automated testing, and strict security compliance.",
       image: "/images/quality.jpg",
       points: [
-        "Automated & Manual Regression Testing",
-        "Sub-second Response Times & 99.9% Uptime",
-        "Clean, Maintainable Architecture",
-        "Cross-Browser & Multi-Device Parity"
+        "OWASP Security Adherence",
+        "Automated QA & CI/CD",
+        "Optimized Performance",
+        "Clean Modular Code"
       ]
     },
     {
-      title: "Good Relationship",
-      subtitle: "Long-Term Collaborative Technology Partners",
-      description: "We are not just fulfilling client’s requirement, we maintain best relationship with our client so that we can work together to grow our businesses. Plan to work together for new ideas.",
+      title: "Reliable Support",
+      subtitle: "End-to-End Commitment",
+      description: "Continuous monitoring, routine security patches, and rapid support to ensure uninterrupted business continuity.",
       image: "/images/good-business-relationship-2.jpg",
       points: [
-        "Dedicated Account & Project Manager",
-        "Transparent Sprint Updates & Demos",
-        "Continuous Post-Launch Maintenance",
-        "Strategic Product Co-Innovation"
+        "Dedicated Account Lead",
+        "Fast Response SLA",
+        "Post-Deployment Maintenance",
+        "24/7 System Health Checks"
       ]
     }
   ]

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHomePage, useTestimonials } from '@backend/useContent';
 import { TESTIMONIALS } from '../data/siteData';
 
 export default function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const { home } = useHomePage();
   const { testimonials } = useTestimonials();
 
@@ -33,16 +34,29 @@ export default function TestimonialsSection() {
     };
   });
 
-  const currentIdx = (activeIndex >= testimonialsList.length) ? 0 : activeIndex;
+  const total = testimonialsList.length;
+
+  const nextReview = useCallback(() => {
+    if (total <= 1) return;
+    setActiveIndex((prev) => (prev + 1) % total);
+  }, [total]);
+
+  const prevReview = useCallback(() => {
+    if (total <= 1) return;
+    setActiveIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
+  }, [total]);
+
+  // 5-Second Automatic Review Transition (Pauses on Hover)
+  useEffect(() => {
+    if (isHovered || total <= 1) return;
+    const timer = setInterval(() => {
+      nextReview();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [isHovered, total, nextReview]);
+
+  const currentIdx = (activeIndex >= total) ? 0 : activeIndex;
   const currentItem = testimonialsList[currentIdx] || testimonialsList[0] || {};
-
-  const prevReview = () => {
-    setActiveIndex((prev) => (prev === 0 ? testimonialsList.length - 1 : prev - 1));
-  };
-
-  const nextReview = () => {
-    setActiveIndex((prev) => (prev === testimonialsList.length - 1 ? 0 : prev + 1));
-  };
 
   // Helper to extract or display initials for avatar
   const getAvatarText = (item) => {
@@ -74,10 +88,15 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        {/* Featured Testimonial Highlight */}
-        <div className="testimonial-featured-card">
+        {/* Featured Testimonial Highlight Card */}
+        <div 
+          className="testimonial-featured-card"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <div className="quote-mark-icon">&ldquo;</div>
 
+          {/* Top Rating & Dynamic 5s Auto-Play Indicator Row */}
           <div className="testimonial-stars-row">
             {[...Array(starCount)].map((_, i) => (
               <span key={i} className="star-icon">★</span>
@@ -86,7 +105,8 @@ export default function TestimonialsSection() {
             <span className="verified-client-pill">{currentItem.verifiedBadge || '✓ Verified Client'}</span>
           </div>
 
-          <p className="testimonial-quote-text">
+          {/* Animated Quote Text (Resets fade-in on 5s change) */}
+          <p key={`quote-${currentIdx}`} className="testimonial-quote-text testimonial-quote-animated">
             {currentItem.quote}
           </p>
 
@@ -99,7 +119,7 @@ export default function TestimonialsSection() {
               <span className="author-role">{currentItem.role}</span>
             </div>
 
-            {/* Slider Controls */}
+            {/* Slider Controls with Navigation Dots */}
             <div className="testimonial-controls">
               <button
                 type="button"
@@ -109,9 +129,24 @@ export default function TestimonialsSection() {
               >
                 &larr;
               </button>
+
+              {/* Navigation Dots */}
+              <div className="testimonial-nav-dots">
+                {testimonialsList.map((_, dotIdx) => (
+                  <button
+                    key={dotIdx}
+                    type="button"
+                    className={`test-nav-dot ${dotIdx === currentIdx ? 'active' : ''}`}
+                    onClick={() => setActiveIndex(dotIdx)}
+                    aria-label={`Go to review ${dotIdx + 1}`}
+                  />
+                ))}
+              </div>
+
               <span className="control-fraction">
-                {String(currentIdx + 1).padStart(2, '0')} / {String(testimonialsList.length).padStart(2, '0')}
+                {String(currentIdx + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
               </span>
+
               <button
                 type="button"
                 className="control-arrow-btn"
@@ -121,6 +156,14 @@ export default function TestimonialsSection() {
                 &rarr;
               </button>
             </div>
+          </div>
+
+          {/* 5-Second Animated Progress Bar (Resets key on step change, pauses on hover) */}
+          <div className="testimonial-timer-bar">
+            <div 
+              key={`timer-${currentIdx}`} 
+              className={`testimonial-timer-fill ${isHovered ? 'paused' : 'animating'}`} 
+            />
           </div>
         </div>
       </div>

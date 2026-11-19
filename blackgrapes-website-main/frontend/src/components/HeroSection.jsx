@@ -11,13 +11,11 @@ export default function HeroSection({ onOpenModal }) {
   const heroImage = rawImage ? resolveMediaUrl(rawImage) : '';
 
   const badgeText = hero.badge || '10+ Years of Proven IT Excellence • Indore, India';
-  const prefix = hero.prefix || 'Innovate. Integrate. Elevate.';
-  const breakText = hero.break_text || 'And Digitalize Your Ideas into Success via';
+  const headline = hero.headline || 'Engineering Scalable Software, Web & Mobile Platforms for Global Ambition';
   const brandHighlight = hero.brand_highlight || 'BLACK GRAPES SOFTECH';
-  const suffix = hero.suffix || ', Where Innovation And ideas Meets Excellence.';
-  const description = hero.description || `${COMPANY_INFO.consultationText}. We engineer scalable custom software, iOS & Android mobile apps, enterprise CRMs, MLM platforms, and high-conversion websites for ambitious startups and global enterprises.`;
-  const ctaPrimary = hero.cta_primary_text || 'Request a Demo';
-  const ctaSecondary = hero.cta_secondary_text || 'Get the offer';
+  const description = hero.description || 'We architect high-performance custom software, mobile apps, enterprise CRMs, and modern websites for ambitious startups and global enterprises.';
+  const ctaPrimary = hero.cta_primary_text || 'Get Free Consultation';
+  const ctaSecondary = hero.cta_secondary_text || 'Explore Services';
 
   const defaultBadges = [
     { name: 'React', category: 'Frontend' },
@@ -39,43 +37,42 @@ export default function HeroSection({ onOpenModal }) {
       <div className="container hero-container">
         {/* Left Column: Headline & Action CTAs */}
         <div className="hero-content">
-          <div className="hero-badge-pill">
+          <div className="hero-badge-pill reveal-fade-down is-revealed">
             <span className="badge-glow-dot"></span>
             <span className="badge-text">{badgeText}</span>
           </div>
 
-          <h1 className="hero-title">
-            <span className="hero-prefix">{prefix} </span>
-            <span className="hero-break">{breakText} </span>
-            <span className="hero-gradient-brand"> {brandHighlight}</span>
-            <span className="hero-suffix">{suffix}</span>
+          <h1 className="hero-title reveal-fade-up is-revealed stagger-1">
+            {hero.headline ? (
+              <span>{hero.headline}</span>
+            ) : (
+              <>
+                <span className="hero-prefix">{hero.prefix || 'Innovate & Scale With'} </span>
+                <span className="hero-gradient-brand">{brandHighlight}</span>
+                {hero.break_text && <span className="hero-break"> — {hero.break_text}</span>}
+              </>
+            )}
           </h1>
 
-          <p className="hero-description">
+          <p className="hero-description reveal-fade-up is-revealed stagger-2">
             {description}
           </p>
 
-          <div className="hero-cta-group">
+          <div className="hero-cta-group reveal-fade-up is-revealed stagger-3">
             <button
               type="button"
-              className="btn btn-primary btn-lg"
-              onClick={() => onOpenModal('Request a Demo')}
+              className="btn btn-primary btn-lg btn-premium-action"
+              onClick={() => onOpenModal(ctaPrimary)}
             >
               <span className="btn-icon">⚡</span>
               <span>{ctaPrimary}</span>
             </button>
 
-            <button
-              type="button"
-              className="btn btn-outline btn-lg"
-              onClick={() => onOpenModal('Get the offer')}
+            <a
+              href="#services"
+              className="btn btn-outline btn-lg btn-premium-action"
             >
-              <span className="btn-icon">🎁</span>
               <span>{ctaSecondary}</span>
-            </button>
-
-            <a href="#services" className="hero-link-btn">
-              <span>View Services</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -84,31 +81,31 @@ export default function HeroSection({ onOpenModal }) {
           </div>
 
           {/* Quick Metrics Bar */}
-          <div className="hero-metrics-grid">
+          <div className="hero-metrics-grid reveal-fade-up is-revealed stagger-4">
             <div className="hero-metric-item">
               <span className="metric-number">10+</span>
-              <span className="metric-label">Years Experience</span>
-            </div>
-            <div className="hero-metric-divider"></div>
-            <div className="hero-metric-item">
-              <span className="metric-number">100+</span>
-              <span className="metric-label">Satisfied Clients</span>
+              <span className="metric-label">Years Innovation</span>
             </div>
             <div className="hero-metric-divider"></div>
             <div className="hero-metric-item">
               <span className="metric-number">150+</span>
-              <span className="metric-label">Projects Delivered</span>
+              <span className="metric-label">Global Clients</span>
             </div>
             <div className="hero-metric-divider"></div>
             <div className="hero-metric-item">
-              <span className="metric-number">50+</span>
-              <span className="metric-label">Tech Services</span>
+              <span className="metric-number">250+</span>
+              <span className="metric-label">Projects Deployed</span>
+            </div>
+            <div className="hero-metric-divider"></div>
+            <div className="hero-metric-item">
+              <span className="metric-number">99%</span>
+              <span className="metric-label">Retention Rate</span>
             </div>
           </div>
         </div>
 
         {/* Right Column: Interactive Tech Showcase Card / Custom Hero Visual */}
-        <div className="hero-visual">
+        <div className="hero-visual reveal-slide-right is-revealed float-subtle">
           <div className="hero-glass-card">
             {/* Card Header with Mock Window Controls */}
             <div className="glass-card-header">

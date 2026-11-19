@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ParticleCanvas from './components/ParticleCanvas';
 import Navbar from './components/Navbar';
@@ -9,6 +9,8 @@ import InquiryModal from './components/InquiryModal';
 import ServiceDetailModal from './components/ServiceDetailModal';
 import FloatingWidgets from './components/FloatingWidgets';
 import ScrollToTop from './components/ScrollToTop';
+import { LoadingScreen, PageTransition } from './components/animations';
+import initScrollAnimations from './utils/initScrollAnimations';
 
 import HomePage from './pages/HomePage';
 import About from './pages/About';
@@ -16,6 +18,8 @@ import OurProducts from './pages/OurProducts';
 import OurClients from './pages/OurClients';
 import ServicesPage from './pages/Services';
 import SoftechServicesPage from './pages/SoftechServices';
+import ServiceDetailPage from './pages/ServiceDetailPage';
+import ProjectsPage from './pages/ProjectsPage';
 import ITStaffingPage from './pages/ITStaffing';
 import EcommercePage from './pages/Ecommerce';
 import ContactPage from './pages/Contact';
@@ -32,6 +36,11 @@ export default function App() {
   const [inquiryService, setInquiryService] = useState('');
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+
+  useEffect(() => {
+    const cleanup = initScrollAnimations();
+    return () => cleanup && cleanup();
+  }, []);
 
   const handleOpenModal = (title = 'Request a Demo') => {
     setModalState({
@@ -67,6 +76,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      {/* Branded Premium Loading Screen */}
+      <LoadingScreen />
+
       <ScrollToTop />
       <div className="app-layout">
         {/* Dynamic Animated Background Particle Canvas */}
@@ -87,9 +99,10 @@ export default function App() {
           onOpenDemoModal={handleOpenDemoModal}
         />
 
-        {/* Main Routed Content */}
+        {/* Main Routed Content with Smooth Page Transitions */}
         <main className="main-content">
-          <Routes>
+          <PageTransition>
+            <Routes>
             {/* Home Page */}
             <Route
               path="/"
@@ -112,14 +125,32 @@ export default function App() {
               element={<About onOpenDemoModal={handleOpenDemoModal} />}
             />
 
-            {/* Services Pages (Abadh's complete hub) */}
+            {/* Services Overview & Individual Service Detail Pages */}
             <Route
               path="/services"
-              element={<ServicesPage onOpenInquiry={handleOpenInquiry} />}
+              element={<SoftechServicesPage onOpenInquiry={handleOpenInquiry} />}
+            />
+            <Route
+              path="/services/:slug"
+              element={<ServiceDetailPage onOpenInquiry={handleOpenInquiry} />}
             />
             <Route
               path="/softech-services"
               element={<SoftechServicesPage onOpenInquiry={handleOpenInquiry} />}
+            />
+            <Route
+              path="/group-services"
+              element={<ServicesPage onOpenInquiry={handleOpenInquiry} />}
+            />
+
+            {/* Portfolio & Projects Showcase */}
+            <Route
+              path="/portfolio"
+              element={<ProjectsPage onOpenModal={handleOpenModal} />}
+            />
+            <Route
+              path="/projects"
+              element={<ProjectsPage onOpenModal={handleOpenModal} />}
             />
 
             {/* Products Pages (Mahesh's proprietary catalog) */}
@@ -185,6 +216,7 @@ export default function App() {
             {/* Fallback to Home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          </PageTransition>
         </main>
 
         {/* Universal Footer */}

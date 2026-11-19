@@ -53,7 +53,8 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    project: '',
+    phone: '',
+    service: 'Web Development',
     message: ''
   });
 
@@ -73,8 +74,8 @@ export default function ContactPage() {
       await submitEnquiry({
         name: formData.name,
         email: formData.email,
-        phone: 'Via Contact Form',
-        service: formData.project || 'General Contact',
+        phone: formData.phone || 'Via Contact Form',
+        service: formData.service || 'General Contact',
         source: 'Contact Page (/contact-us)',
         message: formData.message
       });
@@ -83,7 +84,7 @@ export default function ContactPage() {
     } finally {
       setLoading(false);
       setSubmitted(true);
-      setFormData({ name: '', email: '', project: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', service: 'Web Development', message: '' });
     }
   };
 
@@ -406,16 +407,39 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="form-label" htmlFor="cnt-project">Requirement</label>
+                    <label className="form-label" htmlFor="cnt-phone">Phone Number</label>
                     <input
-                      id="cnt-project"
-                      name="project"
-                      type="text"
-                      placeholder="Your Requirement"
-                      value={formData.project}
+                      id="cnt-phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      placeholder="+91 98765 43210"
+                      value={formData.phone}
                       onChange={handleChange}
                       className="form-input"
                     />
+                  </div>
+
+                  <div>
+                    <label className="form-label" htmlFor="cnt-service">Service Selection</label>
+                    <select
+                      id="cnt-service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      className="form-input"
+                      style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#fff' }}
+                    >
+                      <option value="Web Development" style={{ background: '#111827', color: '#fff' }}>Web Development & Portals</option>
+                      <option value="Mobile App Development" style={{ background: '#111827', color: '#fff' }}>Mobile App Development (iOS & Android)</option>
+                      <option value="Custom Software Development" style={{ background: '#111827', color: '#fff' }}>Custom Software & ERP</option>
+                      <option value="CRM Software" style={{ background: '#111827', color: '#fff' }}>CRM Software Development</option>
+                      <option value="MLM Software" style={{ background: '#111827', color: '#fff' }}>MLM Software Development</option>
+                      <option value="Digital Marketing" style={{ background: '#111827', color: '#fff' }}>Digital Marketing & SEO</option>
+                      <option value="Graphic Designing" style={{ background: '#111827', color: '#fff' }}>Graphic Designing & UI/UX</option>
+                      <option value="Game Development" style={{ background: '#111827', color: '#fff' }}>Game Development</option>
+                      <option value="General Technical Inquiry" style={{ background: '#111827', color: '#fff' }}>General Technical Consultation</option>
+                    </select>
                   </div>
 
                   <div>

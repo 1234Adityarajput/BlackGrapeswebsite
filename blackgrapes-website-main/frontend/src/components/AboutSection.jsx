@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import { useHomePage } from '@backend/useContent';
 import { resolveMediaUrl } from '@backend/dataService';
 import { ABOUT_CONTENT } from '../data/siteData';
@@ -9,10 +11,10 @@ export default function AboutSection({ onOpenModal }) {
   const { home } = useHomePage();
   const about = home?.aboutSection || {};
 
-  const badge = about.badge || ABOUT_CONTENT.badge || 'ABOUT COMPANY';
-  const mainTitle = about.mainTitle || ABOUT_CONTENT.mainTitle || 'Best Website Development Company | Best IT Software Company | Best Mobile App Development Company';
-  const subtitle = about.subtitle || ABOUT_CONTENT.subtitle || 'Black Grapes Softech – Best Website Development Company, App Development, MLM Software, Digital Marketing Services in Indore at Affordable price and best services';
-  const narrativeHeading = about.narrativeHeading || 'Transforming Your Boldest Visions Into High-Performance Reality';
+  const badge = about.badge || ABOUT_CONTENT.badge || 'ABOUT BLACK GRAPES SOFTECH';
+  const mainTitle = about.mainTitle || ABOUT_CONTENT.mainTitle || 'Your Strategic Partner for Digital Innovation & Enterprise Software';
+  const subtitle = about.subtitle || ABOUT_CONTENT.subtitle || 'We transform complex business requirements into high-velocity digital products with clean code, scalable architecture, and reliable delivery.';
+  const narrativeHeading = about.narrativeHeading || 'Engineering Software That Accelerates Business Growth';
   const primaryParagraph = about.primaryParagraph || ABOUT_CONTENT.primaryParagraph;
   const secondaryParagraph = about.secondaryParagraph || ABOUT_CONTENT.secondaryParagraph;
 
@@ -165,6 +167,20 @@ export default function AboutSection({ onOpenModal }) {
               <p className="narrative-body secondary-paragraph" style={{ whiteSpace: 'pre-line' }}>
                 {secondaryParagraph}
               </p>
+
+              <div className="about-actions-row" style={{ marginTop: '1.25rem', display: 'flex', gap: '0.85rem', flexWrap: 'wrap' }}>
+                <Link to="/about" className="btn btn-primary">
+                  <span>Know More</span>
+                  <ArrowRight size={16} />
+                </Link>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={() => onOpenModal && onOpenModal('Get Free Consultation')}
+                >
+                  <span>Get Free Consultation</span>
+                </button>
+              </div>
             </div>
 
             {/* Interactive Core Values Tabs */}

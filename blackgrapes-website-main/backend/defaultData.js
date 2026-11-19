@@ -89,12 +89,13 @@ export const DEFAULT_MENUS = [
 export const DEFAULT_HOME_PAGE = {
   hero: {
     badge: '10+ Years of Proven IT Excellence • Indore, India',
-    prefix: 'Innovate. Integrate. Elevate.',
-    break_text: 'And Digitalize Your Ideas into Success via',
+    headline: 'Engineering Scalable Software, Web & Mobile Platforms for Global Ambition',
+    prefix: 'Innovate & Scale With',
+    break_text: 'Your Trusted Technology Partner',
     brand_highlight: 'BLACK GRAPES SOFTECH',
-    suffix: ', Where Innovation And ideas Meets Excellence.',
-    description: 'Get Free Consultation From Our Industry Experts. We engineer scalable custom software, iOS & Android mobile apps, enterprise CRMs, MLM platforms, and high-conversion websites for ambitious startups and global enterprises.',
-    cta_primary_text: 'Request a Demo',
+    suffix: '',
+    description: 'We architect high-performance custom software, mobile apps, enterprise CRMs, and modern websites for ambitious startups and global enterprises.',
+    cta_primary_text: 'Get Free Consultation',
     cta_secondary_text: 'Explore Services',
     techBadges: [
       { name: 'React', category: 'Frontend' },
@@ -200,9 +201,9 @@ export const DEFAULT_HOME_PAGE = {
     }
   },
     aboutSection: {
-    badge: "ABOUT COMPANY",
-    mainTitle: "Best Website Development Company | Best IT Software Company | Best Mobile App Development Company",
-    subtitle: "Black Grapes Softech – Best Website Development Company, App Development, MLM Software, Digital Marketing Services in Indore at Affordable price and best services",
+    badge: "ABOUT BLACK GRAPES SOFTECH",
+    mainTitle: "Your Strategic Partner for Digital Innovation & Enterprise Software",
+    subtitle: "We transform complex business requirements into high-velocity digital products with clean code, scalable architecture, and reliable delivery.",
     showcaseImage: "/images/blackgrapes-1.png",
     experienceYears: "10+ Years",
     experienceLabel: "of IT & Software Innovation",
@@ -216,9 +217,9 @@ export const DEFAULT_HOME_PAGE = {
     innovationChips: ["Microservices", "Cloud Network", "API Gateways", "Automated CI/CD"],
     lifecycleTitle: "Full Lifecycle Engineering",
     lifecycleDesc: "From technical discovery to deployment and 24/7 proactive monitoring, we build software engineered to scale with your enterprise.",
-    narrativeHeading: "Transforming Your Boldest Visions Into High-Performance Reality",
-    primaryParagraph: "Black Grapes Softech is an IT Company extending its services in the field of Software Development. We’re not just another company; we’re your innovation partner. With a passion for coding and a commitment to excellence, we craft solutions that push the boundaries of what’s possible. Our team of techsavvy wizards brings diverse expertise to the table. From web and mobile apps to cutting-edge AI and IoT solutions, we’ve got it all covered. Our customization prowess knows no bounds. We take your vision and turn it into reality, creating software that aligns perfectly with your goals.",
-    secondaryParagraph: "Searching a company/agency for best customized IT solutions at affordable price, then your search ends here. With more than 10+ Years of experience in IT development field with energetic team of IT professionals, we feel privileged to meet our clients' digital needs in the best professional way. Our dedicated developers are always in search for the development by using latest technologies for app and website developing services to present the best product. Our company has served lots of Startups, Small and Big Organizations to build scalable, enterprise-level apps, websites, and software.",
+    narrativeHeading: "Engineering Software That Accelerates Business Growth",
+    primaryParagraph: "Black Grapes Softech is an enterprise IT consulting and custom software development company based in Indore, India. We specialize in architecting modern web platforms, iOS & Android applications, CRM & ERP systems, and cloud-native solutions that empower global enterprises to innovate faster and scale with confidence.",
+    secondaryParagraph: "With over 10 years of software engineering expertise and 150+ successful client deployments worldwide, our dedicated engineers deliver scalable, secure, and business-focused software tailored precisely to your operational requirements.",
     coreValues: [
       {
         title: "Passionate Craftsmanship",
@@ -401,39 +402,45 @@ export const DEFAULT_HOME_PAGE = {
     ]
   },
   whyChooseUs: {
-    badge: 'WHY CHOOSE US ?',
-    titlePrefix: 'Built On Security, Uncompromising Quality & ',
-    titleHighlight: 'Lifelong Relationships',
-    visionQuote: 'To be the most reliable, visionary IT catalyst for modern businesses by delivering robust code, high ROI, and lifelong partnerships.',
-    clientsCount: '100+',
-    projectsCount: '150+',
+    badge: 'WHY CHOOSE US',
+    titlePrefix: 'Built On Verified Experience, Engineering Rigor & ',
+    titleHighlight: 'Client Trust',
+    visionQuote: 'To be the most reliable IT development partner for ambitious businesses by delivering high-impact software, scalable architecture, and transparent collaboration.',
+    clientsCount: '150+',
+    projectsCount: '250+',
     experienceYears: '10+',
     pillars: [
       {
-        subtitle: 'Unmatched Reliability',
-        title: 'Enterprise Security & Compliance',
-        description: 'Military-grade encryption, OWASP Top 10 mitigation, and ISO-standard coding conventions ensure your product scales without vulnerability.',
-        points: ['Zero Data Leak Architecture', 'Strict NDAs & IP Ownership', 'Regular Security Audits']
+        subtitle: 'Tailored Architecture',
+        title: 'Customized Solutions',
+        description: 'Bespoke software and applications designed specifically around your operational workflows and business objectives.',
+        points: ['Custom UI/UX & Flow Design', 'Tailored Business Logic', 'Scalable Microservices']
       },
       {
-        subtitle: 'Uncompromising Quality',
-        title: 'Precision-Driven Engineering',
-        description: 'Clean, modular, thoroughly tested code architectures that minimize technical debt and maximize page speed, uptime, and user adoption.',
-        points: ['Automated CI/CD Pipelines', '99.9% Uptime Guarantee', 'Pixel-Perfect UI/UX Execution']
+        subtitle: '10+ Years Proven Track',
+        title: 'Experienced Team',
+        description: 'Seasoned full-stack developers, mobile engineers, and architects delivering battle-tested digital products.',
+        points: ['Senior Software Engineers', 'Cross-Platform Expertise', 'Agile Sprint Management']
       },
       {
-        subtitle: 'Dedicated Partnership',
-        title: 'End-to-End Strategic Lifecycle',
-        description: 'We don’t stop at deployment. We stand shoulder to shoulder with founders and CIOs as true technology partners from MVP to multi-million user scale.',
-        points: ['24/7 Priority Support Desk', 'Dedicated Tech Project Manager', 'Continuous Feature Evolution']
+        subtitle: 'Industry-Standard Code',
+        title: 'Quality Development',
+        description: 'Clean, maintainable codebases built with modern frameworks, automated testing, and strict security compliance.',
+        points: ['OWASP Security Adherence', 'Automated QA & CI/CD', 'Optimized Performance']
+      },
+      {
+        subtitle: 'End-to-End Commitment',
+        title: 'Reliable Support',
+        description: 'Continuous monitoring, routine security patches, and rapid support to ensure uninterrupted business continuity.',
+        points: ['Dedicated Account Lead', 'Fast Response SLA', 'Post-Deployment Maintenance']
       }
     ]
   },
   ctaBanner: {
-    badge: 'GET STARTED WITH BLACK GRAPES SOFTECH',
-    title: 'Assess Your Business Potentials Now & Find Take Care of What Matters Most!',
-    subtitle: 'Speak directly with our senior architects. Whether you need a full enterprise software build, high-conversion mobile app, or modern web platform, we deliver excellence on time and on budget.',
-    primaryBtnText: 'Get Started Now!',
+    badge: 'START YOUR PROJECT',
+    title: "Let's Build Something Great Together.",
+    subtitle: 'Partner with our senior architects to bring your digital product vision to life with precision engineering and on-time delivery.',
+    primaryBtnText: 'Contact Us',
     secondaryBtnText: 'Get Free Consultation'
   }
 };
