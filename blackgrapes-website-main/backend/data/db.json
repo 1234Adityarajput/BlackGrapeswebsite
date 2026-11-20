@@ -3686,9 +3686,9 @@
     "waitlist_count": 450
   },
   "partnership_page": {
-    "heroBadge": "TEST ALLIANCES ",
-    "heroTitle": "Partnership",
-    "heroSubtitle": "Cultivating strategic relationships",
+    "heroBadge": "PARTNERSHIP & ALLIANCES",
+    "heroTitle": "Strategic Technology Alliances & Offshore Development",
+    "heroSubtitle": "Cultivating long-term strategic relationships and delivering high-velocity offshore technology development.",
     "partnerWithUsTitle": "Partner With Us",
     "partnerWithUsText": "If you are an IT or web software development company and are eager to expand your operations here in India, we are ready to help you as your development centre. Our business community is focused on cultivating long-term relationships with our clients and offers excellent experiences covering the strategic insights. Partnering with us enables you to provide endless growth and development. You can share our resources for your project requirements to work on technical areas that directly affect the growth of the organization.",
     "partnerImage": "/partners/partner_with_us.webp",
@@ -3696,14 +3696,14 @@
       "Dedicated Offshore Development Center (ODC) setup in Indore tech corridor",
       "Seamless collaboration across global time zones (US, UK, UAE, Australia)",
       "Transparent billing, daily standups, and dedicated engineering leadership",
-      "Strict intellectual property protection and confidentiality agreements "
+      "Strict intellectual property protection and confidentiality agreements"
     ],
     "formTitle": "Please tell us a bit about yourself",
     "formSubtitle": "Fill in your details below to explore development centre partnerships with our team.",
-    "productPartnersTitle": "Products Companies Tie-up",
-    "productPartnersIntro": "Facilitating strategic alliances between product companies to expand reach, unlock mutual growth, and integrate complementary cloud platforms.",
-    "servicePartnersTitle": "Services Companies Tie-up",
-    "servicePartnersIntro": "Strategic collaborations between service enterprises to expand offerings, share cross-domain expertise, and co-deliver complex client mandates."
+    "productPartnersTitle": "Black Grapes Softech Products Companies Tie-up:-",
+    "productPartnersIntro": "In today’s dynamic business landscape, strategic partnerships play a crucial role in driving growth, innovation, and market expansion. Product companies recognize the immense value of collaborating with like-minded organizations to leverage complementary strengths and create mutual opportunities for success. This is where Product Companies Tie-Up Services step in.",
+    "servicePartnersTitle": "Black Grapes Softech Services Companies Tie-up:-",
+    "servicePartnersIntro": "In today’s fast-paced business environment, strategic collaborations are essential for unlocking growth opportunities and staying competitive. Services Companies Tie-Up offers a streamlined approach to forming partnerships between service-oriented businesses. By joining forces, companies can leverage each other’s expertise, expand service offerings, and access new markets more efficiently. With Services Companies Tie-Up, businesses can accelerate their growth and achieve mutual success in a dynamic marketplace."
   },
   "contact_page": {
     "heroBadge": "BLACK GRAPES GROUP",
@@ -4433,20 +4433,19 @@
     "titleAccent": "Business Partners",
     "subtitle": "Forging strategic alliances, distribution networks, and scalable tech integrations across global enterprise platforms.",
     "product_intro": {
-      "sectionTitle": "Products Companies Tie-up",
-      "subHeading": "Products Companies Tie-up",
+      "sectionTitle": "Black Grapes Softech Products Companies Tie-up:-",
+      "subHeading": "Product Companies Tie-up",
       "paragraphs": [
-        "Facilitating strategic alliances between product companies to expand reach, unlock mutual growth, and integrate complementary cloud platforms.",
-        "Our collaborative framework empowers product businesses to cross-promote solutions, share technical toolsets, and deliver bundled digital value.",
-        "Through seamless API integrations and joint go-to-market strategies, we help emerging product innovators scale faster across international markets."
+        "In today’s dynamic business landscape, strategic partnerships play a crucial role in driving growth, innovation, and market expansion. Product companies recognize the immense value of collaborating with like-minded organizations to leverage complementary strengths and create mutual opportunities for success. This is where Product Companies Tie-Up Services step in.",
+        "These services facilitate strategic partnerships between product companies, enabling them to forge stronger alliances, expand their reach, and unlock new avenues for growth. By joining forces, businesses can tap into new markets, access additional resources, and capitalize on emerging opportunities that may be beyond their reach individually. Through distribution agreements, joint ventures, technology partnerships, or co-branding initiatives, these services empower companies to create synergies and unlock value that benefits all parties involved.",
+        "Product Companies Tie-Up Services match companies with compatible partners based on shared goals, complementary capabilities, and strategic fit. They offer ongoing support throughout the partnership lifecycle, from initial discussions and agreement formation to implementation, monitoring, and optimization. By offering strategic guidance, operational assistance, and performance tracking, these services help companies nurture and sustain successful partnerships that drive sustainable growth and competitive advantage."
       ]
     },
     "service_intro": {
-      "sectionTitle": "Services Companies Tie-up",
+      "sectionTitle": "Black Grapes Softech Services Companies Tie-up:-",
       "subHeading": "Services Companies Tie-up",
       "paragraphs": [
-        "Strategic collaborations between service enterprises to expand offerings, share cross-domain expertise, and co-deliver complex client mandates.",
-        "By uniting specialized consulting, digital marketing, and software engineering capabilities, we create full-spectrum execution squads."
+        "In today’s fast-paced business environment, strategic collaborations are essential for unlocking growth opportunities and staying competitive. Services Companies Tie-Up offers a streamlined approach to forming partnerships between service-oriented businesses. By joining forces, companies can leverage each other’s expertise, expand service offerings, and access new markets more efficiently. With Services Companies Tie-Up, businesses can accelerate their growth and achieve mutual success in a dynamic marketplace."
       ]
     },
     "product_partners": [

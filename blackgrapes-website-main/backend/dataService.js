@@ -18,6 +18,7 @@ import {
   DEFAULT_IT_STAFFING,
   DEFAULT_ECOMMERCE,
   DEFAULT_PARTNERSHIP,
+  DEFAULT_BUSINESS_PARTNERS,
   DEFAULT_CONTACT_PAGE,
   DEFAULT_CLIENTS_PAGE,
   DEFAULT_SERVICES_PAGE,
@@ -1073,7 +1074,7 @@ export async function saveClientsPage(data) {
 // 22. BUSINESS PARTNERS (ALLIANCES)
 // ==========================================
 export async function getBusinessPartners() {
-  return await fetchModuleApi('business_partners', { product_partners: [], service_partners: [] });
+  return await fetchModuleApi('business_partners', DEFAULT_BUSINESS_PARTNERS);
 }
 
 export async function saveBusinessPartners(data) {

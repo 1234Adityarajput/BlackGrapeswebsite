@@ -48,6 +48,21 @@ export default function PartnershipPage() {
     setIsSubmitted(false);
   };
 
+  const rawBadge = (partnershipData?.heroBadge || '').trim();
+  const heroBadge = (!rawBadge || rawBadge.toUpperCase().includes('TEST'))
+    ? 'PARTNERSHIP & ALLIANCES'
+    : rawBadge;
+
+  const rawTitle = (partnershipData?.heroTitle || '').trim();
+  const heroTitle = (!rawTitle || rawTitle === 'Partnership')
+    ? 'Strategic Technology Alliances & Offshore Development'
+    : rawTitle;
+
+  const rawSubtitle = (partnershipData?.heroSubtitle || '').trim();
+  const heroSubtitle = (!rawSubtitle || rawSubtitle === 'Cultivating strategic relationships')
+    ? 'Cultivating long-term strategic relationships and delivering high-velocity offshore technology development.'
+    : rawSubtitle;
+
   const benefitsList = (Array.isArray(partnershipData?.benefits) && partnershipData.benefits.length > 0)
     ? partnershipData.benefits
     : [
@@ -64,14 +79,13 @@ export default function PartnershipPage() {
         <div className="partner-page-header">
           <div className="partner-eyebrow">
             <Sparkles size={14} />
-            <span>{partnershipData?.heroBadge || 'PARTNERSHIP'}</span>
+            <span>{heroBadge}</span>
           </div>
           <h1 className="partner-page-title">
-            <span className="text-gradient">{partnershipData?.heroTitle || 'Partnership'}</span>
+            <span className="text-gradient">{heroTitle}</span>
           </h1>
           <p className="partner-page-subtitle">
-            {partnershipData?.heroSubtitle ||
-              'Cultivating long-term strategic relationships and delivering high-velocity offshore technology development.'}
+            {heroSubtitle}
           </p>
         </div>
 
