@@ -912,6 +912,47 @@ button, input, select, textarea {
   letter-spacing: 0.05em;
 }
 
+.hero-title-line {
+  display: block !important;
+  width: 100%;
+}
+
+.hero-title-line-1 {
+  display: block !important;
+  color: #ffffff !important;
+}
+
+.hero-title-line-2 {
+  display: block !important;
+  color: #ffffff !important;
+  margin-top: 0.15rem;
+}
+
+.hero-title-line-3 {
+  display: block !important;
+  color: #ffffff !important;
+  margin-top: 0.2rem;
+}
+
+.hero-brand-shimmer,
+.hero-headline-shimmer {
+  display: inline-block !important;
+  color: #ffffff !important;
+  background: linear-gradient(110deg,
+      #ffffff 0%,
+      #ffffff 38%,
+      #ffb080 50%,
+      #f86200 62%,
+      #ffffff 74%,
+      #ffffff 100%) !important;
+  background-size: 250% 100% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: textShineSweep 5s linear infinite !important;
+  text-shadow: 0 0 35px rgba(248, 98, 0, 0.28);
+}
+
 .hero-break {
   display: block;
   color: #ffffff;
@@ -5329,6 +5370,19 @@ img, video, canvas, svg {
   text-transform: uppercase !important;
   letter-spacing: 0.04em !important;
   word-break: break-word !important;
+}
+
+.hero-title-line {
+  display: block !important;
+  width: 100% !important;
+}
+
+.hero-title-line-1,
+.hero-title-line-2,
+.hero-title-line-3 {
+  display: block !important;
+  color: #ffffff !important;
+  word-break: normal !important;
 }
 
 .hero-break {

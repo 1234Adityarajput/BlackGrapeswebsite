@@ -888,19 +888,20 @@ select:focus {
 }
 
 /* 2. Hero Headline Dynamic Ambient Shimmer */
-.hero-headline-shimmer {
+.hero-headline-shimmer,
+.hero-brand-shimmer {
   display: inline-block;
   background: linear-gradient(110deg,
       #ffffff 0%,
-      #ffffff 45%,
-      #ffb080 55%,
-      #f86200 65%,
-      #ffffff 75%,
+      #ffffff 38%,
+      #ffb080 50%,
+      #f86200 62%,
+      #ffffff 74%,
       #ffffff 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: textShineSweep 7s linear infinite;
+  animation: textShineSweep 5s linear infinite;
 }
 
 @keyframes textShineSweep {

@@ -13,30 +13,9 @@ export default function HeroSection({ onOpenModal }) {
 
   const badgeText = hero.badge || '10+ Years of Proven IT Excellence • Indore, India';
   const prefix = hero.prefix || 'INNOVATE. INTEGRATE. ELEVATE.';
-  const brandHighlight = hero.brand_highlight || 'BLACK GRAPES SOFTECH';
-
-  // Cleanly handle SS1 layout
-  const rawBreakText = (hero.break_text || hero.title || 'And Digitalize Your Ideas into Success via').trim();
-
-  let titleLine1 = hero.title_line1 || 'And Digitalize Your Ideas';
-  let breakText = 'into Success via';
-  if (rawBreakText.toLowerCase().includes('into success via')) {
-    const parts = rawBreakText.split(/into\s+success\s+via/i);
-    titleLine1 = parts[0]?.trim() || 'And Digitalize Your Ideas';
-    breakText = 'into Success via';
-  } else if (!hero.title_line1 && rawBreakText) {
-    titleLine1 = rawBreakText;
-    breakText = '';
-  }
-
-  // Remove "Where Innovation And ideas Meets Excellence." as requested
-  const rawSuffix = (hero.suffix || '').trim();
-  const suffix = (rawSuffix && !rawSuffix.toLowerCase().includes('innovation') && !rawSuffix.toLowerCase().includes('excellence'))
-    ? rawSuffix
-    : '';
-  const suffixInline = (hero.suffix_inline && !hero.suffix_inline.toLowerCase().includes('innovation'))
-    ? hero.suffix_inline
-    : '';
+  const brandHighlight = (hero.brand_highlight || 'BLACK GRAPES SOFTECH').trim();
+  const titleLine1 = (hero.title_line1 || 'And Digitalize Your Ideas').trim();
+  const breakText = (hero.break_text || 'into Success via').trim();
 
   // If hero.headline happens to be the old generic placeholder, ignore it
   const isOldGenericHeadline = hero.headline && hero.headline.includes('Engineering Scalable Software');
@@ -106,13 +85,11 @@ export default function HeroSection({ onOpenModal }) {
             ) : (
               <>
                 <span className="hero-prefix">{prefix}</span>
-                <span className="hero-break">{titleLine1}</span>
-                <span className="hero-title-flow">
-                  {breakText ? `${breakText} ` : ''}
-                  <span className="hero-gradient-brand">{brandHighlight}</span>
-                  {suffixInline ? ` ${suffixInline}` : ''}
+                <span className="hero-title-line hero-title-line-1">{titleLine1}</span>
+                <span className="hero-title-line hero-title-line-2">{breakText}</span>
+                <span className="hero-title-line hero-title-line-3">
+                  <span className="hero-headline-shimmer hero-brand-shimmer">{brandHighlight}</span>
                 </span>
-                {suffix && <span className="hero-suffix">{suffix}</span>}
               </>
             )}
           </h1>
