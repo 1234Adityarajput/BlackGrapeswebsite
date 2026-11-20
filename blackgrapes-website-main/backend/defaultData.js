@@ -462,7 +462,7 @@ export const DEFAULT_PAGE_SECTIONS = {
       primaryBtnText: 'Partner With Us',
       secondaryBtnText: 'Meet Our Leadership',
       secondaryBtnLink: '#founders',
-      image: aboutHeroImg,
+      image: '/images/blackgrapes-1.png',
       floatingStat1Num: '250+ Projects',
       floatingStat1Sub: 'Shipped Globally',
       floatingStat2Num: '15+ Nations',

@@ -21,7 +21,6 @@ import {
 } from 'lucide-react';
 import { usePageSections } from '@backend/useContent';
 import foundersImg from '../../assets/founders.jpg';
-import aboutHeroImg from '../../assets/about-hero.jpg';
 import workspaceImg from '../../assets/workspace.jpg';
 import AnimatedCounter from '../../components/AnimatedCounter';
 import './About.css';
@@ -119,7 +118,10 @@ export default function About({ onOpenDemoModal }) {
   const heroPrimaryBtn = heroSec.primaryBtnText || 'Partner With Us';
   const heroSecondaryBtn = heroSec.secondaryBtnText || 'Meet Our Leadership';
   const heroSecondaryLink = heroSec.secondaryBtnLink || '#founders';
-  const heroImage = heroSec.image || aboutHeroImg;
+  const rawHeroImage = heroSec.image || '';
+  const heroImage = (!rawHeroImage || rawHeroImage.includes('about-hero'))
+    ? '/images/blackgrapes-1.png'
+    : rawHeroImage;
   const floatingStat1Num = heroSec.floatingStat1Num || '250+ Projects';
   const floatingStat1Sub = heroSec.floatingStat1Sub || 'Shipped Globally';
   const floatingStat2Num = heroSec.floatingStat2Num || '15+ Nations';
