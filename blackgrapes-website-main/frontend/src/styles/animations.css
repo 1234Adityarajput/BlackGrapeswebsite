@@ -866,7 +866,41 @@ select:focus {
   }
 }
 
-/* 3. Hero Glass Terminal Card (Right Box) */
+/* 3. Hero Visual Dedicated Slide-In From Right */
+.hero-visual-entrance {
+  animation: heroSlideFromRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both !important;
+  will-change: transform, opacity;
+}
+
+@keyframes heroSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(85px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes heroSlideFromRight {
+    0% {
+      opacity: 0;
+      transform: translate3d(40px, 0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+.hero-glass-card-floating {
+  animation: bgstFloat 5.5s ease-in-out 1.05s infinite !important;
+}
+
+/* Hero Glass Terminal Card (Right Box) */
 .hero-glass-card {
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(248, 98, 0, 0.2), 0 0 50px rgba(147, 51, 234, 0.12) !important;
@@ -916,9 +950,22 @@ select:focus {
 .floating-badge {
   border: 1px solid rgba(248, 98, 0, 0.45) !important;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 25px rgba(248, 98, 0, 0.3) !important;
+  animation: heroBadgeSlideFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both,
+             bgstFloatReverse 5s ease-in-out 1.35s infinite !important;
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
               box-shadow 0.3s ease,
               border-color 0.3s ease !important;
+}
+
+@keyframes heroBadgeSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(50px, 20px, 0) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 .floating-badge:hover {

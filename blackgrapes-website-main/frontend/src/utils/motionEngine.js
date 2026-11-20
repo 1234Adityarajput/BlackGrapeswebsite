@@ -92,7 +92,7 @@ export function initHeroAnimation() {
 
       const visual = elements[4];
       if (visual) {
-        tl.fromTo(visual, { x: 25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.5');
+        tl.fromTo(visual, { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.85, ease: 'power3.out' }, '-=0.4');
       }
     } catch (e) {
       console.warn('[MotionEngine] Hero animation notice:', e);

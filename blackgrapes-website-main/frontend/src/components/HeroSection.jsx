@@ -117,8 +117,8 @@ export default function HeroSection({ onOpenModal }) {
         </div>
 
         {/* Right Column: Interactive Tech Showcase Card / Custom Hero Visual */}
-        <div className="hero-visual reveal-slide-right is-revealed float-subtle">
-          <div className="hero-glass-card">
+        <div className="hero-visual hero-visual-entrance">
+          <div className="hero-glass-card hero-glass-card-floating">
             {/* Card Header with Mock Window Controls */}
             <div className="glass-card-header">
               <div className="window-dots">
@@ -219,7 +219,7 @@ export const EnterprisePortal = () => {
           </div>
 
           {/* Floating Badge */}
-          <div className="floating-badge badge-bottom-left float-reverse">
+          <div className="floating-badge badge-bottom-left">
             <span className="floating-icon">🚀</span>
             <div className="floating-text">
               <strong>
