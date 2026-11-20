@@ -37,7 +37,7 @@ export default function HeroSection({ onOpenModal }) {
     <section id="home" className="hero-section">
       <div className="container hero-container">
         {/* Left Column: Headline & Action CTAs */}
-        <div className="hero-content is-revealed">
+        <div className="hero-content hero-content-entrance is-revealed">
           <div className="hero-badge-pill reveal-fade-down is-revealed">
             <span className="badge-glow-dot"></span>
             <span className="badge-text">{badgeText}</span>

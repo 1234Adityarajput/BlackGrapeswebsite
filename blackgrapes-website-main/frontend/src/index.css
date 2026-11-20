@@ -5273,9 +5273,7 @@ img, video, canvas, svg {
   max-width: 100% !important;
   min-width: 0 !important;
   box-sizing: border-box !important;
-  opacity: 1 !important;
   visibility: visible !important;
-  transform: none !important;
 }
 
 /* Hero Badge Pill */

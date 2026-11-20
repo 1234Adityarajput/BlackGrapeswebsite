@@ -273,9 +273,7 @@
 .reveal-fade-in.is-revealed,
 .reveal-slide-left.is-revealed,
 .reveal-slide-right.is-revealed,
-.reveal-scale.is-revealed,
-.hero-content,
-.hero-content.is-revealed {
+.reveal-scale.is-revealed {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) scale(1) !important;
   visibility: visible !important;
@@ -283,7 +281,6 @@
 
 /* Guard hero elements from ever being hidden above the fold */
 .hero-content > * {
-  opacity: 1 !important;
   visibility: visible !important;
 }
 
@@ -866,8 +863,53 @@ select:focus {
   }
 }
 
-/* 3. Hero Visual Dedicated Slide-In From Right */
-.hero-visual-entrance {
+/* ========================================================
+   HERO SPLIT ENTRANCE: LEFT CONTENT SLIDES FROM LEFT, RIGHT VISUAL FROM RIGHT
+   ======================================================== */
+
+/* 1. Hero Left Content (Home, About, Products, Clients, Services, IT Staffing) */
+.hero-content,
+.hero-content-entrance,
+.products-hero-content,
+.clients-hero-content,
+.service-hero-content,
+.hero-left-v2 {
+  animation: heroSlideFromLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both !important;
+  will-change: transform, opacity;
+}
+
+@keyframes heroSlideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-85px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes heroSlideFromLeft {
+    0% {
+      opacity: 0;
+      transform: translate3d(-35px, 0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+/* 2. Hero Right Visual (Home, About, Products, Clients, Services, IT Staffing) */
+.hero-visual,
+.hero-visual-entrance,
+.hero-visual-card,
+.products-hero-visual,
+.clients-hero-visual,
+.service-hero-visual,
+.hero-right-v2 {
   animation: heroSlideFromRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both !important;
   will-change: transform, opacity;
 }
@@ -887,7 +929,7 @@ select:focus {
   @keyframes heroSlideFromRight {
     0% {
       opacity: 0;
-      transform: translate3d(40px, 0, 0);
+      transform: translate3d(35px, 0, 0);
     }
     100% {
       opacity: 1;

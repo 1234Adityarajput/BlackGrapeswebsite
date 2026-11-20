@@ -65,34 +65,34 @@ export function initHeroAnimation() {
         defaults: { ease: 'power3.out' },
         onComplete: () => {
           elements.forEach(el => {
-            gsap.set(el, { clearProps: 'opacity,filter' });
+            gsap.set(el, { clearProps: 'opacity,filter,transform' });
           });
         }
       });
 
       const badge = elements[0];
       if (badge) {
-        tl.fromTo(badge, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.05 });
+        tl.fromTo(badge, { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, delay: 0.05 });
       }
 
       const title = elements[1];
       if (title) {
-        tl.fromTo(title, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3');
+        tl.fromTo(title, { x: -65, opacity: 0 }, { x: 0, opacity: 1, duration: 0.65 }, '-=0.35');
       }
 
       const desc = elements[2];
       if (desc) {
-        tl.fromTo(desc, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, '-=0.35');
+        tl.fromTo(desc, { x: -55, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 }, '-=0.4');
       }
 
       const cta = elements[3];
       if (cta && cta.children.length > 0) {
-        tl.fromTo(cta.children, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.08 }, '-=0.3');
+        tl.fromTo(cta.children, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, stagger: 0.08 }, '-=0.35');
       }
 
       const visual = elements[4];
       if (visual) {
-        tl.fromTo(visual, { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.85, ease: 'power3.out' }, '-=0.4');
+        tl.fromTo(visual, { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.85, ease: 'power3.out' }, '-=0.45');
       }
     } catch (e) {
       console.warn('[MotionEngine] Hero animation notice:', e);
