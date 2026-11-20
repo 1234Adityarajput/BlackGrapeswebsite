@@ -187,7 +187,7 @@ export async function fetchModuleApi(moduleName, defaultVal) {
 
 export async function saveModuleApi(moduleName, data) {
   setLocal(`bgst_${moduleName}`, data);
-  const userEmail = typeof localStorage !== 'undefined' 
+  const userEmail = typeof localStorage !== 'undefined'
     ? localStorage.getItem('bgst_current_admin_email') || 'admin@blackgrapessoftech.com'
     : 'admin@blackgrapessoftech.com';
 
