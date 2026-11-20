@@ -867,9 +867,10 @@ select:focus {
    HERO SPLIT ENTRANCE: LEFT CONTENT SLIDES FROM LEFT, RIGHT VISUAL FROM RIGHT
    ======================================================== */
 
-/* Hero Elements Waiting State (while loading screen is active) */
+/* Hero & Careers Elements Waiting State (while loading screen is active) */
 .hero-content-waiting,
-.hero-visual-waiting {
+.hero-visual-waiting,
+.career-slide-waiting {
   opacity: 0 !important;
   visibility: hidden !important;
   animation: none !important;
@@ -891,7 +892,9 @@ html.bgst-loading .hero-right-v2,
 html.bgst-loading .hero-visual-card,
 html.bgst-loading .about-section,
 html.bgst-loading .about-visual-col,
-html.bgst-loading .about-text-col {
+html.bgst-loading .about-text-col,
+html.bgst-loading .careers-left-content,
+html.bgst-loading .career-form-card {
   animation: none !important;
   opacity: 0 !important;
 }
@@ -903,7 +906,7 @@ html.bgst-loading .about-text-col {
 .clients-hero-content,
 .service-hero-content,
 .hero-left-v2,
-.careers-left-content {
+.careers-left-content.career-slide-left-active {
   animation: heroSlideFromLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both !important;
   will-change: transform, opacity;
 }
@@ -940,7 +943,7 @@ html.bgst-loading .about-text-col {
 .clients-hero-visual,
 .service-hero-visual,
 .hero-right-v2,
-.career-form-card {
+.career-form-card.career-slide-right-active {
   animation: heroSlideFromRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both !important;
   will-change: transform, opacity;
 }

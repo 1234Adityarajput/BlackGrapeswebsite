@@ -52,6 +52,7 @@ export const NAV_LINKS = [
   { name: "Ecommerce", href: "/ecommerce" },
   { name: "Our Clients", href: "/our-clients" },
   { name: "IT Staffing", href: "/it-staffing" },
+  { name: "Careers", href: "/careers" },
   {
     name: "Partnership",
     href: "/partnership",

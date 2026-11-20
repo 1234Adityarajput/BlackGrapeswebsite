@@ -68,6 +68,70 @@
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+  will-change: transform, opacity;
+}
+
+/* Waiting state before preloader dissolves */
+.career-slide-waiting {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  animation: none !important;
+}
+
+/* Slide in from Left for left content */
+.career-slide-left-active {
+  animation: careerSlideFromLeft 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both !important;
+}
+
+/* Slide in from Right for right form */
+.career-slide-right-active {
+  animation: careerSlideFromRight 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both !important;
+}
+
+@keyframes careerSlideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes careerSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(90px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes careerSlideFromLeft {
+    0% {
+      opacity: 0;
+      transform: translate3d(-35px, 0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes careerSlideFromRight {
+    0% {
+      opacity: 0;
+      transform: translate3d(35px, 0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
 }
 
 .career-intro-card {

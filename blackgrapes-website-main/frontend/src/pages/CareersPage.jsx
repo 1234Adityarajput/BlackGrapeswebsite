@@ -20,6 +20,32 @@ import { submitEnquiry } from '@backend/dataService';
 import '../styles/Careers.css';
 
 export default function CareersPage() {
+  // Coordinate entrance animation with initial loading screen dismissal
+  const [isReady, setIsReady] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return Boolean(window.__bgstLoaded) || !document.getElementById('bgst-initial-loader');
+  });
+
+  useEffect(() => {
+    if (isReady) return;
+
+    const handleDismiss = () => {
+      setTimeout(() => {
+        setIsReady(true);
+      }, 80);
+    };
+
+    window.addEventListener('bgst:loaded', handleDismiss);
+    const timer = setTimeout(() => {
+      setIsReady(true);
+    }, 1500);
+
+    return () => {
+      window.removeEventListener('bgst:loaded', handleDismiss);
+      clearTimeout(timer);
+    };
+  }, [isReady]);
+
   // Dynamic SEO metadata
   useEffect(() => {
     document.title = 'Careers at Black Grapes Softech | Join Our Elite Engineering Team';
@@ -130,8 +156,8 @@ export default function CareersPage() {
 
         {/* Main 2-Column Split Section */}
         <div className="careers-main-grid">
-          {/* Left Column: Story, Culture, Highlights (Slides from Left) */}
-          <div className="careers-left-content">
+          {/* Left Column: Story, Culture, Highlights (Slides in from Left) */}
+          <div className={`careers-left-content ${isReady ? 'career-slide-left-active' : 'career-slide-waiting'}`}>
             <div className="career-intro-card">
               <div className="career-intro-badge">
                 <Briefcase size={13} />
@@ -217,8 +243,11 @@ export default function CareersPage() {
             </div>
           </div>
 
-          {/* Right Column: Direct Job Application Form (Slides from Right) */}
-          <div id="career-application-card" className="career-form-card">
+          {/* Right Column: Direct Job Application Form (Slides in from Right) */}
+          <div
+            id="career-application-card"
+            className={`career-form-card ${isReady ? 'career-slide-right-active' : 'career-slide-waiting'}`}
+          >
             {!isSubmitted ? (
               <>
                 <div className="career-form-header">

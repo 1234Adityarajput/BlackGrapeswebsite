@@ -19,7 +19,7 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
         .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
     : [];
 
-  const navItems = activeMenus.length > 0
+  const baseItems = activeMenus.length > 0
     ? activeMenus.map((m) => {
         const match = NAV_LINKS.find(
           (nl) =>
@@ -33,6 +33,26 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
         };
       })
     : NAV_LINKS;
+
+  // Guarantee Careers is always present in navigation items
+  const hasCareers = baseItems.some(
+    (item) => item.href === '/careers' || item.name.toLowerCase() === 'careers'
+  );
+
+  const navItems = hasCareers
+    ? baseItems
+    : (() => {
+        const contactIndex = baseItems.findIndex(
+          (i) => i.href === '/contact' || i.href === '/contact-us' || i.name.toLowerCase().includes('contact')
+        );
+        const careersItem = { name: 'Careers', href: '/careers', dropdown: null };
+        if (contactIndex !== -1) {
+          const copy = [...baseItems];
+          copy.splice(contactIndex, 0, careersItem);
+          return copy;
+        }
+        return [...baseItems, careersItem];
+      })();
 
   const handleOpenAction = (title = 'Request a Demo') => {
     if (onOpenModal) {
@@ -101,6 +121,9 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
     }
     if (target === '/partnership') {
       return current === '/partnership' || current === '/business-partners';
+    }
+    if (target === '/careers' || target === '/career') {
+      return current === '/careers' || current === '/career' || current === '/jobs';
     }
     if (target === '/contact-us') {
       return current === '/contact' || current === '/contact-us';
