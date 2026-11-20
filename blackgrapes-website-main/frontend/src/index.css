@@ -158,10 +158,9 @@ button, input, select, textarea {
 
 .ambient-glow-wrapper {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
@@ -569,6 +568,8 @@ button, input, select, textarea {
   top: calc(100% + 8px);
   left: 0;
   width: 380px;
+  max-width: calc(100vw - 24px);
+  box-sizing: border-box;
   background: rgba(16, 12, 28, 0.96);
   backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -7455,18 +7456,28 @@ input, select, textarea {
 @media (max-width: 1024px) {
   .why-us-hub-layout {
     flex-direction: column;
-    gap: 3rem;
+    gap: 2.5rem;
   }
   .why-us-column {
-    max-width: 100%;
-    width: 100%;
+    max-width: 100% !important;
+    width: 100% !important;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
   .why-us-center-column {
     order: -1;
-    min-height: 380px;
+    width: 100% !important;
+    max-width: 460px !important;
+    min-height: auto !important;
+  }
+  .why-us-center-visual-wrap {
+    max-width: 100% !important;
+  }
+  .why-us-center-svg {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 400px;
   }
   .capsule-connector-line {
     display: none;
@@ -7476,5 +7487,150 @@ input, select, textarea {
 @media (max-width: 640px) {
   .why-us-column {
     grid-template-columns: 1fr;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .why-us-center-column {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .why-us-center-svg {
+    max-height: 320px;
+  }
+  .center-visual-ambient-glow {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+/* ==========================================================================
+   MASTER MOBILE RESPONSIVENESS & CROSS-DEVICE COMPATIBILITY (320px - 768px)
+   ========================================================================== */
+
+/* Universal Button Wrapping & Safe Mobile Sizing */
+@media (max-width: 640px) {
+  .btn {
+    white-space: normal !important;
+    text-align: center;
+    max-width: 100%;
+    word-break: break-word;
+  }
+  .btn-lg, .btn-xl {
+    padding: 0.85rem 1.4rem !important;
+    font-size: 0.96rem !important;
+  }
+  .section {
+    padding: 3.5rem 0 !important;
+  }
+  .section-header {
+    margin-bottom: 2rem !important;
+  }
+  .section-title {
+    font-size: clamp(1.75rem, 6.2vw, 2.5rem) !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  .section-subtitle {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* Extra-Small Smartphone Breakpoints (320px, 360px, 375px, 390px, 414px) */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* 3D Coverflow Reel on Small Screens */
+  .coverflow-card {
+    width: min(280px, 86vw) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 440px !important;
+  }
+
+  .coverflow-nav-arrow {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .coverflow-nav-arrow.arrow-left {
+    left: 0.25rem !important;
+  }
+  .coverflow-nav-arrow.arrow-right {
+    right: 0.25rem !important;
+  }
+
+  /* 3D Motion Reel on Small Screens */
+  .motion-card {
+    width: min(240px, 84vw) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 410px !important;
+  }
+  .motion-nav-arrow {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .motion-nav-arrow.arrow-left {
+    left: 0.25rem !important;
+  }
+  .motion-nav-arrow.arrow-right {
+    right: 0.25rem !important;
+  }
+
+  /* Form & Interactive Controls */
+  input, select, textarea, button {
+    font-size: 16px !important; /* iOS Zoom Prevention */
+  }
+
+  /* Testimonial Card */
+  .testimonial-featured-card {
+    padding: 1.5rem 1.15rem !important;
+    border-radius: 18px !important;
+  }
+
+  /* CTA Banner Card */
+  .cta-banner-card {
+    padding: 2.5rem 1.15rem !important;
+    border-radius: 20px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .coverflow-card {
+    width: min(250px, 84vw) !important;
+    min-height: 420px !important;
+  }
+
+  .motion-card {
+    width: min(220px, 82vw) !important;
+    min-height: 390px !important;
+  }
+
+  .hero-metric-item {
+    padding: 0.4rem 0 !important;
+  }
+  .metric-number {
+    font-size: 1.35rem !important;
+  }
+  .metric-label {
+    font-size: 0.72rem !important;
+  }
+
+  .why-us-capsule-card {
+    padding: 0.75rem 0.85rem !important;
+  }
+  .capsule-title {
+    font-size: 0.92rem !important;
+  }
+  .capsule-subtitle {
+    font-size: 0.72rem !important;
   }
 }

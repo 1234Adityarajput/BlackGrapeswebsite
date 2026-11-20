@@ -290,7 +290,7 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
                     <Link
                       to={link.href}
                       className={`mobile-link-item ${isLinkActive(link.href) ? 'active' : ''}`}
-                      onClick={() => !link.dropdown && setMobileMenuOpen(false)}
+                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {link.name}
                     </Link>

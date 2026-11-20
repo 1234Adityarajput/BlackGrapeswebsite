@@ -407,6 +407,10 @@
     max-width: 600px;
     gap: 1.25rem;
   }
+  .service-pill-card {
+    height: auto !important;
+    min-height: 94px;
+  }
   .branch-mobile-hint {
     display: inline-flex;
   }
