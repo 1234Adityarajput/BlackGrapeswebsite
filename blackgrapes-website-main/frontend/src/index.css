@@ -896,15 +896,15 @@ button, input, select, textarea {
 .hero-title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(2.3rem, 4vw, 3.6rem);
-  line-height: 1.16;
+  font-size: clamp(1.65rem, 2.75vw, 2.45rem);
+  line-height: 1.22;
   letter-spacing: -0.025em;
   color: #ffffff;
 }
 
 .hero-prefix {
   display: block;
-  font-size: clamp(1.2rem, 2.2vw, 1.85rem);
+  font-size: clamp(0.85rem, 1.25vw, 1.08rem);
   font-weight: 700;
   color: var(--brand-amber);
   margin-bottom: 0.35rem;
@@ -932,7 +932,7 @@ button, input, select, textarea {
 }
 
 .hero-suffix {
-  font-size: clamp(1.15rem, 1.85vw, 1.65rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
   font-weight: 500;
   color: #ffffff;
   display: block;
@@ -940,10 +940,10 @@ button, input, select, textarea {
 }
 
 .hero-description {
-  font-size: 1.12rem;
-  line-height: 1.7;
+  font-size: 0.95rem;
+  line-height: 1.62;
   color: var(--text-secondary);
-  max-width: 620px;
+  max-width: 540px;
 }
 
 .hero-cta-group {
@@ -1010,16 +1010,16 @@ button, input, select, textarea {
 .metric-number {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.8rem;
+  font-size: 1.55rem;
   color: #ffffff;
   line-height: 1;
 }
 
 .metric-label {
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   color: var(--text-muted);
   font-weight: 500;
-  margin-top: 0.3rem;
+  margin-top: 0.25rem;
 }
 
 .hero-metric-divider {
@@ -5310,8 +5310,8 @@ img, video, canvas, svg {
 .hero-title {
   font-family: var(--font-heading) !important;
   font-weight: 800 !important;
-  font-size: clamp(1.55rem, 5vw, 3.4rem) !important;
-  line-height: 1.18 !important;
+  font-size: clamp(1.25rem, 4.2vw, 1.95rem) !important;
+  line-height: 1.22 !important;
   letter-spacing: -0.02em !important;
   color: #ffffff !important;
   max-width: 100% !important;
@@ -5322,7 +5322,7 @@ img, video, canvas, svg {
 
 .hero-prefix {
   display: block !important;
-  font-size: clamp(0.95rem, 3.2vw, 1.8rem) !important;
+  font-size: clamp(0.72rem, 2.5vw, 0.92rem) !important;
   font-weight: 700 !important;
   color: var(--brand-amber) !important;
   margin-bottom: 0.25rem !important;
@@ -5354,17 +5354,17 @@ img, video, canvas, svg {
 }
 
 .hero-suffix {
-  font-size: clamp(0.85rem, 2.6vw, 1.45rem) !important;
+  font-size: clamp(0.75rem, 2.2vw, 1.05rem) !important;
   font-weight: 500 !important;
   color: var(--text-secondary) !important;
   display: inline !important;
-  margin-top: 0.4rem !important;
+  margin-top: 0.3rem !important;
   word-break: break-word !important;
 }
 
 .hero-description {
-  font-size: clamp(0.92rem, 2.6vw, 1.12rem) !important;
-  line-height: 1.65 !important;
+  font-size: clamp(0.82rem, 2.3vw, 0.92rem) !important;
+  line-height: 1.55 !important;
   color: var(--text-secondary) !important;
   max-width: 100% !important;
   box-sizing: border-box !important;

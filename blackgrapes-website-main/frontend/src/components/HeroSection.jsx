@@ -17,7 +17,6 @@ export default function HeroSection({ onOpenModal }) {
 
   // Cleanly handle SS1 layout
   const rawBreakText = (hero.break_text || hero.title || 'And Digitalize Your Ideas into Success via').trim();
-  const rawSuffix = (hero.suffix || 'Where Innovation And ideas Meets Excellence.').trim().replace(/^,\s*/, '');
 
   let titleLine1 = hero.title_line1 || 'And Digitalize Your Ideas';
   let breakText = 'into Success via';
@@ -30,16 +29,14 @@ export default function HeroSection({ onOpenModal }) {
     breakText = '';
   }
 
-  let suffixInline = hero.suffix_inline || 'Where Innovation';
-  let suffix = 'And ideas Meets Excellence.';
-  if (rawSuffix.toLowerCase().includes('where innovation')) {
-    suffixInline = 'Where Innovation';
-    const rest = rawSuffix.replace(/.*?where\s+innovation\s*/i, '').trim();
-    suffix = rest || 'And ideas Meets Excellence.';
-  } else if (!hero.suffix_inline && rawSuffix) {
-    suffix = rawSuffix;
-    suffixInline = '';
-  }
+  // Remove "Where Innovation And ideas Meets Excellence." as requested
+  const rawSuffix = (hero.suffix || '').trim();
+  const suffix = (rawSuffix && !rawSuffix.toLowerCase().includes('innovation') && !rawSuffix.toLowerCase().includes('excellence'))
+    ? rawSuffix
+    : '';
+  const suffixInline = (hero.suffix_inline && !hero.suffix_inline.toLowerCase().includes('innovation'))
+    ? hero.suffix_inline
+    : '';
 
   // If hero.headline happens to be the old generic placeholder, ignore it
   const isOldGenericHeadline = hero.headline && hero.headline.includes('Engineering Scalable Software');
