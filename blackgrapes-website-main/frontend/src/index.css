@@ -896,15 +896,15 @@ button, input, select, textarea {
 .hero-title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(1.65rem, 2.75vw, 2.45rem);
-  line-height: 1.22;
+  font-size: clamp(2.3rem, 4vw, 3.6rem);
+  line-height: 1.16;
   letter-spacing: -0.025em;
   color: #ffffff;
 }
 
 .hero-prefix {
   display: block;
-  font-size: clamp(0.85rem, 1.25vw, 1.08rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.85rem);
   font-weight: 700;
   color: var(--brand-amber);
   margin-bottom: 0.35rem;
@@ -930,27 +930,39 @@ button, input, select, textarea {
 
 .hero-title-line-3 {
   display: block !important;
-  color: #ffffff !important;
   margin-top: 0.2rem;
 }
 
 .hero-brand-shimmer,
 .hero-headline-shimmer {
   display: inline-block !important;
-  color: #ffffff !important;
-  background: linear-gradient(110deg,
-      #ffffff 0%,
-      #ffffff 38%,
-      #ffb080 50%,
-      #f86200 62%,
-      #ffffff 74%,
-      #ffffff 100%) !important;
-  background-size: 250% 100% !important;
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #ffffff 25%,
+    #ff8c3b 45%,
+    #f86200 55%,
+    #ffb080 65%,
+    #ffffff 85%,
+    #ffffff 100%
+  ) !important;
+  background-size: 220% 100% !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  animation: textShineSweep 5s linear infinite !important;
-  text-shadow: 0 0 35px rgba(248, 98, 0, 0.28);
+  color: transparent !important;
+  animation: textShineSweep 3.5s linear infinite !important;
+  text-shadow: none !important;
+  filter: drop-shadow(0 0 16px rgba(248, 98, 0, 0.45));
+}
+
+@keyframes textShineSweep {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -150% 0;
+  }
 }
 
 .hero-break {
@@ -981,10 +993,10 @@ button, input, select, textarea {
 }
 
 .hero-description {
-  font-size: 0.95rem;
-  line-height: 1.62;
+  font-size: 1.12rem;
+  line-height: 1.7;
   color: var(--text-secondary);
-  max-width: 540px;
+  max-width: 620px;
 }
 
 .hero-cta-group {
@@ -1051,16 +1063,16 @@ button, input, select, textarea {
 .metric-number {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.55rem;
+  font-size: 1.8rem;
   color: #ffffff;
   line-height: 1;
 }
 
 .metric-label {
-  font-size: 0.74rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   font-weight: 500;
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
 }
 
 .hero-metric-divider {
@@ -5351,8 +5363,8 @@ img, video, canvas, svg {
 .hero-title {
   font-family: var(--font-heading) !important;
   font-weight: 800 !important;
-  font-size: clamp(1.25rem, 4.2vw, 1.95rem) !important;
-  line-height: 1.22 !important;
+  font-size: clamp(1.55rem, 5vw, 3.4rem) !important;
+  line-height: 1.18 !important;
   letter-spacing: -0.02em !important;
   color: #ffffff !important;
   max-width: 100% !important;
@@ -5363,7 +5375,7 @@ img, video, canvas, svg {
 
 .hero-prefix {
   display: block !important;
-  font-size: clamp(0.72rem, 2.5vw, 0.92rem) !important;
+  font-size: clamp(0.95rem, 3.2vw, 1.8rem) !important;
   font-weight: 700 !important;
   color: var(--brand-amber) !important;
   margin-bottom: 0.25rem !important;
@@ -5378,10 +5390,14 @@ img, video, canvas, svg {
 }
 
 .hero-title-line-1,
-.hero-title-line-2,
-.hero-title-line-3 {
+.hero-title-line-2 {
   display: block !important;
   color: #ffffff !important;
+  word-break: normal !important;
+}
+
+.hero-title-line-3 {
+  display: block !important;
   word-break: normal !important;
 }
 

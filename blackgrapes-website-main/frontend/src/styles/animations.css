@@ -890,18 +890,23 @@ select:focus {
 /* 2. Hero Headline Dynamic Ambient Shimmer */
 .hero-headline-shimmer,
 .hero-brand-shimmer {
-  display: inline-block;
-  background: linear-gradient(110deg,
-      #ffffff 0%,
-      #ffffff 38%,
-      #ffb080 50%,
-      #f86200 62%,
-      #ffffff 74%,
-      #ffffff 100%);
-  background-size: 250% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textShineSweep 5s linear infinite;
+  display: inline-block !important;
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #ffffff 25%,
+    #ff8c3b 45%,
+    #f86200 55%,
+    #ffb080 65%,
+    #ffffff 85%,
+    #ffffff 100%
+  ) !important;
+  background-size: 220% 100% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: textShineSweep 3.5s linear infinite !important;
 }
 
 @keyframes textShineSweep {
