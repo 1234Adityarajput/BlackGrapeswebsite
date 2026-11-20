@@ -896,13 +896,14 @@ html.bgst-loading .about-text-col {
   opacity: 0 !important;
 }
 
-/* 1. Hero Left Content (Home, About, Products, Clients, Services, IT Staffing) */
+/* 1. Hero Left Content (Home, About, Products, Clients, Services, IT Staffing, Careers) */
 .hero-content,
 .hero-content-entrance,
 .products-hero-content,
 .clients-hero-content,
 .service-hero-content,
-.hero-left-v2 {
+.hero-left-v2,
+.careers-left-content {
   animation: heroSlideFromLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both !important;
   will-change: transform, opacity;
 }
@@ -931,14 +932,15 @@ html.bgst-loading .about-text-col {
   }
 }
 
-/* 2. Hero Right Visual (Home, About, Products, Clients, Services, IT Staffing) */
+/* 2. Hero Right Visual (Home, About, Products, Clients, Services, IT Staffing, Careers) */
 .hero-visual,
 .hero-visual-entrance,
 .hero-visual-card,
 .products-hero-visual,
 .clients-hero-visual,
 .service-hero-visual,
-.hero-right-v2 {
+.hero-right-v2,
+.career-form-card {
   animation: heroSlideFromRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both !important;
   will-change: transform, opacity;
 }

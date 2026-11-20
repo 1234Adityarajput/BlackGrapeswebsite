@@ -130,6 +130,7 @@ export default function Footer({ onOpenModal, onOpenInquiry }) {
         { label: 'About Us', path: '/about' },
         { label: 'Services', path: '/services' },
         { label: 'Products', path: '/products' },
+        { label: 'Careers', path: '/careers' },
         { label: 'Contact', path: '/contact' }
       ];
 

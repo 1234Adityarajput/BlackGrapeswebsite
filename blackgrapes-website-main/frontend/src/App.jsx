@@ -40,6 +40,7 @@ import EcommercePage from './pages/Ecommerce';
 import ContactPage from './pages/Contact';
 import PartnershipPage from './pages/PartnershipPage';
 import BusinessPartnersPage from './pages/BusinessPartnersPage';
+import CareersPage from './pages/CareersPage';
 import './App.css';
 
 export default function App() {
@@ -234,6 +235,20 @@ export default function App() {
               <Route
                 path="/business-partners"
                 element={<BusinessPartnersPage onOpenModal={handleOpenModal} />}
+              />
+
+              {/* Careers / Job Opportunities Pages */}
+              <Route
+                path="/careers"
+                element={<CareersPage />}
+              />
+              <Route
+                path="/career"
+                element={<CareersPage />}
+              />
+              <Route
+                path="/jobs"
+                element={<CareersPage />}
               />
 
               {/* Fallback to Home */}
