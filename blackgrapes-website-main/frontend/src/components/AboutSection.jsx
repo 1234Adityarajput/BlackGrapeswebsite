@@ -103,9 +103,16 @@ export default function AboutSection({ onOpenModal }) {
 
     observer.observe(elem);
 
-    // Scroll listener for immediate responsiveness on fast scrolls
+    // Scroll listener throttled via requestAnimationFrame to avoid mobile layout thrashing
+    let scrollTicking = false;
     const onScroll = () => {
-      updateVisibility();
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          updateVisibility();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });

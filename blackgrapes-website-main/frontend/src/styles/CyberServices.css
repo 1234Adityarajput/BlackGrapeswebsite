@@ -71,9 +71,14 @@
 }
 
 html {
-  scroll-behavior: smooth;
   color-scheme: dark;
   background-color: #08070d;
+}
+
+@media (min-width: 1025px) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

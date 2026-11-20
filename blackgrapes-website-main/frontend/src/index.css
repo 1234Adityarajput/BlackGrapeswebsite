@@ -76,13 +76,18 @@
 }
 
 html {
-  scroll-behavior: smooth;
   font-size: 16px;
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 1025px) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -7795,5 +7800,76 @@ input, select, textarea {
   }
   .capsule-subtitle {
     font-size: 0.72rem !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE HARDWARE-ACCELERATED SMOOTH SCROLLING (<= 1024px)
+   Eliminates touch lag, dropped frames & backdrop-filter GPU stalls
+   ========================================================================== */
+@media (max-width: 1024px) {
+  html, body {
+    /* Enable native GPU touch momentum scrolling */
+    scroll-behavior: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: auto !important;
+  }
+
+  /* Optimize layout layers for hardware composite thread */
+  .app-layout,
+  .main-content {
+    -webkit-overflow-scrolling: touch;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Disable heavy infinite blur animation on fixed ambient background */
+  .ambient-glow-wrapper .ambient-glow {
+    animation: none !important;
+    filter: blur(45px) !important;
+    opacity: 0.2 !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Prevent GPU stalls: replace expensive real-time multi-pass Gaussian blur on mobile cards with smooth rich dark glass */
+  .service-card,
+  .softech-card,
+  .softech-service-card,
+  .softech-spotlight-card,
+  .project-card,
+  .product-card,
+  .product-glass-card,
+  .stat-card,
+  .stat-card-v2,
+  .translucent-glass-card,
+  .translucent-glass-panel,
+  .career-intro-card,
+  .career-form-card,
+  .hero-form-card,
+  .about-narrative-card,
+  .about-stat-floating-card,
+  .about-tech-floating-pill,
+  .bp-intro-card,
+  .partner-content-card,
+  .expansion-card-v2,
+  .counter-card,
+  .counters-banner,
+  .testimonial-card,
+  .industry-card,
+  .timeline-card,
+  .compliance-metric-box {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(13, 10, 22, 0.95) !important;
+  }
+
+  /* Optimize box-shadow rasterization while dragging on mobile */
+  .service-card,
+  .softech-card,
+  .project-card,
+  .product-card,
+  .translucent-glass-card {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
   }
 }
