@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useHomePage } from '@backend/useContent';
@@ -9,8 +9,48 @@ import AnimatedCounter from './AnimatedCounter';
 export default function AboutSection({ onOpenModal }) {
   const [openFaq, setOpenFaq] = useState(0);
   const [activeValueTab, setActiveValueTab] = useState(0);
+  const [isRevealed, setIsRevealed] = useState(false);
+  const gridRef = useRef(null);
   const { home } = useHomePage();
   const about = home?.aboutSection || {};
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsRevealed(true);
+      return;
+    }
+
+    const currentElem = gridRef.current;
+    if (!currentElem) {
+      setIsRevealed(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+    );
+
+    observer.observe(currentElem);
+
+    // Guaranteed fallback
+    const timer = setTimeout(() => {
+      setIsRevealed(true);
+    }, 2200);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, []);
 
   const badge = about.badge || ABOUT_CONTENT.badge || 'ABOUT BLACK GRAPES SOFTECH';
   const mainTitle = about.mainTitle || ABOUT_CONTENT.mainTitle || 'Your Strategic Partner for Digital Innovation & Enterprise Software';
@@ -72,9 +112,9 @@ export default function AboutSection({ onOpenModal }) {
         </div>
 
         {/* Main 2-Column Content Grid */}
-        <div className="about-grid">
+        <div ref={gridRef} className="about-grid">
           {/* Left Column: Visual Infographic & Modern Technology Visual Card */}
-          <div className="about-visual-col">
+          <div className={`about-visual-col ${isRevealed ? 'is-revealed' : ''}`}>
             {/* Top Showcase Card */}
             <div className="about-image-card">
               <div className="about-img-wrapper">
@@ -157,7 +197,7 @@ export default function AboutSection({ onOpenModal }) {
           </div>
 
           {/* Right Column: Detailed Narrative & Interactive Values */}
-          <div className="about-text-col">
+          <div className={`about-text-col ${isRevealed ? 'is-revealed' : ''}`}>
             <div className="about-narrative-card">
               <h3 className="narrative-heading">
                 {narrativeHeading}

@@ -25,6 +25,20 @@ export const prefersReducedMotion = () => {
 export function initHeroAnimation() {
   if (typeof window === 'undefined' || prefersReducedMotion()) return;
 
+  // If initial preloader is active, defer animation choreography until loader dissolves
+  const isLoaderActive = typeof document !== 'undefined' && 
+    document.getElementById('bgst-initial-loader') && 
+    !document.getElementById('bgst-initial-loader').classList.contains('loader-hidden');
+
+  if (isLoaderActive) {
+    const runAfterLoad = () => {
+      window.removeEventListener('bgst:loaded', runAfterLoad);
+      setTimeout(initHeroAnimation, 80);
+    };
+    window.addEventListener('bgst:loaded', runAfterLoad);
+    return;
+  }
+
   const heroSelectors = [
     '.hero-section',
     '.about-hero-section',
@@ -261,6 +275,8 @@ export function initScrollTriggers() {
   }
 
   const selector = [
+    '.about-visual-col:not(._observed)',
+    '.about-text-col:not(._observed)',
     '.section-header:not(._observed)',
     '.section-title:not(._observed)',
     '.section-subtitle:not(._observed)',

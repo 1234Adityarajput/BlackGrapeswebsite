@@ -33,11 +33,40 @@ export default function HeroSection({ onOpenModal }) {
 
   const techBadges = (hero.techBadges && hero.techBadges.length > 0) ? hero.techBadges : defaultBadges;
 
+  // Coordinate entrance animation with initial loading screen dismissal
+  const [isHeroReady, setIsHeroReady] = React.useState(() => {
+    if (typeof window === 'undefined') return true;
+    return Boolean(window.__bgstLoaded) || !document.getElementById('bgst-initial-loader');
+  });
+
+  React.useEffect(() => {
+    if (isHeroReady) return;
+
+    const handleLoaderDismissed = () => {
+      // Trigger smooth entrance right as loader starts dissolving
+      setTimeout(() => {
+        setIsHeroReady(true);
+      }, 80);
+    };
+
+    window.addEventListener('bgst:loaded', handleLoaderDismissed);
+
+    // Guaranteed fallback timer (never remains hidden)
+    const fallbackTimer = setTimeout(() => {
+      setIsHeroReady(true);
+    }, 1500);
+
+    return () => {
+      window.removeEventListener('bgst:loaded', handleLoaderDismissed);
+      clearTimeout(fallbackTimer);
+    };
+  }, [isHeroReady]);
+
   return (
     <section id="home" className="hero-section">
       <div className="container hero-container">
         {/* Left Column: Headline & Action CTAs */}
-        <div className="hero-content hero-content-entrance is-revealed">
+        <div className={`hero-content ${isHeroReady ? 'hero-content-entrance' : 'hero-content-waiting'} is-revealed`}>
           <div className="hero-badge-pill reveal-fade-down is-revealed">
             <span className="badge-glow-dot"></span>
             <span className="badge-text">{badgeText}</span>
@@ -85,7 +114,7 @@ export default function HeroSection({ onOpenModal }) {
           </div>
 
           {/* Quick Metrics Bar */}
-          <div className="hero-metrics-grid reveal-fade-up is-revealed stagger-4">
+          <div key={isHeroReady ? 'hero-metrics-ready' : 'hero-metrics-waiting'} className="hero-metrics-grid reveal-fade-up is-revealed stagger-4">
             <div className="hero-metric-item">
               <span className="metric-number">
                 <AnimatedCounter target={10} duration={1600} suffix="+" />
@@ -117,7 +146,7 @@ export default function HeroSection({ onOpenModal }) {
         </div>
 
         {/* Right Column: Interactive Tech Showcase Card / Custom Hero Visual */}
-        <div className="hero-visual hero-visual-entrance">
+        <div className={`hero-visual ${isHeroReady ? 'hero-visual-entrance' : 'hero-visual-waiting'}`}>
           <div className="hero-glass-card hero-glass-card-floating">
             {/* Card Header with Mock Window Controls */}
             <div className="glass-card-header">
@@ -219,7 +248,7 @@ export const EnterprisePortal = () => {
           </div>
 
           {/* Floating Badge */}
-          <div className="floating-badge badge-bottom-left">
+          <div key={isHeroReady ? 'hero-badge-ready' : 'hero-badge-waiting'} className="floating-badge badge-bottom-left">
             <span className="floating-icon">🚀</span>
             <div className="floating-text">
               <strong>

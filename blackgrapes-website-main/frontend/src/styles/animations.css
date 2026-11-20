@@ -867,6 +867,32 @@ select:focus {
    HERO SPLIT ENTRANCE: LEFT CONTENT SLIDES FROM LEFT, RIGHT VISUAL FROM RIGHT
    ======================================================== */
 
+/* Hero Elements Waiting State (while loading screen is active) */
+.hero-content-waiting,
+.hero-visual-waiting {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  animation: none !important;
+}
+
+/* While the initial HTML preloader is active, hold hero split animations */
+html.bgst-loading .hero-content-entrance,
+html.bgst-loading .hero-visual-entrance,
+html.bgst-loading .hero-content,
+html.bgst-loading .hero-visual,
+html.bgst-loading .products-hero-content,
+html.bgst-loading .products-hero-visual,
+html.bgst-loading .clients-hero-content,
+html.bgst-loading .clients-hero-visual,
+html.bgst-loading .service-hero-content,
+html.bgst-loading .service-hero-visual,
+html.bgst-loading .hero-left-v2,
+html.bgst-loading .hero-right-v2,
+html.bgst-loading .hero-visual-card {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
 /* 1. Hero Left Content (Home, About, Products, Clients, Services, IT Staffing) */
 .hero-content,
 .hero-content-entrance,
@@ -935,6 +961,49 @@ select:focus {
       opacity: 1;
       transform: translate3d(0, 0, 0);
     }
+  }
+}
+
+/* ========================================================
+   HOME ABOUT SECTION CINEMATIC SCROLL-TRIGGERED SPLIT ENTRANCE
+   ======================================================== */
+.about-visual-col {
+  opacity: 0;
+  transform: translate3d(-75px, 0, 0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform, opacity;
+}
+
+.about-text-col {
+  opacity: 0;
+  transform: translate3d(75px, 0, 0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s,
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s !important;
+  will-change: transform, opacity;
+}
+
+.about-visual-col.is-revealed,
+.about-text-col.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+@media (max-width: 768px) {
+  .about-visual-col {
+    transform: translate3d(-35px, 0, 0);
+  }
+  .about-text-col {
+    transform: translate3d(35px, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-visual-col,
+  .about-text-col {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="dark bgst-loading">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/bgst-logo.png" />
@@ -238,6 +238,12 @@
           setTimeout(function() {
             if (loader) {
               loader.classList.add('loader-hidden');
+              document.documentElement.classList.remove('bgst-loading');
+              document.documentElement.classList.add('bgst-loaded');
+              window.__bgstLoaded = true;
+              try {
+                window.dispatchEvent(new CustomEvent('bgst:loaded'));
+              } catch (e) {}
               setTimeout(function() {
                 if (loader && loader.parentNode) {
                   loader.parentNode.removeChild(loader);
@@ -248,8 +254,8 @@
         }
 
         window.__dismissBgstLoader = dismissLoader;
-        setTimeout(dismissLoader, 1400);
-        setTimeout(dismissLoader, 3000);
+        setTimeout(dismissLoader, 1300);
+        setTimeout(dismissLoader, 2500);
       })();
     </script>
 
