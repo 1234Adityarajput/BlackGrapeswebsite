@@ -966,35 +966,89 @@ html.bgst-loading .hero-visual-card {
 
 /* ========================================================
    HOME ABOUT SECTION CINEMATIC SCROLL-TRIGGERED SPLIT ENTRANCE
+   Left Image Column slides from Left, Right Narrative Column from Right
    ======================================================== */
-.about-visual-col {
-  opacity: 0;
-  transform: translate3d(-75px, 0, 0);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+/* 1. Initial State before scroll (hidden and shifted sideways) */
+.about-section:not(.about-split-active) .about-visual-col,
+.about-visual-col:not(.about-slide-left-active) {
+  opacity: 0 !important;
+  transform: translate3d(-90px, 0, 0) !important;
+}
+
+.about-section:not(.about-split-active) .about-text-col,
+.about-text-col:not(.about-slide-right-active) {
+  opacity: 0 !important;
+  transform: translate3d(90px, 0, 0) !important;
+}
+
+/* 2. Active Scroll Entrance Keyframes */
+.about-section.about-split-active .about-visual-col,
+.about-visual-col.about-slide-left-active {
+  animation: aboutSlideFromLeft 0.95s cubic-bezier(0.16, 1, 0.3, 1) both !important;
   will-change: transform, opacity;
 }
 
-.about-text-col {
-  opacity: 0;
-  transform: translate3d(75px, 0, 0);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s,
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s !important;
-  will-change: transform, opacity;
-}
-
-.about-visual-col.is-revealed,
-.about-text-col.is-revealed {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
-}
-
-@media (max-width: 768px) {
-  .about-visual-col {
-    transform: translate3d(-35px, 0, 0);
+@keyframes aboutSlideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-90px, 0, 0);
   }
-  .about-text-col {
-    transform: translate3d(35px, 0, 0);
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.about-section.about-split-active .about-text-col,
+.about-text-col.about-slide-right-active {
+  animation: aboutSlideFromRight 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both !important;
+  will-change: transform, opacity;
+}
+
+@keyframes aboutSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(90px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* 3. Mobile Fluidity Adjustments (<= 768px: Safe 40px Offset, Zero Overflow) */
+@media (max-width: 768px) {
+  .about-section:not(.about-split-active) .about-visual-col,
+  .about-visual-col:not(.about-slide-left-active) {
+    transform: translate3d(-40px, 0, 0) !important;
+  }
+
+  .about-section:not(.about-split-active) .about-text-col,
+  .about-text-col:not(.about-slide-right-active) {
+    transform: translate3d(40px, 0, 0) !important;
+  }
+
+  @keyframes aboutSlideFromLeft {
+    0% {
+      opacity: 0;
+      transform: translate3d(-40px, 0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes aboutSlideFromRight {
+    0% {
+      opacity: 0;
+      transform: translate3d(40px, 0, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 }
 
@@ -1003,7 +1057,7 @@ html.bgst-loading .hero-visual-card {
   .about-text-col {
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
+    animation: none !important;
   }
 }
 

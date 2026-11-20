@@ -9,8 +9,8 @@ import AnimatedCounter from './AnimatedCounter';
 export default function AboutSection({ onOpenModal }) {
   const [openFaq, setOpenFaq] = useState(0);
   const [activeValueTab, setActiveValueTab] = useState(0);
-  const [isRevealed, setIsRevealed] = useState(false);
-  const gridRef = useRef(null);
+  const [hasEntered, setHasEntered] = useState(false);
+  const sectionRef = useRef(null);
   const { home } = useHomePage();
   const about = home?.aboutSection || {};
 
@@ -18,39 +18,60 @@ export default function AboutSection({ onOpenModal }) {
     if (typeof window === 'undefined') return;
 
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setIsRevealed(true);
+      setHasEntered(true);
       return;
     }
 
-    const currentElem = gridRef.current;
-    if (!currentElem) {
-      setIsRevealed(true);
+    const elem = sectionRef.current;
+    if (!elem) {
+      setHasEntered(true);
       return;
     }
 
+    // 1. Viewport check helper
+    const checkViewport = () => {
+      if (hasEntered) return;
+      const rect = elem.getBoundingClientRect();
+      if (rect.top <= window.innerHeight * 0.82 && rect.bottom >= 0) {
+        setHasEntered(true);
+      }
+    };
+
+    // Check immediately in case page reloaded while already scrolled to this section
+    checkViewport();
+
+    // 2. IntersectionObserver trigger on scroll entrance
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
         if (entry.isIntersecting) {
-          setIsRevealed(true);
+          setHasEntered(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     );
 
-    observer.observe(currentElem);
+    observer.observe(elem);
 
-    // Guaranteed fallback
-    const timer = setTimeout(() => {
-      setIsRevealed(true);
-    }, 2200);
+    // 3. Native scroll listener fallback
+    const onScroll = () => {
+      checkViewport();
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // 4. Safe fallback after 8s
+    const fallbackTimer = setTimeout(() => {
+      setHasEntered(true);
+    }, 8000);
 
     return () => {
       observer.disconnect();
-      clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+      clearTimeout(fallbackTimer);
     };
-  }, []);
+  }, [hasEntered]);
 
   const badge = about.badge || ABOUT_CONTENT.badge || 'ABOUT BLACK GRAPES SOFTECH';
   const mainTitle = about.mainTitle || ABOUT_CONTENT.mainTitle || 'Your Strategic Partner for Digital Innovation & Enterprise Software';
@@ -86,7 +107,7 @@ export default function AboutSection({ onOpenModal }) {
   const lifecycleDesc = about.lifecycleDesc || 'From technical discovery to deployment and 24/7 proactive monitoring, we build software engineered to scale with your enterprise.';
 
   return (
-    <section id="about" className="section about-section">
+    <section id="about" ref={sectionRef} className={`section about-section ${hasEntered ? 'about-split-active' : ''}`}>
       <div className="container">
         {/* Section Header */}
         <div className="section-header text-center">
@@ -112,9 +133,9 @@ export default function AboutSection({ onOpenModal }) {
         </div>
 
         {/* Main 2-Column Content Grid */}
-        <div ref={gridRef} className="about-grid">
+        <div className="about-grid">
           {/* Left Column: Visual Infographic & Modern Technology Visual Card */}
-          <div className={`about-visual-col ${isRevealed ? 'is-revealed' : ''}`}>
+          <div className={`about-visual-col ${hasEntered ? 'about-slide-left-active' : ''}`}>
             {/* Top Showcase Card */}
             <div className="about-image-card">
               <div className="about-img-wrapper">
@@ -197,7 +218,7 @@ export default function AboutSection({ onOpenModal }) {
           </div>
 
           {/* Right Column: Detailed Narrative & Interactive Values */}
-          <div className={`about-text-col ${isRevealed ? 'is-revealed' : ''}`}>
+          <div className={`about-text-col ${hasEntered ? 'about-slide-right-active' : ''}`}>
             <div className="about-narrative-card">
               <h3 className="narrative-heading">
                 {narrativeHeading}

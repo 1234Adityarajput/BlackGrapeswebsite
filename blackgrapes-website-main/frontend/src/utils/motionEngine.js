@@ -275,8 +275,6 @@ export function initScrollTriggers() {
   }
 
   const selector = [
-    '.about-visual-col:not(._observed)',
-    '.about-text-col:not(._observed)',
     '.section-header:not(._observed)',
     '.section-title:not(._observed)',
     '.section-subtitle:not(._observed)',
