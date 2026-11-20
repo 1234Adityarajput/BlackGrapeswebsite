@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              visibility 0.5s ease;
+    visibility 0.5s ease;
   overflow: hidden;
 }
 
@@ -151,11 +151,13 @@
     transform: scale(0.85) translateY(12px);
     filter: blur(8px);
   }
+
   60% {
     opacity: 1;
     transform: scale(1.02) translateY(0);
     filter: blur(0);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -164,10 +166,13 @@
 }
 
 @keyframes bgstLogoGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 25px rgba(248, 98, 0, 0.35), 0 0 50px rgba(147, 51, 234, 0.2);
     border-color: rgba(248, 98, 0, 0.4);
   }
+
   50% {
     box-shadow: 0 0 45px rgba(248, 98, 0, 0.65), 0 0 80px rgba(147, 51, 234, 0.4);
     border-color: rgba(248, 98, 0, 0.8);
@@ -178,6 +183,7 @@
   0% {
     transform: translateX(-150%) skewX(-20deg);
   }
+
   100% {
     transform: translateX(250%) skewX(-20deg);
   }
@@ -188,6 +194,7 @@
     opacity: 0;
     transform: translate3d(0, 16px, 0);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -195,19 +202,25 @@
 }
 
 @keyframes bgstFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }
 }
 
 @keyframes bgstPulseGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.8;
     transform: scale(1.08);
@@ -280,7 +293,7 @@
 }
 
 /* Guard hero elements from ever being hidden above the fold */
-.hero-content > * {
+.hero-content>* {
   visibility: visible !important;
 }
 
@@ -288,14 +301,37 @@
    4. STAGGER DELAYS
    ======================================================== */
 
-.stagger-1 { transition-delay: 0.08s !important; }
-.stagger-2 { transition-delay: 0.16s !important; }
-.stagger-3 { transition-delay: 0.24s !important; }
-.stagger-4 { transition-delay: 0.32s !important; }
-.stagger-5 { transition-delay: 0.40s !important; }
-.stagger-6 { transition-delay: 0.48s !important; }
-.stagger-7 { transition-delay: 0.56s !important; }
-.stagger-8 { transition-delay: 0.64s !important; }
+.stagger-1 {
+  transition-delay: 0.08s !important;
+}
+
+.stagger-2 {
+  transition-delay: 0.16s !important;
+}
+
+.stagger-3 {
+  transition-delay: 0.24s !important;
+}
+
+.stagger-4 {
+  transition-delay: 0.32s !important;
+}
+
+.stagger-5 {
+  transition-delay: 0.40s !important;
+}
+
+.stagger-6 {
+  transition-delay: 0.48s !important;
+}
+
+.stagger-7 {
+  transition-delay: 0.56s !important;
+}
+
+.stagger-8 {
+  transition-delay: 0.64s !important;
+}
 
 /* ========================================================
    5. AUTOMATED SCROLL REVEAL & UNIVERSAL CARD ENHANCEMENTS
@@ -305,7 +341,7 @@
   opacity: 0;
   transform: translate3d(0, 26px, 0);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -349,9 +385,9 @@
 .compliance-metric-box,
 .translucent-glass-card {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.35s ease,
-              border-color 0.3s ease,
-              background 0.3s ease !important;
+    box-shadow 0.35s ease,
+    border-color 0.3s ease,
+    background 0.3s ease !important;
   will-change: transform, box-shadow;
 }
 
@@ -433,11 +469,9 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(
-    500px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(248, 98, 0, 0.14),
-    transparent 70%
-  );
+  background: radial-gradient(500px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+      rgba(248, 98, 0, 0.14),
+      transparent 70%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -480,9 +514,9 @@
   position: relative;
   overflow: hidden;
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.25s ease,
-              background 0.25s ease,
-              border-color 0.25s ease !important;
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease !important;
   will-change: transform;
 }
 
@@ -509,12 +543,10 @@
   left: 0;
   width: 40%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.22) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 100%);
   transform: translateX(-180%) skewX(-20deg);
   pointer-events: none;
 }
@@ -567,14 +599,17 @@ select:focus {
     transform: translateX(-100%);
     opacity: 1;
   }
+
   70% {
     transform: translateX(-15%);
     opacity: 1;
   }
+
   90% {
     transform: translateX(0%);
     opacity: 1;
   }
+
   100% {
     transform: translateX(0%);
     opacity: 0;
@@ -595,18 +630,24 @@ select:focus {
 }
 
 @keyframes bgstFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-8px);
   }
 }
 
 @keyframes bgstFloatReverse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(6px);
   }
@@ -635,10 +676,12 @@ select:focus {
     transform: scale(0.9);
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
   }
+
   70% {
     transform: scale(1.05);
     box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
   }
+
   100% {
     transform: scale(0.9);
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
@@ -654,10 +697,12 @@ select:focus {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(248, 98, 0, 0.8);
   }
+
   70% {
     transform: scale(1.1);
     box-shadow: 0 0 0 8px rgba(248, 98, 0, 0);
   }
+
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(248, 98, 0, 0);
@@ -674,6 +719,7 @@ select:focus {
   from {
     stroke-dashoffset: 22;
   }
+
   to {
     stroke-dashoffset: 0;
   }
@@ -694,10 +740,13 @@ select:focus {
 }
 
 @keyframes badgeSparkle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(0deg) scale(1);
     filter: drop-shadow(0 0 4px rgba(248, 98, 0, 0.6));
   }
+
   50% {
     transform: rotate(15deg) scale(1.2);
     filter: drop-shadow(0 0 10px rgba(248, 98, 0, 0.9));
@@ -723,9 +772,9 @@ select:focus {
 .btn-primary {
   box-shadow: 0 4px 18px rgba(248, 98, 0, 0.35);
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s ease,
-              background 0.3s ease,
-              border-color 0.3s ease !important;
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease !important;
 }
 
 .btn-premium-action:hover,
@@ -740,9 +789,9 @@ select:focus {
 
 .main-navbar {
   transition: background 0.35s ease,
-              backdrop-filter 0.35s ease,
-              border-color 0.35s ease,
-              box-shadow 0.35s ease !important;
+    backdrop-filter 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
 }
 
 .main-navbar.navbar-scrolled {
@@ -769,7 +818,7 @@ select:focus {
   background: #f86200;
   border-radius: 2px;
   transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nav-link:hover::after,
@@ -783,10 +832,10 @@ select:focus {
 .social-icon-btn,
 .social-pill {
   transition: transform 0.25s ease,
-              color 0.25s ease,
-              background 0.25s ease,
-              border-color 0.25s ease,
-              box-shadow 0.25s ease !important;
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease !important;
 }
 
 .footer-social-link:hover,
@@ -811,8 +860,8 @@ select:focus {
   box-shadow: 0 0 20px rgba(248, 98, 0, 0.16), inset 0 0 12px rgba(248, 98, 0, 0.08) !important;
   animation: heroBadgeAura 4.5s ease-in-out infinite alternate !important;
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease !important;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease !important;
 }
 
 .hero-badge-pill:hover {
@@ -826,10 +875,12 @@ select:focus {
     border-color: rgba(248, 98, 0, 0.35);
     box-shadow: 0 0 16px rgba(248, 98, 0, 0.14);
   }
+
   50% {
     border-color: rgba(248, 98, 0, 0.65);
     box-shadow: 0 0 26px rgba(248, 98, 0, 0.32), 0 0 45px rgba(147, 51, 234, 0.15);
   }
+
   100% {
     border-color: rgba(248, 98, 0, 0.4);
     box-shadow: 0 0 18px rgba(248, 98, 0, 0.18);
@@ -839,15 +890,13 @@ select:focus {
 /* 2. Hero Headline Dynamic Ambient Shimmer */
 .hero-headline-shimmer {
   display: inline-block;
-  background: linear-gradient(
-    110deg,
-    #ffffff 0%,
-    #ffffff 45%,
-    #ffb080 55%,
-    #f86200 65%,
-    #ffffff 75%,
-    #ffffff 100%
-  );
+  background: linear-gradient(110deg,
+      #ffffff 0%,
+      #ffffff 45%,
+      #ffb080 55%,
+      #f86200 65%,
+      #ffffff 75%,
+      #ffffff 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -858,6 +907,7 @@ select:focus {
   0% {
     background-position: 150% 0;
   }
+
   100% {
     background-position: -150% 0;
   }
@@ -916,6 +966,7 @@ html.bgst-loading .career-form-card {
     opacity: 0;
     transform: translate3d(-85px, 0, 0);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -928,6 +979,7 @@ html.bgst-loading .career-form-card {
       opacity: 0;
       transform: translate3d(-35px, 0, 0);
     }
+
     100% {
       opacity: 1;
       transform: translate3d(0, 0, 0);
@@ -953,6 +1005,7 @@ html.bgst-loading .career-form-card {
     opacity: 0;
     transform: translate3d(85px, 0, 0);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -965,6 +1018,7 @@ html.bgst-loading .career-form-card {
       opacity: 0;
       transform: translate3d(35px, 0, 0);
     }
+
     100% {
       opacity: 1;
       transform: translate3d(0, 0, 0);
@@ -1002,6 +1056,7 @@ html.bgst-loading .career-form-card {
     opacity: 0;
     transform: translate3d(-90px, 0, 0);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -1019,6 +1074,7 @@ html.bgst-loading .career-form-card {
     opacity: 0;
     transform: translate3d(90px, 0, 0);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -1027,6 +1083,7 @@ html.bgst-loading .career-form-card {
 
 /* 3. Mobile Fluidity Adjustments (<= 768px: Safe 40px Offset, Zero Overflow) */
 @media (max-width: 768px) {
+
   .about-section:not(.about-split-active) .about-visual-col,
   .about-visual-col:not(.about-slide-left-active) {
     transform: translate3d(-40px, 0, 0) !important;
@@ -1042,6 +1099,7 @@ html.bgst-loading .career-form-card {
       opacity: 0;
       transform: translate3d(-40px, 0, 0);
     }
+
     100% {
       opacity: 1;
       transform: translate3d(0, 0, 0);
@@ -1053,6 +1111,7 @@ html.bgst-loading .career-form-card {
       opacity: 0;
       transform: translate3d(40px, 0, 0);
     }
+
     100% {
       opacity: 1;
       transform: translate3d(0, 0, 0);
@@ -1061,6 +1120,7 @@ html.bgst-loading .career-form-card {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .about-visual-col,
   .about-text-col {
     opacity: 1 !important;
@@ -1078,8 +1138,8 @@ html.bgst-loading .career-form-card {
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(248, 98, 0, 0.2), 0 0 50px rgba(147, 51, 234, 0.12) !important;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.35s ease,
-              box-shadow 0.35s ease !important;
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
 }
 
 .hero-glass-card:hover {
@@ -1093,8 +1153,15 @@ html.bgst-loading .career-form-card {
 }
 
 @keyframes dotPulse {
-  0% { transform: scale(1); filter: brightness(1); }
-  100% { transform: scale(1.25); filter: brightness(1.35); }
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  100% {
+    transform: scale(1.25);
+    filter: brightness(1.35);
+  }
 }
 
 /* 4. Terminal KPI Boxes Hover & Number Glow */
@@ -1103,9 +1170,9 @@ html.bgst-loading .career-form-card {
   background: rgba(255, 255, 255, 0.02) !important;
   border-radius: 12px;
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease,
-              background 0.3s ease !important;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease !important;
 }
 
 .card-kpis .kpi-box:hover {
@@ -1124,10 +1191,10 @@ html.bgst-loading .career-form-card {
   border: 1px solid rgba(248, 98, 0, 0.45) !important;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 25px rgba(248, 98, 0, 0.3) !important;
   animation: heroBadgeSlideFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both,
-             bgstFloatReverse 5s ease-in-out 1.35s infinite !important;
+    bgstFloatReverse 5s ease-in-out 1.35s infinite !important;
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s ease,
-              border-color 0.3s ease !important;
+    box-shadow 0.3s ease,
+    border-color 0.3s ease !important;
 }
 
 @keyframes heroBadgeSlideFromRight {
@@ -1135,6 +1202,7 @@ html.bgst-loading .career-form-card {
     opacity: 0;
     transform: translate3d(50px, 20px, 0) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
@@ -1154,18 +1222,23 @@ html.bgst-loading .career-form-card {
 }
 
 @keyframes rocketBoost {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg);
     filter: drop-shadow(0 0 4px #f86200);
   }
+
   25% {
     transform: translate(-1.5px, -2px) rotate(-6deg);
     filter: drop-shadow(0 0 8px #ff8438);
   }
+
   50% {
     transform: translate(1px, -3px) rotate(4deg);
     filter: drop-shadow(0 0 12px #f86200);
   }
+
   75% {
     transform: translate(1.5px, -1px) rotate(-3deg);
     filter: drop-shadow(0 0 8px #ff8438);
@@ -1184,8 +1257,8 @@ html.bgst-loading .career-form-card {
   border: 1px solid rgba(248, 98, 0, 0.32) !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(248, 98, 0, 0.16) !important;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.4s ease,
-              box-shadow 0.4s ease !important;
+    border-color 0.4s ease,
+    box-shadow 0.4s ease !important;
 }
 
 .about-image-card:hover {
@@ -1200,6 +1273,7 @@ html.bgst-loading .career-form-card {
 
 .about-image-card:hover .about-main-img {
   transform: scale(1.06);
+
 }
 
 /* 2. About Floating Experience Badge (10+ Years of IT & Software Innovation) */
@@ -1210,8 +1284,8 @@ html.bgst-loading .career-form-card {
   -webkit-backdrop-filter: blur(16px) !important;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 25px rgba(248, 98, 0, 0.28) !important;
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease !important;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease !important;
 }
 
 .about-stat-floating-card:hover {
@@ -1227,10 +1301,13 @@ html.bgst-loading .career-form-card {
 }
 
 @keyframes trophyShine {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1) rotate(0deg);
     filter: drop-shadow(0 0 4px rgba(248, 98, 0, 0.6));
   }
+
   50% {
     transform: scale(1.18) rotate(10deg);
     filter: drop-shadow(0 0 16px #ffb080);
@@ -1277,11 +1354,14 @@ html.bgst-loading .career-form-card {
 }
 
 @keyframes separatorGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
     filter: drop-shadow(0 0 2px #f86200);
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     filter: drop-shadow(0 0 10px #f86200);
@@ -1310,8 +1390,8 @@ html.bgst-loading .career-form-card {
 .about-tech-visual-card {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.35s ease,
-              box-shadow 0.35s ease !important;
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
 }
 
 .about-tech-visual-card:hover {
@@ -1345,6 +1425,7 @@ html.bgst-loading .career-form-card {
    ======================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

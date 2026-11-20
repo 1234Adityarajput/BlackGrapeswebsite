@@ -89,14 +89,15 @@ export const DEFAULT_MENUS = [
 export const DEFAULT_HOME_PAGE = {
   hero: {
     badge: '10+ Years of Proven IT Excellence • Indore, India',
-    headline: 'Engineering Scalable Software, Web & Mobile Platforms for Global Ambition',
-    prefix: 'Innovate & Scale With',
-    break_text: 'Your Trusted Technology Partner',
+    prefix: 'INNOVATE. INTEGRATE. ELEVATE.',
+    title_line1: 'And Digitalize Your Ideas',
+    break_text: 'into Success via',
     brand_highlight: 'BLACK GRAPES SOFTECH',
-    suffix: '',
-    description: 'We architect high-performance custom software, mobile apps, enterprise CRMs, and modern websites for ambitious startups and global enterprises.',
-    cta_primary_text: 'Get Free Consultation',
-    cta_secondary_text: 'Explore Services',
+    suffix_inline: 'Where Innovation',
+    suffix: 'And ideas Meets Excellence.',
+    description: 'Get Free Consultation From Our Industry Experts. We engineer scalable custom software, iOS & Android mobile apps, enterprise CRMs, MLM platforms, and high-conversion websites for ambitious startups and global enterprises.',
+    cta_primary_text: 'Request a Demo',
+    cta_secondary_text: 'Get the offer',
     techBadges: [
       { name: 'React', category: 'Frontend' },
       { name: 'Flutter', category: 'Mobile' },

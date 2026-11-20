@@ -12,11 +12,42 @@ export default function HeroSection({ onOpenModal }) {
   const heroImage = rawImage ? resolveMediaUrl(rawImage) : '';
 
   const badgeText = hero.badge || '10+ Years of Proven IT Excellence • Indore, India';
-  const headline = hero.headline || 'Engineering Scalable Software, Web & Mobile Platforms for Global Ambition';
+  const prefix = hero.prefix || 'INNOVATE. INTEGRATE. ELEVATE.';
   const brandHighlight = hero.brand_highlight || 'BLACK GRAPES SOFTECH';
-  const description = hero.description || 'We architect high-performance custom software, mobile apps, enterprise CRMs, and modern websites for ambitious startups and global enterprises.';
-  const ctaPrimary = hero.cta_primary_text || 'Get Free Consultation';
-  const ctaSecondary = hero.cta_secondary_text || 'Explore Services';
+
+  // Cleanly handle SS1 layout
+  const rawBreakText = (hero.break_text || hero.title || 'And Digitalize Your Ideas into Success via').trim();
+  const rawSuffix = (hero.suffix || 'Where Innovation And ideas Meets Excellence.').trim().replace(/^,\s*/, '');
+
+  let titleLine1 = hero.title_line1 || 'And Digitalize Your Ideas';
+  let breakText = 'into Success via';
+  if (rawBreakText.toLowerCase().includes('into success via')) {
+    const parts = rawBreakText.split(/into\s+success\s+via/i);
+    titleLine1 = parts[0]?.trim() || 'And Digitalize Your Ideas';
+    breakText = 'into Success via';
+  } else if (!hero.title_line1 && rawBreakText) {
+    titleLine1 = rawBreakText;
+    breakText = '';
+  }
+
+  let suffixInline = hero.suffix_inline || 'Where Innovation';
+  let suffix = 'And ideas Meets Excellence.';
+  if (rawSuffix.toLowerCase().includes('where innovation')) {
+    suffixInline = 'Where Innovation';
+    const rest = rawSuffix.replace(/.*?where\s+innovation\s*/i, '').trim();
+    suffix = rest || 'And ideas Meets Excellence.';
+  } else if (!hero.suffix_inline && rawSuffix) {
+    suffix = rawSuffix;
+    suffixInline = '';
+  }
+
+  // If hero.headline happens to be the old generic placeholder, ignore it
+  const isOldGenericHeadline = hero.headline && hero.headline.includes('Engineering Scalable Software');
+  const customHeadline = (!isOldGenericHeadline && hero.headline) ? hero.headline : null;
+
+  const description = hero.description || 'Get Free Consultation From Our Industry Experts. We engineer scalable custom software, iOS & Android mobile apps, enterprise CRMs, MLM platforms, and high-conversion websites for ambitious startups and global enterprises.';
+  const ctaPrimary = hero.cta_primary_text || 'Request a Demo';
+  const ctaSecondary = hero.cta_secondary_text || 'Get the offer';
 
   const defaultBadges = [
     { name: 'React', category: 'Frontend' },
@@ -73,16 +104,18 @@ export default function HeroSection({ onOpenModal }) {
           </div>
 
           <h1 className="hero-title reveal-fade-up is-revealed stagger-1">
-            {hero.headline ? (
-              <span className="hero-headline-shimmer">{hero.headline}</span>
+            {customHeadline ? (
+              <span className="hero-headline-shimmer">{customHeadline}</span>
             ) : (
               <>
-                <span className="hero-prefix">{hero.prefix || 'Innovate & Scale With'} </span>
-                <span className="hero-gradient-brand">{brandHighlight || 'BLACK GRAPES SOFTECH'}</span>
-                {(hero.break_text || !hero.prefix) && (
-                  <span className="hero-break"> — {hero.break_text || 'Your Trusted Technology Partner'}</span>
-                )}
-                {hero.suffix && <span className="hero-suffix">{hero.suffix}</span>}
+                <span className="hero-prefix">{prefix}</span>
+                <span className="hero-break">{titleLine1}</span>
+                <span className="hero-title-flow">
+                  {breakText ? `${breakText} ` : ''}
+                  <span className="hero-gradient-brand">{brandHighlight}</span>
+                  {suffixInline ? ` ${suffixInline}` : ''}
+                </span>
+                {suffix && <span className="hero-suffix">{suffix}</span>}
               </>
             )}
           </h1>
@@ -101,16 +134,30 @@ export default function HeroSection({ onOpenModal }) {
               <span>{ctaPrimary}</span>
             </button>
 
-            <a
-              href="#services"
-              className="btn btn-outline btn-lg btn-premium-action"
-            >
-              <span>{ctaSecondary}</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
+            {ctaSecondary === 'Get the offer' ? (
+              <button
+                type="button"
+                className="btn btn-outline btn-lg btn-premium-action"
+                onClick={() => onOpenModal(ctaSecondary)}
+              >
+                <span>{ctaSecondary}</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            ) : (
+              <a
+                href="#services"
+                className="btn btn-outline btn-lg btn-premium-action"
+              >
+                <span>{ctaSecondary}</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            )}
           </div>
 
           {/* Quick Metrics Bar */}

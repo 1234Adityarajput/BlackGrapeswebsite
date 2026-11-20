@@ -134,13 +134,15 @@
   },
   "home_page": {
     "hero": {
-      "badge": "10+ Years of Proven IT Excellence • Indore, India ",
-      "prefix": "Innovate. Integrate. Elevate. ",
-      "break_text": "And Digitalize Your Ideas into Success via  ",
-      "brand_highlight": "BLACK GRAPES SOFTECH ",
-      "suffix": "Where Innovation And ideas Meets Excellence.  ",
-      "description": "Get Free Consultation From Our Industry Experts. We engineer scalable custom software, iOS & Android mobile apps, enterprise CRMs, MLM platforms, and high-conversion websites for ambitious startups and global enterprises.  ",
-      "cta_primary_text": "Request a Demo ",
+      "badge": "10+ Years of Proven IT Excellence • Indore, India",
+      "prefix": "INNOVATE. INTEGRATE. ELEVATE.",
+      "title_line1": "And Digitalize Your Ideas",
+      "break_text": "into Success via",
+      "brand_highlight": "BLACK GRAPES SOFTECH",
+      "suffix_inline": "Where Innovation",
+      "suffix": "And ideas Meets Excellence.",
+      "description": "Get Free Consultation From Our Industry Experts. We engineer scalable custom software, iOS & Android mobile apps, enterprise CRMs, MLM platforms, and high-conversion websites for ambitious startups and global enterprises.",
+      "cta_primary_text": "Request a Demo",
       "cta_secondary_text": "Get the offer",
       "techBadges": [
         {
