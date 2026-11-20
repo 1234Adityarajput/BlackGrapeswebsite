@@ -896,8 +896,8 @@ button, input, select, textarea {
 .hero-title {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(2.3rem, 4vw, 3.6rem);
-  line-height: 1.16;
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+  line-height: 1.15;
   letter-spacing: -0.025em;
   color: #ffffff;
 }
@@ -936,24 +936,35 @@ button, input, select, textarea {
 .hero-brand-shimmer,
 .hero-headline-shimmer {
   display: inline-block !important;
-  background: linear-gradient(
+  background-image: linear-gradient(
     110deg,
     #ffffff 0%,
-    #ffffff 25%,
-    #ff8c3b 45%,
-    #f86200 55%,
-    #ffb080 65%,
-    #ffffff 85%,
+    #ffffff 35%,
+    #ff9d5c 48%,
+    #f86200 56%,
+    #ffb080 64%,
+    #ffffff 75%,
     #ffffff 100%
   ) !important;
-  background-size: 220% 100% !important;
+  background-size: 250% 100% !important;
+  background-position: 150% 0;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
+  -webkit-animation: textShineSweep 3.5s linear infinite !important;
   animation: textShineSweep 3.5s linear infinite !important;
   text-shadow: none !important;
-  filter: drop-shadow(0 0 16px rgba(248, 98, 0, 0.45));
+  will-change: background-position;
+}
+
+@-webkit-keyframes textShineSweep {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -150% 0;
+  }
 }
 
 @keyframes textShineSweep {
@@ -5363,8 +5374,8 @@ img, video, canvas, svg {
 .hero-title {
   font-family: var(--font-heading) !important;
   font-weight: 800 !important;
-  font-size: clamp(1.55rem, 5vw, 3.4rem) !important;
-  line-height: 1.18 !important;
+  font-size: clamp(1.85rem, 4.4vw, 3.8rem) !important;
+  line-height: 1.15 !important;
   letter-spacing: -0.02em !important;
   color: #ffffff !important;
   max-width: 100% !important;
@@ -5375,10 +5386,10 @@ img, video, canvas, svg {
 
 .hero-prefix {
   display: block !important;
-  font-size: clamp(0.95rem, 3.2vw, 1.8rem) !important;
+  font-size: clamp(1rem, 2.4vw, 1.65rem) !important;
   font-weight: 700 !important;
   color: var(--brand-amber) !important;
-  margin-bottom: 0.25rem !important;
+  margin-bottom: 0.35rem !important;
   text-transform: uppercase !important;
   letter-spacing: 0.04em !important;
   word-break: break-word !important;
