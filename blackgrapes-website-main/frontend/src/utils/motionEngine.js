@@ -1,10 +1,12 @@
 /**
  * BLACK GRAPES SOFTECH - CREATIVE GSAP MOTION DESIGN SYSTEM
  * 100% Safe, GPU-Accelerated, Zero-Freeze Creative Motion Engine
+ * Inspired by luxury tech agency aesthetics (Aimfortech)
  */
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { initSmoothScroll } from './smoothScroll';
 
 // Register GSAP Plugins
 if (typeof window !== 'undefined') {
@@ -51,7 +53,7 @@ export function initHeroAnimation() {
       ].filter(Boolean);
 
       // Guarantee elements are never stuck invisible
-      elements.forEach(el => {
+      elements.forEach((el) => {
         el.style.visibility = 'visible';
         el.style.opacity = '1';
       });
@@ -59,7 +61,7 @@ export function initHeroAnimation() {
       const tl = gsap.timeline({
         defaults: { ease: 'power3.out' },
         onComplete: () => {
-          elements.forEach(el => {
+          elements.forEach((el) => {
             gsap.set(el, { clearProps: 'opacity,filter' });
           });
         }
@@ -72,27 +74,34 @@ export function initHeroAnimation() {
 
       const title = elements[1];
       if (title) {
-        tl.fromTo(title, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3');
+        tl.fromTo(title, { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65 }, '-=0.3');
       }
 
       const desc = elements[2];
       if (desc) {
-        tl.fromTo(desc, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, '-=0.35');
+        tl.fromTo(desc, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55 }, '-=0.35');
       }
 
       const cta = elements[3];
       if (cta && cta.children.length > 0) {
-        tl.fromTo(cta.children, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.08 }, '-=0.3');
+        tl.fromTo(cta.children, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.08 }, '-=0.3');
       }
 
       const visual = elements[4];
       if (visual) {
-        tl.fromTo(visual, { x: 25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.5');
+        tl.fromTo(visual, { x: 25, opacity: 0, scale: 0.98 }, { x: 0, opacity: 1, scale: 1, duration: 0.75, ease: 'power2.out' }, '-=0.5');
+      }
+
+      const metrics = elements[5];
+      if (metrics) {
+        tl.fromTo(metrics, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, '-=0.3');
       }
     } catch (e) {
       console.warn('[MotionEngine] Hero animation notice:', e);
-      const allHeroElements = container.querySelectorAll('.hero-content, .hero-badge-pill, .hero-title, .hero-description, .hero-cta-group, .hero-metrics-grid, .hero-visual');
-      allHeroElements.forEach(el => {
+      const allHeroElements = container.querySelectorAll(
+        '.hero-content, .hero-badge-pill, .hero-title, .hero-description, .hero-cta-group, .hero-metrics-grid, .hero-visual'
+      );
+      allHeroElements.forEach((el) => {
         el.style.opacity = '1';
         el.style.visibility = 'visible';
       });
@@ -132,46 +141,50 @@ export function initCardTilt() {
     '.partner-tier-card'
   ].join(', ');
 
-  document.addEventListener('mousemove', (e) => {
-    const card = e.target.closest(cardSelector);
+  document.addEventListener(
+    'mousemove',
+    (e) => {
+      const card = e.target.closest(cardSelector);
 
-    if (card) {
-      activeTiltCard = card;
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      if (card) {
+        activeTiltCard = card;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-      // Subtle tilt (-5 to 5 deg)
-      const rotateX = ((y - centerY) / centerY) * -5;
-      const rotateY = ((x - centerX) / centerX) * 5;
+        // Subtle tilt (-4 to 4 deg)
+        const rotateX = ((y - centerY) / centerY) * -4;
+        const rotateY = ((x - centerX) / centerX) * 4;
 
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
 
-      gsap.to(card, {
-        rotateX,
-        rotateY,
-        transformPerspective: 1000,
-        scale: 1.015,
-        duration: 0.25,
-        ease: 'power1.out',
-        overwrite: 'auto'
-      });
-    } else if (activeTiltCard) {
-      gsap.to(activeTiltCard, {
-        rotateX: 0,
-        rotateY: 0,
-        scale: 1,
-        duration: 0.5,
-        ease: 'power2.out',
-        overwrite: 'auto'
-      });
-      activeTiltCard = null;
-    }
-  }, { passive: true });
+        gsap.to(card, {
+          rotateX,
+          rotateY,
+          transformPerspective: 1000,
+          scale: 1.015,
+          duration: 0.25,
+          ease: 'power1.out',
+          overwrite: 'auto'
+        });
+      } else if (activeTiltCard) {
+        gsap.to(activeTiltCard, {
+          rotateX: 0,
+          rotateY: 0,
+          scale: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+        activeTiltCard = null;
+      }
+    },
+    { passive: true }
+  );
 }
 
 /**
@@ -188,37 +201,72 @@ export function initMagneticButtons() {
 
   isMagneticInitialized = true;
 
-  document.addEventListener('mousemove', (e) => {
-    const btn = e.target.closest('.btn-primary, .nav-cta-btn, .btn-magnetic');
+  document.addEventListener(
+    'mousemove',
+    (e) => {
+      const btn = e.target.closest('.btn-primary, .nav-cta-btn, .btn-magnetic, .btn-premium-action');
 
-    if (btn) {
-      activeMagneticBtn = btn;
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
+      if (btn) {
+        activeMagneticBtn = btn;
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
 
-      gsap.to(btn, {
-        x: x * 0.2,
-        y: y * 0.2,
-        duration: 0.25,
-        ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    } else if (activeMagneticBtn) {
-      gsap.to(activeMagneticBtn, {
-        x: 0,
-        y: 0,
-        duration: 0.45,
-        ease: 'elastic.out(1, 0.4)',
-        overwrite: 'auto'
-      });
-      activeMagneticBtn = null;
-    }
-  }, { passive: true });
+        gsap.to(btn, {
+          x: x * 0.22,
+          y: y * 0.22,
+          duration: 0.25,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      } else if (activeMagneticBtn) {
+        gsap.to(activeMagneticBtn, {
+          x: 0,
+          y: 0,
+          duration: 0.45,
+          ease: 'elastic.out(1, 0.4)',
+          overwrite: 'auto'
+        });
+        activeMagneticBtn = null;
+      }
+    },
+    { passive: true }
+  );
 }
 
 /**
- * 4. SCROLL ENTRANCE VIA SAFE INTERSECTION OBSERVER
+ * 4. KINETIC TYPOGRAPHY & HEADING REVEAL
+ * Reveals section titles with silky slide-up masking
+ */
+export function initKineticHeadings() {
+  if (typeof window === 'undefined' || prefersReducedMotion()) return;
+
+  const headings = document.querySelectorAll(
+    '.section-title:not(._kinetic_init), .page-hero-title:not(._kinetic_init)'
+  );
+
+  headings.forEach((heading) => {
+    heading.classList.add('_kinetic_init', 'kinetic-heading');
+  });
+}
+
+/**
+ * 5. CINEMATIC IMAGE CLIP-PATH MASK REVEALS
+ */
+export function initImageMaskReveals() {
+  if (typeof window === 'undefined' || prefersReducedMotion()) return;
+
+  const imageWrappers = document.querySelectorAll(
+    '.about-img-wrapper:not(._mask_init), .about-image-card:not(._mask_init), .founder-img-wrap:not(._mask_init)'
+  );
+
+  imageWrappers.forEach((wrapper) => {
+    wrapper.classList.add('_mask_init', 'clip-mask-reveal');
+  });
+}
+
+/**
+ * 6. SCROLL ENTRANCE VIA SAFE INTERSECTION OBSERVER
  * Uses native IntersectionObserver for buttery smooth 60fps card reveals.
  * Runs once per element, NEVER loops, 0% CPU impact.
  */
@@ -228,21 +276,26 @@ export function initScrollTriggers() {
   if (typeof window === 'undefined' || prefersReducedMotion()) return;
 
   if (!scrollObserver) {
-    scrollObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.08,
-      rootMargin: '0px 0px -30px 0px'
-    });
+    scrollObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -30px 0px'
+      }
+    );
   }
 
   const selector = [
     '.section-header:not(._observed)',
+    '.section-title:not(._observed)',
+    '.section-badge:not(._observed)',
     '.service-card:not(._observed)',
     '.project-card:not(._observed)',
     '.process-step-card:not(._observed)',
@@ -266,14 +319,19 @@ export function initScrollTriggers() {
     '.contact-info-card:not(._observed)',
     '.partner-tier-card:not(._observed)',
     '.tendering-callout-card:not(._observed)',
-    '.cta-banner-box:not(._observed)'
+    '.cta-banner-box:not(._observed)',
+    '.about-image-card:not(._observed)',
+    '.about-visual-card:not(._observed)',
+    '.honeycomb-grid:not(._observed)',
+    '.contact-form-box:not(._observed)',
+    '.footer-col:not(._observed)'
   ].join(', ');
 
   const targets = document.querySelectorAll(selector);
 
   targets.forEach((el) => {
     el.classList.add('_observed', 'reveal-init');
-    const parentGrid = el.closest('.grid, .cards-grid, [class*="-grid"], [class*="-layout"]');
+    const parentGrid = el.closest('.grid, .cards-grid, [class*="-grid"], [class*="-layout"], .footer-grid');
     if (parentGrid) {
       const siblingIndex = Array.from(parentGrid.children).indexOf(el);
       if (siblingIndex >= 0) {
@@ -286,8 +344,9 @@ export function initScrollTriggers() {
 }
 
 /**
- * 5. MASTER MOTION INITIALIZER
- * Safe, reliable, non-blocking initializer.
+ * 7. MASTER MOTION INITIALIZER
+ * Coordinates hero choreography, 3D card tilts, magnetic buttons,
+ * kinetic typography, image mask reveals, smooth scroll, and scroll observers.
  */
 export function initMotionSystem() {
   if (typeof window === 'undefined') return () => {};
@@ -295,12 +354,18 @@ export function initMotionSystem() {
   initHeroAnimation();
   initCardTilt();
   initMagneticButtons();
+  initKineticHeadings();
+  initImageMaskReveals();
   initScrollTriggers();
+  const cleanupSmoothScroll = initSmoothScroll();
 
   return () => {
     if (scrollObserver) {
       scrollObserver.disconnect();
       scrollObserver = null;
+    }
+    if (cleanupSmoothScroll) {
+      cleanupSmoothScroll();
     }
   };
 }

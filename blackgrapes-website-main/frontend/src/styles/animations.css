@@ -1,6 +1,6 @@
 /**
- * BLACK GRAPES SOFTECH - PREMIUM ANIMATION SYSTEM
- * High-performance, GPU-accelerated motion styles
+ * BLACK GRAPES SOFTECH - PREMIUM CINEMATIC ANIMATION SYSTEM
+ * High-performance, GPU-accelerated motion styles inspired by luxury tech studios (Aimfortech)
  */
 
 /* ========================================================
@@ -215,7 +215,7 @@
 }
 
 /* ========================================================
-   2. GLOBAL PAGE TRANSITION
+   3. GLOBAL PAGE TRANSITION
    ======================================================== */
 
 .page-transition-wrapper {
@@ -225,7 +225,7 @@
 }
 
 /* ========================================================
-   3. SCROLL REVEAL UTILITY CLASSES
+   4. SCROLL REVEAL UTILITY CLASSES
    ======================================================== */
 
 .reveal-base {
@@ -288,7 +288,7 @@
 }
 
 /* ========================================================
-   4. STAGGER DELAYS
+   5. STAGGER DELAYS
    ======================================================== */
 
 .stagger-1 { transition-delay: 0.08s !important; }
@@ -301,7 +301,7 @@
 .stagger-8 { transition-delay: 0.64s !important; }
 
 /* ========================================================
-   5. AUTOMATED SCROLL REVEAL & UNIVERSAL CARD ENHANCEMENTS
+   6. AUTOMATED SCROLL REVEAL & UNIVERSAL CARD ENHANCEMENTS
    ======================================================== */
 
 .reveal-init {
@@ -431,7 +431,7 @@
 }
 
 /* ========================================================
-   6. INTERACTIVE BUTTONS & MICRO-INTERACTIONS
+   7. INTERACTIVE BUTTONS & MICRO-INTERACTIONS
    ======================================================== */
 
 .btn,
@@ -512,7 +512,7 @@ select:focus {
 }
 
 /* ========================================================
-   7. NAVBAR & FOOTER ANIMATIONS
+   8. NAVBAR & FOOTER ANIMATIONS
    ======================================================== */
 
 .main-navbar {
@@ -577,7 +577,138 @@ select:focus {
 }
 
 /* ========================================================
-   7. ACCESSIBILITY: REDUCED MOTION PREFERENCE
+   9. DESKTOP CUSTOM MAGNETIC CURSOR (AIMFORTECH-INSPIRED)
+   ======================================================== */
+
+.bgst-cursor-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999999;
+  transition: opacity 0.3s ease;
+}
+
+.bgst-cursor-container.cursor-hidden {
+  opacity: 0;
+}
+
+.bgst-cursor-container.cursor-visible {
+  opacity: 1;
+}
+
+/* Precision Center Dot */
+.bgst-cursor-dot {
+  position: fixed;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f86200, #ff9e42);
+  box-shadow: 0 0 12px rgba(248, 98, 0, 0.95), 0 0 24px rgba(248, 98, 0, 0.5);
+  pointer-events: none;
+  z-index: 100000000;
+  transition: width 0.2s ease, height 0.2s ease, transform 0.05s ease-out;
+  will-change: transform;
+}
+
+.bgst-cursor-dot.cursor-hover {
+  transform: scale(0.65);
+  background: #ff9e42;
+}
+
+.bgst-cursor-dot.cursor-clicked {
+  transform: scale(1.4);
+}
+
+/* Trailing Follower Ring */
+.bgst-cursor-ring {
+  position: fixed;
+  top: -19px;
+  left: -19px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(248, 98, 0, 0.5);
+  background: rgba(248, 98, 0, 0.06);
+  box-shadow: 0 0 15px rgba(248, 98, 0, 0.15);
+  pointer-events: none;
+  z-index: 99999999;
+  transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              top 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              left 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.25s ease,
+              background 0.25s ease;
+  will-change: transform;
+}
+
+.bgst-cursor-ring.cursor-hover {
+  top: -28px;
+  left: -28px;
+  width: 56px;
+  height: 56px;
+  border-color: rgba(248, 98, 0, 0.9);
+  background: rgba(248, 98, 0, 0.15);
+  box-shadow: 0 0 28px rgba(248, 98, 0, 0.4);
+}
+
+.bgst-cursor-ring.cursor-clicked {
+  transform: scale(0.85);
+  border-color: #ff9e42;
+}
+
+/* Hide default cursor on desktop interactive elements */
+@media (min-width: 1024px) and (pointer: fine) {
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor [role="button"],
+  body.has-custom-cursor .btn,
+  body.has-custom-cursor .nav-link,
+  body.has-custom-cursor .service-card,
+  body.has-custom-cursor .project-card,
+  body.has-custom-cursor .why-us-capsule-card,
+  body.has-custom-cursor .coverflow-card,
+  body.has-custom-cursor .counter-card {
+    cursor: none !important;
+  }
+}
+
+/* ========================================================
+   10. KINETIC TYPOGRAPHY & HEADING REVEAL
+   ======================================================== */
+
+.kinetic-heading {
+  position: relative;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ========================================================
+   11. CINEMATIC IMAGE CLIP-PATH MASK REVEALS
+   ======================================================== */
+
+.clip-mask-reveal {
+  overflow: hidden;
+  position: relative;
+}
+
+.clip-mask-reveal img {
+  clip-path: inset(8% 0% 8% 0%);
+  transform: scale(1.05);
+  transition: clip-path 1s cubic-bezier(0.19, 1, 0.22, 1),
+              transform 1s cubic-bezier(0.19, 1, 0.22, 1) !important;
+  will-change: clip-path, transform;
+}
+
+.clip-mask-reveal.is-revealed img,
+.is-revealed .clip-mask-reveal img {
+  clip-path: inset(0% 0% 0% 0%) !important;
+  transform: scale(1) !important;
+}
+
+/* ========================================================
+   12. ACCESSIBILITY: REDUCED MOTION PREFERENCE
    ======================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -596,8 +727,14 @@ select:focus {
   .reveal-fade-in,
   .reveal-slide-left,
   .reveal-slide-right,
-  .reveal-scale {
+  .reveal-scale,
+  .reveal-init {
     opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .clip-mask-reveal img {
+    clip-path: none !important;
     transform: none !important;
   }
 
@@ -605,5 +742,9 @@ select:focus {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .bgst-cursor-container {
+    display: none !important;
   }
 }
