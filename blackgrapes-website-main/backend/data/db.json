@@ -3392,21 +3392,21 @@
     }
   ],
   "it_staffing": {
-    "badge": "LIVE TEST BADGE ",
-    "headline": "Stay on course with growth plans by hiring contractual staff ",
+    "badge": "BLACK GRAPES SOFTECH • IT STAFFING & MANPOWER SOLUTIONS",
+    "headline": "Stay on course with growth plans by",
     "headlineAccent": "hiring contractual staff",
-    "subtitle": "Live WebSocket Test Subtitle",
-    "description": "",
+    "subtitle": "Outsource your manpower needs with prompt.",
+    "description": "Deploy pre-vetted senior software engineers, technical squads, and bulk contractual staff across 28 Indian states with full statutory compliance, zero long-term liabilities, and guaranteed rapid onboarding.",
     "heroImage": "/it-staffing/staffing-hero.jpg",
     "badge1Val": "28 States",
-    "badge1Sub": "100% Compliant ",
-    "badge2Val": "25,000+ Staff ",
-    "badge2Sub": "Active on Payroll ",
-    "formBadge": "Direct Staffing Mandate Form ",
-    "formTitle": "Outsource Your Manpower Needs ",
-    "formSubtitle": "Get a tailored contract staffing quotation with SLA confirmation in 2 business hours. ",
-    "formBtnText": "Send Staffing Inquiry ",
-    "formFooterNotice": "100% Confidential • Zero Commitment Required • NDA Protected ",
+    "badge1Sub": "100% Compliant",
+    "badge2Val": "25,000+ Staff",
+    "badge2Sub": "Active on Payroll",
+    "formBadge": "Direct Staffing Mandate Form",
+    "formTitle": "Outsource Your Manpower Needs",
+    "formSubtitle": "Get a tailored contract staffing quotation with SLA confirmation in 2 business hours.",
+    "formBtnText": "Send Staffing Inquiry",
+    "formFooterNotice": "100% Confidential • Zero Commitment Required • NDA Protected",
     "staffingServices": [
       "NAPS/Apprenticeship Hiring",
       "Bulk Hiring",
@@ -3423,24 +3423,24 @@
     ],
     "stats": [
       {
-        "label": "Deployment Time",
-        "value": "48 Hours",
-        "sub": "Ready-to-code talent"
+        "value": "25,000+",
+        "label": "Contract Staff Deployed",
+        "desc": "Active workforce deployed across PAN-India client locations"
       },
       {
-        "label": "Vetting Standard",
-        "value": "Top 1%",
-        "sub": "Rigorous technical screens"
+        "value": "28 States",
+        "label": "Full Statutory Compliance",
+        "desc": "Complete PF, ESIC, Professional Tax & state labour laws adherence"
       },
       {
-        "label": "Replacement Guarantee",
-        "value": "100%",
-        "sub": "Zero-risk trial"
+        "value": "48-72h",
+        "label": "Rapid Onboarding SLA",
+        "desc": "Swift talent turnaround from requirement mandate to active kickoff"
       },
       {
-        "label": "Client Retention",
-        "value": "98.5%",
-        "sub": "Long-term contracts"
+        "value": "98.4%",
+        "label": "Client Retention Rate",
+        "desc": "Trusted by leading Fortune enterprises, MNCs & Indian startups"
       }
     ],
     "models": [

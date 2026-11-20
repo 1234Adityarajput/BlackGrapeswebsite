@@ -37,6 +37,30 @@ import '../styles/CyberServices.css';
 export default function ITStaffingPage({ onOpenContact }) {
   const { staffingData } = useITStaffing();
 
+  // Sanitized Hero Content (prevents test data or duplicate accents from displaying)
+  const rawBadge = (staffingData?.badge || '').trim();
+  const heroBadge = (!rawBadge || rawBadge.toUpperCase().includes('TEST'))
+    ? 'BLACK GRAPES SOFTECH • IT STAFFING & MANPOWER SOLUTIONS'
+    : rawBadge;
+
+  const rawHeadline = (staffingData?.headline || '').trim();
+  const rawAccent = (staffingData?.headlineAccent || '').trim();
+  let heroHeadline = rawHeadline;
+  let heroAccent = rawAccent || 'hiring contractual staff';
+  if (!heroHeadline || heroHeadline.includes('hiring contractual staff') || heroHeadline.toUpperCase().includes('TEST')) {
+    heroHeadline = 'Stay on course with growth plans by';
+    heroAccent = 'hiring contractual staff';
+  }
+
+  const rawSubtitle = (staffingData?.subtitle || '').trim();
+  const heroSubtitle = (!rawSubtitle || rawSubtitle.toLowerCase().includes('test'))
+    ? 'Outsource your manpower needs with prompt.'
+    : rawSubtitle;
+
+  const heroDesc = (staffingData?.description && !staffingData.description.toLowerCase().includes('test'))
+    ? staffingData.description.trim()
+    : 'Deploy pre-vetted senior software engineers, technical squads, and bulk contractual staff across 28 Indian states with full statutory compliance, zero long-term liabilities, and guaranteed rapid onboarding.';
+
   const staffingServicesList = (Array.isArray(staffingData?.staffingServices) && staffingData.staffingServices.length > 0)
     ? staffingData.staffingServices
     : [
@@ -352,26 +376,26 @@ export default function ITStaffingPage({ onOpenContact }) {
               <div className="hero-badge-wrap" style={{ textAlign: 'left', marginBottom: '1.25rem' }}>
                 <span className="hero-top-pill cyber-pill-flame">
                   <Flame size={14} color="#f86200" />
-                  <span>{staffingData?.badge || 'BLACK GRAPES SOFTECH • IT STAFFING & MANPOWER SOLUTIONS'}</span>
+                  <span>{heroBadge}</span>
                 </span>
               </div>
 
               <h1 className="staffing-h1">
-                {staffingData?.headline || 'Stay on course with growth plans by'}
-                {staffingData?.headlineAccent ? (
+                {heroHeadline}
+                {heroAccent ? (
                   <>
                     {' '}
-                    <span className="neon-flame-text">{staffingData.headlineAccent}</span>
+                    <span className="neon-flame-text">{heroAccent}</span>
                   </>
                 ) : null}
               </h1>
 
               <p className="staffing-lead-text">
-                {staffingData?.subtitle || 'Outsource your manpower needs with prompt.'}
+                {heroSubtitle}
               </p>
 
               <p className="staffing-sub-desc">
-                {staffingData?.description || 'Deploy pre-vetted senior software engineers, technical squads, and bulk contractual staff across 28 Indian states with full statutory compliance, zero long-term liabilities, and guaranteed rapid onboarding.'}
+                {heroDesc}
               </p>
 
               {/* Authentic Business Image with Cyber Grape High-Tech Frame & Floating Stats */}
