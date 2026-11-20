@@ -803,6 +803,324 @@ select:focus {
 }
 
 /* ========================================================
+   HERO SECTION - SPECIALIZED LUXURY ANIMATIONS (SS1 & SS2)
+   ======================================================== */
+
+/* 1. Hero Badge Pill (Left Box) */
+.hero-badge-pill {
+  position: relative;
+  background: rgba(248, 98, 0, 0.08) !important;
+  border: 1px solid rgba(248, 98, 0, 0.38) !important;
+  box-shadow: 0 0 20px rgba(248, 98, 0, 0.16), inset 0 0 12px rgba(248, 98, 0, 0.08) !important;
+  animation: heroBadgeAura 4.5s ease-in-out infinite alternate !important;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease !important;
+}
+
+.hero-badge-pill:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  border-color: rgba(248, 98, 0, 0.75) !important;
+  box-shadow: 0 0 28px rgba(248, 98, 0, 0.45), inset 0 0 16px rgba(248, 98, 0, 0.2) !important;
+}
+
+@keyframes heroBadgeAura {
+  0% {
+    border-color: rgba(248, 98, 0, 0.35);
+    box-shadow: 0 0 16px rgba(248, 98, 0, 0.14);
+  }
+  50% {
+    border-color: rgba(248, 98, 0, 0.65);
+    box-shadow: 0 0 26px rgba(248, 98, 0, 0.32), 0 0 45px rgba(147, 51, 234, 0.15);
+  }
+  100% {
+    border-color: rgba(248, 98, 0, 0.4);
+    box-shadow: 0 0 18px rgba(248, 98, 0, 0.18);
+  }
+}
+
+/* 2. Hero Headline Dynamic Ambient Shimmer */
+.hero-headline-shimmer {
+  display: inline-block;
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #ffffff 45%,
+    #ffb080 55%,
+    #f86200 65%,
+    #ffffff 75%,
+    #ffffff 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShineSweep 7s linear infinite;
+}
+
+@keyframes textShineSweep {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -150% 0;
+  }
+}
+
+/* 3. Hero Glass Terminal Card (Right Box) */
+.hero-glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(248, 98, 0, 0.2), 0 0 50px rgba(147, 51, 234, 0.12) !important;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease !important;
+}
+
+.hero-glass-card:hover {
+  transform: translateY(-5px) scale(1.01) !important;
+  border-color: rgba(248, 98, 0, 0.6) !important;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 45px rgba(248, 98, 0, 0.35), 0 0 65px rgba(147, 51, 234, 0.22) !important;
+}
+
+.window-dots:hover .dot {
+  animation: dotPulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes dotPulse {
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.25); filter: brightness(1.35); }
+}
+
+/* 4. Terminal KPI Boxes Hover & Number Glow */
+.card-kpis .kpi-box {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-radius: 12px;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              background 0.3s ease !important;
+}
+
+.card-kpis .kpi-box:hover {
+  transform: translateY(-4px) scale(1.03) !important;
+  border-color: rgba(248, 98, 0, 0.6) !important;
+  background: rgba(248, 98, 0, 0.08) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7), 0 0 18px rgba(248, 98, 0, 0.3) !important;
+}
+
+.card-kpis .kpi-box:hover .kpi-val {
+  filter: drop-shadow(0 0 10px rgba(248, 98, 0, 0.85));
+}
+
+/* 5. Hero Floating Rocket Badge (Bottom-Left) */
+.floating-badge {
+  border: 1px solid rgba(248, 98, 0, 0.45) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 25px rgba(248, 98, 0, 0.3) !important;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease !important;
+}
+
+.floating-badge:hover {
+  transform: scale(1.06) translateY(-4px) !important;
+  border-color: rgba(248, 98, 0, 0.75) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(248, 98, 0, 0.5) !important;
+}
+
+.floating-badge .floating-icon {
+  display: inline-block;
+  animation: rocketBoost 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes rocketBoost {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    filter: drop-shadow(0 0 4px #f86200);
+  }
+  25% {
+    transform: translate(-1.5px, -2px) rotate(-6deg);
+    filter: drop-shadow(0 0 8px #ff8438);
+  }
+  50% {
+    transform: translate(1px, -3px) rotate(4deg);
+    filter: drop-shadow(0 0 12px #f86200);
+  }
+  75% {
+    transform: translate(1.5px, -1px) rotate(-3deg);
+    filter: drop-shadow(0 0 8px #ff8438);
+  }
+}
+
+/* ========================================================
+   HOME ABOUT SECTION - SPECIALIZED ANIMATIONS (SS3)
+   ======================================================== */
+
+/* 1. About Grapes Image Showcase Card */
+.about-image-card {
+  position: relative;
+  border-radius: 20px !important;
+  overflow: hidden;
+  border: 1px solid rgba(248, 98, 0, 0.32) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(248, 98, 0, 0.16) !important;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease !important;
+}
+
+.about-image-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(248, 98, 0, 0.65) !important;
+  box-shadow: 0 26px 65px rgba(0, 0, 0, 0.9), 0 0 42px rgba(248, 98, 0, 0.3) !important;
+}
+
+.about-main-img {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.about-image-card:hover .about-main-img {
+  transform: scale(1.06);
+}
+
+/* 2. About Floating Experience Badge (10+ Years of IT & Software Innovation) */
+.about-stat-floating-card {
+  border: 1px solid rgba(248, 98, 0, 0.5) !important;
+  background: rgba(16, 12, 28, 0.94) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 25px rgba(248, 98, 0, 0.28) !important;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease !important;
+}
+
+.about-stat-floating-card:hover {
+  transform: scale(1.05) translateY(-3px) !important;
+  border-color: rgba(248, 98, 0, 0.8) !important;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.95), 0 0 36px rgba(248, 98, 0, 0.45) !important;
+}
+
+.stat-floating-icon {
+  display: inline-block;
+  animation: trophyShine 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes trophyShine {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 4px rgba(248, 98, 0, 0.6));
+  }
+  50% {
+    transform: scale(1.18) rotate(10deg);
+    filter: drop-shadow(0 0 16px #ffb080);
+  }
+}
+
+.about-stat-floating-card:hover .stat-floating-number {
+  filter: drop-shadow(0 0 10px rgba(248, 98, 0, 0.8));
+}
+
+/* 3. About Floating Tech Pill (Web • Mobile • Cloud • AI) */
+.about-tech-floating-pill {
+  border: 1px solid rgba(248, 98, 0, 0.45) !important;
+  background: rgba(8, 7, 13, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65), 0 0 18px rgba(248, 98, 0, 0.22) !important;
+  transition: transform 0.3s ease, border-color 0.3s ease !important;
+}
+
+.about-tech-floating-pill:hover {
+  transform: scale(1.05) translateY(-2px) !important;
+  border-color: rgba(248, 98, 0, 0.75) !important;
+}
+
+.about-tech-floating-pill .pill-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  margin-right: 6px;
+}
+
+/* 4. Section Title Gradient Separators */
+.title-gradient-separator {
+  display: inline-block;
+  color: #f86200 !important;
+  font-weight: 300;
+  animation: separatorGlow 2.5s ease-in-out infinite;
+  margin: 0 0.4rem;
+}
+
+@keyframes separatorGlow {
+  0%, 100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px #f86200);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px #f86200);
+    transform: scale(1.15);
+  }
+}
+
+/* 5. Right Narrative Card */
+.about-narrative-card {
+  position: relative;
+  transition: transform 0.35s ease !important;
+}
+
+.about-narrative-card:hover {
+  transform: translateY(-3px) !important;
+}
+
+.narrative-heading {
+  background: linear-gradient(135deg, #ffffff 65%, #ff9e42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* 6. Technology Visual Card (Below) */
+.about-tech-visual-card {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease !important;
+}
+
+.about-tech-visual-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(248, 98, 0, 0.55) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 28px rgba(248, 98, 0, 0.22) !important;
+}
+
+.about-tech-visual-card .tech-visual-img {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.about-tech-visual-card:hover .tech-visual-img {
+  transform: scale(1.05);
+}
+
+.tech-chip {
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
+}
+
+.tech-chip:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  border-color: #f86200 !important;
+  background: rgba(248, 98, 0, 0.22) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(248, 98, 0, 0.45) !important;
+}
+
+/* ========================================================
    7. ACCESSIBILITY: REDUCED MOTION PREFERENCE
    ======================================================== */
 

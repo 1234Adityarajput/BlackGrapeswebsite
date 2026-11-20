@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { useHomePage } from '@backend/useContent';
 import { resolveMediaUrl } from '@backend/dataService';
 import { ABOUT_CONTENT } from '../data/siteData';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function AboutSection({ onOpenModal }) {
   const [openFaq, setOpenFaq] = useState(0);
@@ -89,16 +90,18 @@ export default function AboutSection({ onOpenModal }) {
               </div>
 
               {/* Floating Experience Card */}
-              <div className="about-stat-floating-card">
+              <div className="about-stat-floating-card float-reverse">
                 <div className="stat-floating-icon">🏆</div>
                 <div className="stat-floating-content">
-                  <span className="stat-floating-number">{experienceYears}</span>
+                  <span className="stat-floating-number">
+                    <AnimatedCounter value={experienceYears} duration={1800} />
+                  </span>
                   <span className="stat-floating-label">{experienceLabel}</span>
                 </div>
               </div>
 
               {/* Floating Technology Badge */}
-              <div className="about-tech-floating-pill">
+              <div className="about-tech-floating-pill float-subtle">
                 <span className="pill-dot"></span>
                 <span>{techBadgeText}</span>
               </div>

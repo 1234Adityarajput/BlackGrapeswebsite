@@ -45,7 +45,7 @@ export default function HeroSection({ onOpenModal }) {
 
           <h1 className="hero-title reveal-fade-up is-revealed stagger-1">
             {hero.headline ? (
-              <span>{hero.headline}</span>
+              <span className="hero-headline-shimmer">{hero.headline}</span>
             ) : (
               <>
                 <span className="hero-prefix">{hero.prefix || 'Innovate & Scale With'} </span>
