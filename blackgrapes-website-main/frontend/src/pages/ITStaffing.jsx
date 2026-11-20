@@ -1133,20 +1133,6 @@ export default function ITStaffingPage({ onOpenContact }) {
           </div>
         </div>
       )}
-
-      {/* =========================================================================
-          FLOATING WHATSAPP BUTTON (Authentic Widget)
-          ========================================================================= */}
-      <a
-        href="https://wa.me/917470997884?text=Hello%20Black%20Grapes%20Softech,%20I%20want%20to%20inquire%20about%20IT%20Staffing%20Services"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="floating-whatsapp-widget"
-        title="Chat on WhatsApp (+91 7470997884)"
-      >
-        <MessageCircle size={22} />
-        <span className="whatsapp-label">WhatsApp Us</span>
-      </a>
     </main>
   );
 }

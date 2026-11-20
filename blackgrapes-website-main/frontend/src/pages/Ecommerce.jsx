@@ -558,18 +558,6 @@ export default function EcommercePage({ onOpenContact }) {
           </div>
         </div>
       )}
-
-      {/* Floating WhatsApp Us Button (Original Website Feature) */}
-      <a
-        href="https://wa.me/917470997884?text=Hello%20Black%20Grapes%20Softech,%20I%20want%20to%20inquire%20about%20Naya%20Purana%20Bazaar%20Ecommerce%20Platform"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="floating-whatsapp-btn"
-        title="Chat on WhatsApp (+91 7470997884)"
-      >
-        <MessageCircle size={18} />
-        <span>WhatsApp Us</span>
-      </a>
     </main>
   );
 }

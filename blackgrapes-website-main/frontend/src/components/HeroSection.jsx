@@ -36,7 +36,7 @@ export default function HeroSection({ onOpenModal }) {
     <section id="home" className="hero-section">
       <div className="container hero-container">
         {/* Left Column: Headline & Action CTAs */}
-        <div className="hero-content">
+        <div className="hero-content is-revealed">
           <div className="hero-badge-pill reveal-fade-down is-revealed">
             <span className="badge-glow-dot"></span>
             <span className="badge-text">{badgeText}</span>
@@ -48,8 +48,11 @@ export default function HeroSection({ onOpenModal }) {
             ) : (
               <>
                 <span className="hero-prefix">{hero.prefix || 'Innovate & Scale With'} </span>
-                <span className="hero-gradient-brand">{brandHighlight}</span>
-                {hero.break_text && <span className="hero-break"> — {hero.break_text}</span>}
+                <span className="hero-gradient-brand">{brandHighlight || 'BLACK GRAPES SOFTECH'}</span>
+                {(hero.break_text || !hero.prefix) && (
+                  <span className="hero-break"> — {hero.break_text || 'Your Trusted Technology Partner'}</span>
+                )}
+                {hero.suffix && <span className="hero-suffix">{hero.suffix}</span>}
               </>
             )}
           </h1>

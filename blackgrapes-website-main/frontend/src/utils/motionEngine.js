@@ -41,42 +41,61 @@ export function initHeroAnimation() {
     container.dataset.heroAnimated = 'true';
 
     try {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const elements = [
+        container.querySelector('.hero-badge-pill, .hero-eyebrow, .hero-eyebrow-badge, .hero-badge-wrap, .hero-eyebrow-pill'),
+        container.querySelector('.hero-title, .products-hero-title, .portfolio-hero-title, .black-hero-title, .clients-hero-title, h1'),
+        container.querySelector('.hero-description, .products-hero-desc, .portfolio-hero-subtitle, .black-hero-subtitle, .hero-lead'),
+        container.querySelector('.hero-cta-group, .hero-cta-bar, .hero-cta-row'),
+        container.querySelector('.hero-visual, .hero-visual-card, .products-hero-visual, .hero-glass-card'),
+        container.querySelector('.hero-metrics-grid')
+      ].filter(Boolean);
 
-      const badge = container.querySelector(
-        '.hero-badge-pill, .hero-eyebrow, .hero-eyebrow-badge, .hero-badge-wrap, .hero-eyebrow-pill'
-      );
+      // Guarantee elements are never stuck invisible
+      elements.forEach(el => {
+        el.style.visibility = 'visible';
+        el.style.opacity = '1';
+      });
+
+      const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        onComplete: () => {
+          elements.forEach(el => {
+            gsap.set(el, { clearProps: 'opacity,filter' });
+          });
+        }
+      });
+
+      const badge = elements[0];
       if (badge) {
-        tl.fromTo(badge, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.1 });
+        tl.fromTo(badge, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.05 });
       }
 
-      const title = container.querySelector(
-        '.hero-title, .products-hero-title, .portfolio-hero-title, .black-hero-title, .clients-hero-title, h1'
-      );
+      const title = elements[1];
       if (title) {
-        tl.fromTo(title, { y: 30, opacity: 0, filter: 'blur(6px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8 }, '-=0.35');
+        tl.fromTo(title, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3');
       }
 
-      const desc = container.querySelector(
-        '.hero-description, .products-hero-desc, .portfolio-hero-subtitle, .black-hero-subtitle, .hero-lead'
-      );
+      const desc = elements[2];
       if (desc) {
-        tl.fromTo(desc, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.45');
+        tl.fromTo(desc, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, '-=0.35');
       }
 
-      const cta = container.querySelector('.hero-cta-group, .hero-cta-bar, .hero-cta-row');
+      const cta = elements[3];
       if (cta && cta.children.length > 0) {
-        tl.fromTo(cta.children, { y: 16, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, stagger: 0.1 }, '-=0.35');
+        tl.fromTo(cta.children, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, stagger: 0.08 }, '-=0.3');
       }
 
-      const visual = container.querySelector(
-        '.hero-visual, .hero-visual-card, .products-hero-visual, .hero-glass-card'
-      );
+      const visual = elements[4];
       if (visual) {
-        tl.fromTo(visual, { x: 35, opacity: 0, scale: 0.96 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out' }, '-=0.7');
+        tl.fromTo(visual, { x: 25, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: 'power2.out' }, '-=0.5');
       }
     } catch (e) {
       console.warn('[MotionEngine] Hero animation notice:', e);
+      const allHeroElements = container.querySelectorAll('.hero-content, .hero-badge-pill, .hero-title, .hero-description, .hero-cta-group, .hero-metrics-grid, .hero-visual');
+      allHeroElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.visibility = 'visible';
+      });
     }
   });
 }
@@ -224,8 +243,6 @@ export function initScrollTriggers() {
 
   const selector = [
     '.section-header:not(._observed)',
-    '.hero-content:not(._observed)',
-    '.hero-visual:not(._observed)',
     '.service-card:not(._observed)',
     '.project-card:not(._observed)',
     '.process-step-card:not(._observed)',

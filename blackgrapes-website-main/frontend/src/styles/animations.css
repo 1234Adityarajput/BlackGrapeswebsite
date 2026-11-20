@@ -273,9 +273,18 @@
 .reveal-fade-in.is-revealed,
 .reveal-slide-left.is-revealed,
 .reveal-slide-right.is-revealed,
-.reveal-scale.is-revealed {
+.reveal-scale.is-revealed,
+.hero-content,
+.hero-content.is-revealed {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) scale(1) !important;
+  visibility: visible !important;
+}
+
+/* Guard hero elements from ever being hidden above the fold */
+.hero-content > * {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* ========================================================

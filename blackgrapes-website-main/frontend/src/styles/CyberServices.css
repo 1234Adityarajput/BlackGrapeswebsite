@@ -3569,30 +3569,13 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
 }
 
-/* Floating WhatsApp Button (Original Site Feature) */
-.floating-whatsapp-btn {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: #25D366;
-  color: #ffffff;
-  padding: 0.75rem 1.25rem;
-  border-radius: 9999px;
-  font-size: 0.88rem;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
-  z-index: 999;
-  transition: all 0.25s ease;
-}
-
-.floating-whatsapp-btn:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
-  background: #20ba59;
+/* Floating WhatsApp Button */
+.floating-widgets-container .floating-whatsapp-btn {
+  position: relative !important;
+  bottom: auto !important;
+  right: auto !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
 }
 
 /* ==========================================================================
