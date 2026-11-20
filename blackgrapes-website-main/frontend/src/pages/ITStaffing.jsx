@@ -333,37 +333,6 @@ export default function ITStaffingPage({ onOpenContact }) {
       <div className="cyber-ambient-glow glow-grape-right" />
       <div className="cyber-ambient-glow glow-cyan-left" />
 
-      {/* Cyber Grape Theme Indicator Banner */}
-      <div className="cyber-theme-badge-bar">
-        <div className="content-wrapper theme-badge-inner">
-          <div className="cyber-status-pill">
-            <span className="pulsing-cyber-dot" />
-            <span className="theme-tech-name">CYBER GRAPE & NEON FLAME</span>
-            <span className="theme-tech-sep">•</span>
-            <span className="theme-tech-sub">Dark High-Tech Glassmorphism</span>
-          </div>
-
-          <div className="cyber-metrics-mini">
-            <span className="cyber-metric-chip">
-              <span className="chip-dot" style={{ background: '#f86200' }} />
-              <span>Neon Flame</span>
-            </span>
-            <span className="cyber-metric-chip">
-              <span className="chip-dot" style={{ background: '#9333ea' }} />
-              <span>Cyber Grape</span>
-            </span>
-            <span className="cyber-metric-chip">
-              <span className="chip-dot" style={{ background: '#38bdf8' }} />
-              <span>Cyan Blue</span>
-            </span>
-            <span className="cyber-metric-chip">
-              <span className="chip-dot" style={{ background: '#10b981' }} />
-              <span>Emerald</span>
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* =========================================================================
           HERO SECTION (2-Column High-Tech Glassmorphism Layout)
           ========================================================================= */}
