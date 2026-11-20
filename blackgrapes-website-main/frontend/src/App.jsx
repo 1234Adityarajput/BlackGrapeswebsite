@@ -9,7 +9,6 @@ import InquiryModal from './components/InquiryModal';
 import ServiceDetailModal from './components/ServiceDetailModal';
 import FloatingWidgets from './components/FloatingWidgets';
 import ScrollToTop from './components/ScrollToTop';
-import CustomCursor from './components/CustomCursor';
 import { LoadingScreen, PageTransition } from './components/animations';
 import initMotionSystem from './utils/motionEngine';
 
@@ -81,9 +80,6 @@ export default function App() {
     <BrowserRouter>
       {/* Branded Premium Loading Screen */}
       <LoadingScreen />
-
-      {/* Desktop Magnetic Follower Cursor (Aimfortech-inspired) */}
-      <CustomCursor />
 
       <ScrollToTop />
       <div className="app-layout">
