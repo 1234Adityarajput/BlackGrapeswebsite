@@ -3,6 +3,7 @@ import React from 'react';
 import { COMPANY_INFO } from '../data/siteData';
 import { useHomePage } from '@backend/useContent';
 import { resolveMediaUrl } from '@backend/dataService';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function HeroSection({ onOpenModal }) {
   const { home } = useHomePage();
@@ -86,22 +87,30 @@ export default function HeroSection({ onOpenModal }) {
           {/* Quick Metrics Bar */}
           <div className="hero-metrics-grid reveal-fade-up is-revealed stagger-4">
             <div className="hero-metric-item">
-              <span className="metric-number">10+</span>
+              <span className="metric-number">
+                <AnimatedCounter target={10} duration={1600} suffix="+" />
+              </span>
               <span className="metric-label">Years Innovation</span>
             </div>
             <div className="hero-metric-divider"></div>
             <div className="hero-metric-item">
-              <span className="metric-number">150+</span>
+              <span className="metric-number">
+                <AnimatedCounter target={150} duration={1800} suffix="+" />
+              </span>
               <span className="metric-label">Global Clients</span>
             </div>
             <div className="hero-metric-divider"></div>
             <div className="hero-metric-item">
-              <span className="metric-number">250+</span>
+              <span className="metric-number">
+                <AnimatedCounter target={250} duration={2000} suffix="+" />
+              </span>
               <span className="metric-label">Projects Deployed</span>
             </div>
             <div className="hero-metric-divider"></div>
             <div className="hero-metric-item">
-              <span className="metric-number">99%</span>
+              <span className="metric-number">
+                <AnimatedCounter target={99} duration={1800} suffix="%" />
+              </span>
               <span className="metric-label">Retention Rate</span>
             </div>
           </div>
@@ -166,7 +175,10 @@ export default function HeroSection({ onOpenModal }) {
                 <div className="tab-pane">
                   <div className="code-header">
                     <span className="code-lang">FullStackApp.tsx</span>
-                    <span className="code-status">● Live Production</span>
+                    <span className="code-status">
+                      <span className="live-ping-dot"></span>
+                      <span>Live Production</span>
+                    </span>
                   </div>
                   <pre className="code-block">
                     <code>{`// Modern React + Cloud Integration
@@ -185,7 +197,9 @@ export const EnterprisePortal = () => {
 
                   <div className="card-kpis">
                     <div className="kpi-box">
-                      <span className="kpi-val">99 / 100</span>
+                      <span className="kpi-val">
+                        <AnimatedCounter target={99} duration={1600} suffix=" / 100" />
+                      </span>
                       <span className="kpi-label">Lighthouse Score</span>
                     </div>
                     <div className="kpi-box">
@@ -193,7 +207,9 @@ export const EnterprisePortal = () => {
                       <span className="kpi-label">Load Time</span>
                     </div>
                     <div className="kpi-box">
-                      <span className="kpi-val">100%</span>
+                      <span className="kpi-val">
+                        <AnimatedCounter target={100} duration={1600} suffix="%" />
+                      </span>
                       <span className="kpi-label">Responsive</span>
                     </div>
                   </div>
@@ -203,10 +219,12 @@ export const EnterprisePortal = () => {
           </div>
 
           {/* Floating Badge */}
-          <div className="floating-badge badge-bottom-left">
+          <div className="floating-badge badge-bottom-left float-reverse">
             <span className="floating-icon">🚀</span>
             <div className="floating-text">
-              <strong>100+ Clients</strong>
+              <strong>
+                <AnimatedCounter target={100} duration={1800} suffix="+ Clients" />
+              </strong>
               <span>Global Deliveries</span>
             </div>
           </div>

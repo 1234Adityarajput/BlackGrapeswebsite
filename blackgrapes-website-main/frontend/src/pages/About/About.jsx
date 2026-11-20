@@ -23,6 +23,7 @@ import { usePageSections } from '@backend/useContent';
 import foundersImg from '../../assets/founders.jpg';
 import aboutHeroImg from '../../assets/about-hero.jpg';
 import workspaceImg from '../../assets/workspace.jpg';
+import AnimatedCounter from '../../components/AnimatedCounter';
 import './About.css';
 
 const DEFAULT_STATS = [
@@ -245,22 +246,26 @@ export default function About({ onOpenDemoModal }) {
                 className="hero-main-img"
               />
               <div className="visual-glass-overlay">
-                <div className="floating-stat-box floating-elem">
+                <div className="floating-stat-box floating-elem float-subtle">
                   <div className="stat-pill-icon">
                     <Rocket size={20} />
                   </div>
                   <div>
-                    <span className="stat-pill-title">{floatingStat1Num}</span>
+                    <span className="stat-pill-title">
+                      <AnimatedCounter value={floatingStat1Num} duration={1800} />
+                    </span>
                     <span className="stat-pill-sub">{floatingStat1Sub}</span>
                   </div>
                 </div>
 
-                <div className="floating-stat-box box-bottom">
+                <div className="floating-stat-box box-bottom float-reverse">
                   <div className="stat-pill-icon purple-icon">
                     <Globe size={20} />
                   </div>
                   <div>
-                    <span className="stat-pill-title">{floatingStat2Num}</span>
+                    <span className="stat-pill-title">
+                      <AnimatedCounter value={floatingStat2Num} duration={1800} />
+                    </span>
                     <span className="stat-pill-sub">{floatingStat2Sub}</span>
                   </div>
                 </div>
@@ -284,7 +289,9 @@ export default function About({ onOpenDemoModal }) {
                     <Icon size={24} />
                   </div>
                   <div className="stat-info">
-                    <span className="stat-number">{stat.number}</span>
+                    <span className="stat-number">
+                      <AnimatedCounter value={stat.number} duration={1800} />
+                    </span>
                     <span className="stat-label">{stat.label}</span>
                     <span className="stat-tag">{stat.highlight}</span>
                   </div>

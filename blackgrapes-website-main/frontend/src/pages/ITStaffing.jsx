@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import { useITStaffing } from '@backend/useContent';
 import { submitEnquiry } from '@backend/dataService';
+import AnimatedCounter from '../components/AnimatedCounter';
 import '../styles/CyberServices.css';
 
 export default function ITStaffingPage({ onOpenContact }) {
@@ -573,7 +574,9 @@ export default function ITStaffingPage({ onOpenContact }) {
             const colorClass = colorClasses[idx % colorClasses.length];
             return (
               <div key={idx} className="stat-card-v2 translucent-glass-card">
-                <div className={`stat-card-num ${colorClass}`}>{stat.value || stat.number}</div>
+                <div className={`stat-card-num ${colorClass}`}>
+                  <AnimatedCounter value={stat.value || stat.number} duration={1800} />
+                </div>
                 <div className="stat-card-title">{stat.label || stat.title}</div>
                 <div className="stat-card-desc">{stat.desc || stat.sub}</div>
               </div>
@@ -965,7 +968,7 @@ export default function ITStaffingPage({ onOpenContact }) {
               return (
                 <div key={csIdx} className={`compliance-metric-box translucent-glass-card ${highlightClass}`}>
                   <div className={`compliance-stat-val ${cStat.color || 'neon-flame-text'}`}>
-                    {cStat.value}
+                    <AnimatedCounter value={cStat.value} duration={1600} />
                   </div>
                   <div className="compliance-stat-label">{cStat.label}</div>
                 </div>

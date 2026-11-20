@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import ParticleCanvas from './components/ParticleCanvas';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -9,8 +9,23 @@ import InquiryModal from './components/InquiryModal';
 import ServiceDetailModal from './components/ServiceDetailModal';
 import FloatingWidgets from './components/FloatingWidgets';
 import ScrollToTop from './components/ScrollToTop';
-import { LoadingScreen, PageTransition } from './components/animations';
+import { LoadingScreen, PageTransition, TopRouteProgressBar } from './components/animations';
 import initMotionSystem from './utils/motionEngine';
+
+function MotionRouteTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Re-initialize motion triggers on route change for newly mounted elements
+    const timer = setTimeout(() => {
+      initMotionSystem();
+    }, 60);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  return null;
+}
 
 import HomePage from './pages/HomePage';
 import About from './pages/About';
@@ -78,6 +93,12 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      {/* Route-Aware Motion Engine Re-Initializer */}
+      <MotionRouteTracker />
+
+      {/* Top Cyber Navigation Progress Bar */}
+      <TopRouteProgressBar />
+
       {/* Branded Premium Loading Screen */}
       <LoadingScreen />
 

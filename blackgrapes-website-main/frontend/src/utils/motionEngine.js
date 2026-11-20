@@ -31,7 +31,12 @@ export function initHeroAnimation() {
     '.products-hero-section',
     '.clients-hero-section',
     '.portfolio-hero-section',
-    '.softech-hero'
+    '.softech-hero',
+    '.it-staffing-hero',
+    '.ecommerce-hero',
+    '.contact-hero',
+    '.partnership-hero',
+    '.business-partners-hero'
   ].join(', ');
 
   const heroContainers = document.querySelectorAll(heroSelectors);
@@ -117,19 +122,33 @@ export function initCardTilt() {
 
   const cardSelector = [
     '.service-card',
+    '.softech-card',
+    '.softech-service-card',
+    '.softech-spotlight-card',
     '.project-card',
     '.coverflow-card',
     '.process-step-card',
     '.why-us-capsule-card',
     '.industry-card',
     '.product-card',
+    '.product-glass-card',
     '.value-card',
     '.domain-card',
     '.timeline-card',
     '.staffing-model-card',
     '.talent-card',
+    '.hiring-step-card',
     '.ecommerce-feature-card',
-    '.partner-tier-card'
+    '.store-model-card',
+    '.partner-tier-card',
+    '.stat-card',
+    '.stat-card-v2',
+    '.counter-card',
+    '.founder-card',
+    '.contact-card',
+    '.contact-info-card',
+    '.compliance-metric-box',
+    '.translucent-glass-card'
   ].join(', ');
 
   document.addEventListener('mousemove', (e) => {
@@ -243,30 +262,45 @@ export function initScrollTriggers() {
 
   const selector = [
     '.section-header:not(._observed)',
+    '.section-title:not(._observed)',
+    '.section-subtitle:not(._observed)',
+    '.section-badge:not(._observed)',
     '.service-card:not(._observed)',
+    '.softech-card:not(._observed)',
+    '.softech-service-card:not(._observed)',
+    '.softech-spotlight-card:not(._observed)',
     '.project-card:not(._observed)',
     '.process-step-card:not(._observed)',
     '.why-us-capsule-card:not(._observed)',
     '.counter-card:not(._observed)',
+    '.counters-banner:not(._observed)',
     '.testimonial-card:not(._observed)',
     '.industry-card:not(._observed)',
     '.stat-strip-card:not(._observed)',
+    '.stat-card:not(._observed)',
+    '.stat-card-v2:not(._observed)',
     '.vm-card:not(._observed)',
     '.founder-card:not(._observed)',
     '.value-card:not(._observed)',
     '.domain-card:not(._observed)',
     '.timeline-card:not(._observed)',
     '.product-card:not(._observed)',
+    '.product-glass-card:not(._observed)',
     '.client-logo-card:not(._observed)',
     '.client-case-card:not(._observed)',
     '.staffing-model-card:not(._observed)',
     '.talent-card:not(._observed)',
     '.hiring-step-card:not(._observed)',
     '.ecommerce-feature-card:not(._observed)',
+    '.store-model-card:not(._observed)',
     '.contact-info-card:not(._observed)',
+    '.contact-form-wrap:not(._observed)',
     '.partner-tier-card:not(._observed)',
     '.tendering-callout-card:not(._observed)',
-    '.cta-banner-box:not(._observed)'
+    '.cta-banner-box:not(._observed)',
+    '.cta-banner:not(._observed)',
+    '.compliance-metric-box:not(._observed)',
+    '.translucent-glass-card:not(._observed)'
   ].join(', ');
 
   const targets = document.querySelectorAll(selector);
@@ -274,14 +308,24 @@ export function initScrollTriggers() {
   targets.forEach((el) => {
     el.classList.add('_observed', 'reveal-init');
     const parentGrid = el.closest('.grid, .cards-grid, [class*="-grid"], [class*="-layout"]');
+    let delay = 0;
     if (parentGrid) {
       const siblingIndex = Array.from(parentGrid.children).indexOf(el);
       if (siblingIndex >= 0) {
-        const delay = Math.min((siblingIndex % 6) * 0.08, 0.48);
+        delay = Math.min((siblingIndex % 6) * 0.08, 0.48);
         el.style.transitionDelay = `${delay}s`;
       }
     }
-    scrollObserver.observe(el);
+
+    // If already in viewport on mount, reveal immediately with subtle stagger
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setTimeout(() => {
+        el.classList.add('is-revealed');
+      }, delay * 1000 + 40);
+    } else {
+      scrollObserver.observe(el);
+    }
   });
 }
 
