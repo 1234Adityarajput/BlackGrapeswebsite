@@ -106,9 +106,15 @@ export default function About({ onOpenDemoModal }) {
   const finalCtaSec = sections?.final_cta?.content || {};
 
   // 1. Hero Content
-  const heroBadge = heroSec.badge || 'ABOUT BLACK GRAPES SOFTECH';
-  const heroTitle = heroSec.title || 'We Don’t Just Write Code —';
-  const heroTitleHighlight = heroSec.titleHighlight || 'We Engineer The Digital Future.';
+  const heroBadge = heroSec.badge ? heroSec.badge.trim() : 'ABOUT BLACK GRAPES SOFTECH';
+  const rawTitle = (heroSec.title || '').trim();
+  const heroTitle = (!rawTitle || rawTitle.includes('Empowering Businesses'))
+    ? 'We Don’t Just Write Code'
+    : rawTitle.replace(/\s*—\s*$/, '').trim();
+  const rawHighlight = (heroSec.titleHighlight || '').trim();
+  const heroTitleHighlight = rawHighlight
+    ? (rawHighlight.startsWith('—') ? rawHighlight : `— ${rawHighlight}`)
+    : '— We Engineer The Digital Future.';
   const heroLead = heroSec.lead || 'Headquartered in Indore, India, Black Grapes Softech is a premier software engineering & digital transformation agency. We translate complex business hurdles into elegant, high-impact digital products.';
   const heroPrimaryBtn = heroSec.primaryBtnText || 'Partner With Us';
   const heroSecondaryBtn = heroSec.secondaryBtnText || 'Meet Our Leadership';
