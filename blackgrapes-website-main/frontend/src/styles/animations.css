@@ -888,7 +888,10 @@ html.bgst-loading .service-hero-content,
 html.bgst-loading .service-hero-visual,
 html.bgst-loading .hero-left-v2,
 html.bgst-loading .hero-right-v2,
-html.bgst-loading .hero-visual-card {
+html.bgst-loading .hero-visual-card,
+html.bgst-loading .about-section,
+html.bgst-loading .about-visual-col,
+html.bgst-loading .about-text-col {
   animation: none !important;
   opacity: 0 !important;
 }
