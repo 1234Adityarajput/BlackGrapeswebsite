@@ -22,6 +22,7 @@ export const COMPANY_INFO = {
     "+91 6262414463"
   ],
   whatsappNumber: "+917470997884",
+  portfolioUrl: "https://black-grapes-portfolio.vercel.app",
   address: "252-F/H Scheme No 54, Vijaynagar, Indore - 452010, Madhya Pradesh, India",
   googleMapsUrl: "https://maps.google.com/?q=Vijaynagar,Indore,Madhya+Pradesh,India",
   workingHours: "Mon - Sat: 9:00 AM - 8:00 PM IST",
@@ -47,7 +48,7 @@ export const NAV_LINKS = [
       { name: "Private Tender Services", desc: "Corporate RFP execution & compliance", href: "/services/tender-services" }
     ]
   },
-  { name: "Portfolio", href: "/portfolio" },
+  { name: "Portfolio", href: "https://black-grapes-portfolio.vercel.app", isExternal: true },
   { name: "Our Products", href: "/our-products" },
   { name: "Ecommerce", href: "/ecommerce" },
   { name: "Our Clients", href: "/our-clients" },

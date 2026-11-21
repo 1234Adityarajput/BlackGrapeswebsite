@@ -3351,45 +3351,52 @@
       "is_active": true
     },
     {
+      "id": "m-portfolio",
+      "label": "Portfolio",
+      "path": "https://black-grapes-portfolio.vercel.app",
+      "order_index": 4,
+      "is_active": true
+    },
+    {
       "id": "m-4",
       "label": "Our Products",
       "path": "/our-products",
-      "order_index": 4,
+      "order_index": 5,
       "is_active": true
     },
     {
       "id": "m-5",
       "label": "Ecommerce",
       "path": "/ecommerce",
-      "order_index": 5,
+      "order_index": 6,
       "is_active": true
     },
     {
       "id": "m-6",
       "label": "Our Clients",
       "path": "/our-clients",
-      "order_index": 6,
+      "order_index": 7,
       "is_active": true
     },
     {
       "id": "m-7",
       "label": "IT Staffing",
       "path": "/it-staffing",
-      "order_index": 7,
+      "order_index": 8,
       "is_active": true
     },
     {
       "id": "m-8",
       "label": "Partnership",
       "path": "/partnership",
-      "order_index": 8,
+      "order_index": 9,
       "is_active": true
     },
     {
       "id": "m-9",
       "label": "Contact",
       "path": "/contact",
-      "order_index": 9,
+      "order_index": 10,
       "is_active": true
     }
   ],

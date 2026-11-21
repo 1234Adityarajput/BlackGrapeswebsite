@@ -200,25 +200,36 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
                   onMouseEnter={() => link.dropdown && setActiveDropdown(link.name)}
                   onMouseLeave={() => link.dropdown && setActiveDropdown(null)}
                 >
-                  <Link
-                    to={link.href}
-                    className={`nav-link ${active ? 'nav-link-active' : ''}`}
-                  >
-                    {link.name}
-                    {link.dropdown && (
-                      <svg
-                        className={`dropdown-chevron ${activeDropdown === link.name ? 'chevron-rotated' : ''}`}
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                      >
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                      </svg>
-                    )}
-                  </Link>
+                  {link.href?.startsWith('http') ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="nav-link"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className={`nav-link ${active ? 'nav-link-active' : ''}`}
+                    >
+                      {link.name}
+                      {link.dropdown && (
+                        <svg
+                          className={`dropdown-chevron ${activeDropdown === link.name ? 'chevron-rotated' : ''}`}
+                          width="12"
+                          height="12"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                        >
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      )}
+                    </Link>
+                  )}
 
                   {/* Dropdown Menu */}
                   {link.dropdown && (
@@ -310,13 +321,25 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
               {navItems.map((link) => (
                 <div key={link.name} className="mobile-link-group">
                   <div className="mobile-link-row">
-                    <Link
-                      to={link.href}
-                      className={`mobile-link-item ${isLinkActive(link.href) ? 'active' : ''}`}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {link.name}
-                    </Link>
+                    {link.href?.startsWith('http') ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mobile-link-item"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {link.name} ↗
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className={`mobile-link-item ${isLinkActive(link.href) ? 'active' : ''}`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {link.name}
+                      </Link>
+                    )}
                     {link.dropdown && (
                       <button
                         type="button"

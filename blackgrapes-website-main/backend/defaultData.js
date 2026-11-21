@@ -81,9 +81,10 @@ export const DEFAULT_MENUS = [
   { id: 'm-1', label: 'Home', path: '/', order_index: 1, is_active: true },
   { id: 'm-2', label: 'About Us', path: '/about', order_index: 2, is_active: true },
   { id: 'm-3', label: 'Services', path: '/services', order_index: 3, is_active: true },
-  { id: 'm-4', label: 'Our Products', path: '/products', order_index: 4, is_active: true },
-  { id: 'm-5', label: 'Our Clients', path: '/clients', order_index: 5, is_active: true },
-  { id: 'm-6', label: 'Contact', path: '/contact', order_index: 6, is_active: true }
+  { id: 'm-portfolio', label: 'Portfolio', path: 'https://black-grapes-portfolio.vercel.app', order_index: 4, is_active: true },
+  { id: 'm-4', label: 'Our Products', path: '/products', order_index: 5, is_active: true },
+  { id: 'm-5', label: 'Our Clients', path: '/clients', order_index: 6, is_active: true },
+  { id: 'm-6', label: 'Contact', path: '/contact', order_index: 7, is_active: true }
 ];
 
 export const DEFAULT_HOME_PAGE = {
