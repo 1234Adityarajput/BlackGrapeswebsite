@@ -25,10 +25,12 @@ export default function ParticleCanvas() {
       if (scrollTimeout) clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         isScrolling = false;
-      }, 90);
+      }, 100);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('touchmove', handleScroll, { passive: true });
+    window.addEventListener('touchstart', handleScroll, { passive: true });
 
     const handleResize = () => {
       if (!canvas) return;
@@ -166,6 +168,8 @@ export default function ParticleCanvas() {
       cancelAnimationFrame(animationFrameId);
       if (scrollTimeout) clearTimeout(scrollTimeout);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+      window.removeEventListener('touchstart', handleScroll);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);

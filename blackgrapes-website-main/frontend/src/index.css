@@ -82,6 +82,8 @@ html {
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 @media (min-width: 1025px) {
@@ -91,11 +93,15 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
   background: var(--bg-dark);
   color: var(--text-primary);
   line-height: 1.65;
   min-height: 100vh;
+  position: relative;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Custom Modern Scrollbar */
@@ -5327,18 +5333,22 @@ img, video, canvas, svg {
   }
 }
 
-/* 4. Hero Section Root-Cause Overflow Fixes */
+/* 4. Hero Section Root-Cause Overflow & Mobile Touch Smoothness Fixes */
 .hero-section {
   width: 100% !important;
   max-width: 100% !important;
-  overflow: hidden !important;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
   box-sizing: border-box !important;
+  touch-action: pan-y !important;
+  -webkit-overflow-scrolling: touch !important;
 }
 
 .hero-container {
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
+  touch-action: pan-y !important;
 }
 
 .hero-content {
@@ -5347,6 +5357,16 @@ img, video, canvas, svg {
   min-width: 0 !important;
   box-sizing: border-box !important;
   visibility: visible !important;
+  touch-action: pan-y !important;
+}
+
+.hero-visual,
+.hero-title,
+.hero-title-line,
+.hero-description,
+.hero-cta-group,
+.hero-metrics-grid {
+  touch-action: pan-y !important;
 }
 
 /* Hero Badge Pill */
@@ -7902,14 +7922,14 @@ input, select, textarea {
     scroll-behavior: auto !important;
     -webkit-overflow-scrolling: touch !important;
     overscroll-behavior-y: auto !important;
+    touch-action: pan-y !important;
   }
 
-  /* Optimize layout layers for hardware composite thread */
+  /* Optimize layout layers for hardware composite thread without forcing single giant GPU texture */
   .app-layout,
   .main-content {
-    -webkit-overflow-scrolling: touch;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important;
   }
 
   /* Disable heavy infinite blur animation on fixed ambient background */
@@ -7921,7 +7941,17 @@ input, select, textarea {
     will-change: auto !important;
   }
 
+  /* Stop continuous floating / translateY translations in Hero on mobile to free up GPU */
+  .hero-glass-card-floating,
+  .floating-badge {
+    animation: none !important;
+    transform: none !important;
+  }
+
   /* Prevent GPU stalls: replace expensive real-time multi-pass Gaussian blur on mobile cards with smooth rich dark glass */
+  .hero-glass-card,
+  .floating-badge,
+  .tech-marquee-wrapper,
   .service-card,
   .softech-card,
   .softech-service-card,
@@ -7953,6 +7983,20 @@ input, select, textarea {
     background: rgba(13, 10, 22, 0.95) !important;
   }
 
+  /* Hero visual elements clean shadow on mobile */
+  .hero-glass-card {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.55) !important;
+  }
+  .floating-badge {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Remove expensive GPU alpha-mask on mobile marquee */
+  .marquee-track-container {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
   /* Optimize box-shadow rasterization while dragging on mobile */
   .service-card,
   .softech-card,
@@ -7961,4 +8005,18 @@ input, select, textarea {
   .translucent-glass-card {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
   }
+
+  /* Optimize hero headline shimmer on mobile */
+  .hero-brand-shimmer,
+  .hero-headline-shimmer {
+    will-change: auto !important;
+    animation-duration: 4.5s !important;
+  }
+}
+
+/* Pause GPU text repaints during active finger drag / inertial touch scroll */
+body.is-scrolling .hero-headline-shimmer,
+body.is-scrolling .hero-brand-shimmer,
+body.is-scrolling .marquee-track {
+  animation-play-state: paused !important;
 }

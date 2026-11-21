@@ -344,12 +344,45 @@ export function initScrollTriggers() {
 }
 
 /**
- * 5. MASTER MOTION INITIALIZER
+ * 5. MOBILE TOUCH-SCROLL PERFORMANCE GOVERNOR (60-120fps lock)
+ * Pauses heavy raster animations and particle drawing while finger is dragging / during momentum scroll
+ */
+let isScrollGovernorInitialized = false;
+
+export function initScrollGovernor() {
+  if (typeof window === 'undefined' || isScrollGovernorInitialized) return;
+  isScrollGovernorInitialized = true;
+
+  const isTouchDevice = 'ontouchstart' in window || (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0);
+  if (!isTouchDevice) return;
+
+  let scrollTimeout = null;
+
+  const onScrollStart = () => {
+    if (document.body && !document.body.classList.contains('is-scrolling')) {
+      document.body.classList.add('is-scrolling');
+    }
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (document.body) {
+        document.body.classList.remove('is-scrolling');
+      }
+    }, 110);
+  };
+
+  window.addEventListener('scroll', onScrollStart, { passive: true });
+  window.addEventListener('touchmove', onScrollStart, { passive: true });
+  window.addEventListener('touchstart', onScrollStart, { passive: true });
+}
+
+/**
+ * 6. MASTER MOTION INITIALIZER
  * Safe, reliable, non-blocking initializer.
  */
 export function initMotionSystem() {
   if (typeof window === 'undefined') return () => {};
 
+  initScrollGovernor();
   initHeroAnimation();
   initCardTilt();
   initMagneticButtons();
