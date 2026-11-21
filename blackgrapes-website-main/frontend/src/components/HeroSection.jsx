@@ -85,8 +85,12 @@ export default function HeroSection({ onOpenModal }) {
             ) : (
               <>
                 <span className="hero-prefix">{prefix}</span>
-                <span className="hero-title-line hero-title-line-1">{titleLine1}</span>
-                <span className="hero-title-line hero-title-line-2">{breakText}</span>
+                <span className="hero-title-line hero-title-line-1">
+                  <span className="hero-headline-shimmer">{titleLine1}</span>
+                </span>
+                <span className="hero-title-line hero-title-line-2">
+                  <span className="hero-headline-shimmer">{breakText}</span>
+                </span>
                 <span className="hero-title-line hero-title-line-3">
                   <span className="hero-headline-shimmer hero-brand-shimmer">{brandHighlight}</span>
                 </span>
