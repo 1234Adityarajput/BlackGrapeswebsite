@@ -93,11 +93,86 @@ export async function testSmtpConnection() {
     }
   }
 
+  const hasResend = !!cleanEnvValue(process.env.RESEND_API_KEY, '');
+  const hasBrevo = !!cleanEnvValue(process.env.BREVO_API_KEY, '');
+  results.https_api = {
+    resend_configured: hasResend,
+    brevo_configured: hasBrevo
+  };
+
   return {
     user,
     host,
     results
   };
+}
+
+/**
+ * Send via HTTPS API (Port 443) - Bypasses Render/cloud SMTP port blocks
+ * Supports Resend (RESEND_API_KEY) and Brevo (BREVO_API_KEY)
+ */
+async function sendViaHttpsApi(mailOptions) {
+  // Option 1: Resend (Port 443 HTTPS)
+  const resendKey = cleanEnvValue(process.env.RESEND_API_KEY, '');
+  if (resendKey) {
+    try {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${resendKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: cleanEnvValue(process.env.RESEND_FROM, 'Black Grapes Leads <onboarding@resend.dev>'),
+          to: [mailOptions.to],
+          subject: mailOptions.subject,
+          html: mailOptions.html,
+          text: mailOptions.text,
+          reply_to: mailOptions.replyTo
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.id) {
+        return { success: true, messageId: data.id, provider: 'resend' };
+      } else {
+        console.warn('[HTTPS Mail Warning] Resend error:', data);
+      }
+    } catch (e) {
+      console.warn('[HTTPS Mail Warning] Resend failed:', e.message);
+    }
+  }
+
+  // Option 2: Brevo (Port 443 HTTPS)
+  const brevoKey = cleanEnvValue(process.env.BREVO_API_KEY, '');
+  if (brevoKey) {
+    try {
+      const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'api-key': brevoKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender: { name: cleanEnvValue(process.env.FROM_NAME, 'Black Grapes Leads'), email: cleanEnvValue(process.env.SMTP_USER, 'blackgrapes.arpitjain@gmail.com') },
+          to: [{ email: mailOptions.to }],
+          subject: mailOptions.subject,
+          htmlContent: mailOptions.html,
+          textContent: mailOptions.text,
+          replyTo: mailOptions.replyTo ? { email: mailOptions.replyTo } : undefined
+        })
+      });
+      const data = await res.json();
+      if (res.ok && (data.messageId || data.id)) {
+        return { success: true, messageId: data.messageId || data.id, provider: 'brevo' };
+      } else {
+        console.warn('[HTTPS Mail Warning] Brevo error:', data);
+      }
+    } catch (e) {
+      console.warn('[HTTPS Mail Warning] Brevo failed:', e.message);
+    }
+  }
+
+  return null;
 }
 
 /**
@@ -314,7 +389,18 @@ Call: ${phone}
     replyTo: (email && email.includes('@')) ? email : undefined
   };
 
-  console.log(`[SMTP Mail] Sending new lead notification (#${ticketId}) to ${recipient}...`);
+  console.log(`[Email Dispatch] Sending new lead notification (#${ticketId}) to ${recipient}...`);
+
+  // Step 0: Try HTTPS Email API (Port 443 - zero firewall blocks on Render / Cloud)
+  try {
+    const httpsResult = await sendViaHttpsApi(mailOptions);
+    if (httpsResult && httpsResult.success) {
+      console.log(`\x1b[32m%s\x1b[0m`, `✨ [HTTPS Success] Lead email dispatched via ${httpsResult.provider}! Message ID: ${httpsResult.messageId}`);
+      return httpsResult;
+    }
+  } catch (httpsErr) {
+    console.warn('[HTTPS Notice] Direct API dispatch skipped:', httpsErr.message);
+  }
 
   let info = null;
   let lastError = null;
