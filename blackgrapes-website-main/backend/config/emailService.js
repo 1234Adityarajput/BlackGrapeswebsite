@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Fallback credentials provided by user
 const DEFAULT_USER = 'blackgrapes.arpitjain@gmail.com';
@@ -6,28 +8,96 @@ const DEFAULT_PASS = 'qmymectgxtuuursq';
 const DEFAULT_RECIPIENT = 'blackgrapes.arpitjain@gmail.com';
 
 /**
- * Create and configure reusable Nodemailer transporter
+ * Clean & sanitize string from surrounding quotes, accidental whitespace, or backslashes
  */
-function createTransporter() {
-  const user = (process.env.SMTP_USER || DEFAULT_USER).trim();
-  // Strip any accidental spaces from Gmail App Password
-  const pass = (process.env.SMTP_PASS || DEFAULT_PASS).replace(/\s+/g, '').trim();
-  const host = (process.env.SMTP_HOST || 'smtp.gmail.com').trim();
-  const port = parseInt(process.env.SMTP_PORT || '465', 10);
-  const secure = (process.env.SMTP_SECURE || 'true') === 'true' || port === 465;
+function cleanEnvValue(val, fallback = '') {
+  if (val === undefined || val === null) return fallback;
+  return String(val).replace(/["'\r\n]/g, '').trim();
+}
 
+/**
+ * Extract sanitized credentials
+ */
+function getSmtpConfig() {
+  const user = cleanEnvValue(process.env.SMTP_USER, DEFAULT_USER);
+  // Strip ALL whitespace, quotes, and backslashes from App Password
+  const pass = (process.env.SMTP_PASS ? String(process.env.SMTP_PASS).replace(/["'\s\\]/g, '') : DEFAULT_PASS).trim();
+  const host = cleanEnvValue(process.env.SMTP_HOST, 'smtp.gmail.com');
+  const port = parseInt(cleanEnvValue(process.env.SMTP_PORT, '465'), 10) || 465;
+  const secure = cleanEnvValue(process.env.SMTP_SECURE, 'true') === 'true' || port === 465;
+
+  return { user, pass, host, port, secure };
+}
+
+/**
+ * Create Nodemailer transporter with connection pooling and explicit timeouts
+ * Supports multiple modes: 'service' (Google default), '587' (STARTTLS), '465' (SSL)
+ */
+function createTransporter(mode = 'service') {
+  const { user, pass, host, port, secure } = getSmtpConfig();
+  const isGmail = host.includes('gmail') || user.includes('gmail');
+
+  if (mode === 'service' && isGmail) {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user, pass },
+      pool: true,
+      maxConnections: 3,
+      connectionTimeout: 12000,
+      greetingTimeout: 10000,
+      socketTimeout: 20000
+    });
+  }
+
+  if (mode === '587' || (!secure && port === 587)) {
+    return nodemailer.createTransport({
+      host: isGmail ? 'smtp.gmail.com' : host,
+      port: 587,
+      secure: false, // STARTTLS
+      auth: { user, pass },
+      tls: { rejectUnauthorized: false },
+      connectionTimeout: 12000,
+      greetingTimeout: 10000,
+      socketTimeout: 20000
+    });
+  }
+
+  // Default: Port 465 SSL
   return nodemailer.createTransport({
-    host,
-    port,
-    secure,
-    auth: {
-      user,
-      pass
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
+    host: isGmail ? 'smtp.gmail.com' : host,
+    port: 465,
+    secure: true,
+    auth: { user, pass },
+    tls: { rejectUnauthorized: false },
+    connectionTimeout: 12000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000
   });
+}
+
+/**
+ * Helper to test SMTP connection across all modes
+ */
+export async function testSmtpConnection() {
+  const { user, host } = getSmtpConfig();
+  const modes = ['service', '587', '465'];
+  const results = {};
+
+  for (const mode of modes) {
+    try {
+      const transporter = createTransporter(mode);
+      await transporter.verify();
+      results[mode] = { success: true };
+    } catch (err) {
+      results[mode] = { success: false, error: err.message };
+    }
+  }
+
+  return {
+    user,
+    host,
+    results
+  };
 }
 
 /**
@@ -35,9 +105,9 @@ function createTransporter() {
  * whenever ANY contact form or enquiry form is submitted
  */
 export async function sendEnquiryNotification(lead = {}) {
-  const recipient = (process.env.NOTIFY_EMAIL || DEFAULT_RECIPIENT).trim();
-  const senderEmail = (process.env.SMTP_USER || DEFAULT_USER).trim();
-  const fromName = process.env.FROM_NAME || 'Black Grapes Softech Leads';
+  const recipient = cleanEnvValue(process.env.NOTIFY_EMAIL, DEFAULT_RECIPIENT);
+  const senderEmail = cleanEnvValue(process.env.SMTP_USER, DEFAULT_USER);
+  const fromName = cleanEnvValue(process.env.FROM_NAME, 'Black Grapes Softech Leads');
 
   const name = lead.name || 'Prospective Client';
   const phone = lead.phone || 'Not provided';
@@ -235,25 +305,52 @@ Reply to: ${email}
 Call: ${phone}
   `.trim();
 
+  const mailOptions = {
+    from: `"${fromName}" <${senderEmail}>`,
+    to: recipient,
+    subject: `🚨 New Lead: ${name} - ${service} [#${ticketId}]`,
+    text: plainText,
+    html: htmlContent,
+    replyTo: (email && email.includes('@')) ? email : undefined
+  };
+
+  console.log(`[SMTP Mail] Sending new lead notification (#${ticketId}) to ${recipient}...`);
+
+  let info = null;
+  let lastError = null;
+
+  // Step 1: Attempt standard Gmail service transport
   try {
-    const transporter = createTransporter();
+    const transporter = createTransporter('service');
+    info = await transporter.sendMail(mailOptions);
+  } catch (err1) {
+    console.warn(`[SMTP Warning] Method 1 (service:gmail) failed: ${err1.message}. Retrying via Port 587 STARTTLS...`);
+    lastError = err1;
 
-    console.log(`[SMTP Mail] Sending new lead notification (#${ticketId}) to ${recipient}...`);
+    // Step 2: Attempt Port 587 STARTTLS
+    try {
+      const transporter587 = createTransporter('587');
+      info = await transporter587.sendMail(mailOptions);
+    } catch (err2) {
+      console.warn(`[SMTP Warning] Method 2 (port:587) failed: ${err2.message}. Retrying via Port 465 SSL...`);
+      lastError = err2;
 
-    const info = await transporter.sendMail({
-      from: `"${fromName}" <${senderEmail}>`,
-      to: recipient,
-      subject: `🚨 New Lead: ${name} - ${service} [#${ticketId}]`,
-      text: plainText,
-      html: htmlContent,
-      replyTo: (email && email.includes('@')) ? email : undefined
-    });
+      // Step 3: Attempt Port 465 SSL
+      try {
+        const transporter465 = createTransporter('465');
+        info = await transporter465.sendMail(mailOptions);
+      } catch (err3) {
+        lastError = err3;
+      }
+    }
+  }
 
+  if (info && info.messageId) {
     console.log(`\x1b[32m%s\x1b[0m`, `✨ [SMTP Success] Lead email dispatched to ${recipient}! Message ID: ${info.messageId}`);
     return { success: true, messageId: info.messageId };
-  } catch (err) {
-    console.error(`\x1b[31m%s\x1b[0m`, `❌ [SMTP Error] Failed to send lead notification to ${recipient}:`, err.message);
-    return { success: false, error: err.message };
+  } else {
+    console.error(`\x1b[31m%s\x1b[0m`, `❌ [SMTP Error] Failed to send lead notification to ${recipient}:`, lastError?.message);
+    return { success: false, error: lastError?.message };
   }
 }
 
@@ -261,11 +358,11 @@ Call: ${phone}
  * Optional: Send auto-acknowledgement email to the client
  */
 export async function sendClientConfirmation(lead = {}) {
-  const email = (lead.email || '').trim();
+  const email = cleanEnvValue(lead.email, '');
   if (!email || !email.includes('@')) return null;
 
-  const senderEmail = (process.env.SMTP_USER || DEFAULT_USER).trim();
-  const fromName = process.env.FROM_NAME || 'Black Grapes Softech';
+  const senderEmail = cleanEnvValue(process.env.SMTP_USER, DEFAULT_USER);
+  const fromName = cleanEnvValue(process.env.FROM_NAME, 'Black Grapes Softech');
   const name = lead.name || 'Valued Client';
   const service = lead.service || 'Software / IT Solutions';
   const ticketId = lead.ticket_id || lead.ticketId || `BG-${Date.now().toString().slice(-6)}`;
@@ -294,7 +391,7 @@ export async function sendClientConfirmation(lead = {}) {
   `;
 
   try {
-    const transporter = createTransporter();
+    const transporter = createTransporter('service');
     await transporter.sendMail({
       from: `"${fromName}" <${senderEmail}>`,
       to: email,
