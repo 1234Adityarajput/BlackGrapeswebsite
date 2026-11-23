@@ -115,6 +115,7 @@ export default function Footer({ onOpenModal, onOpenInquiry }) {
   const solutionsLinks = (settings?.footer_solutions_links && settings.footer_solutions_links.length > 0)
     ? settings.footer_solutions_links
     : [
+        { label: 'Interactive Live Portfolio', path: 'https://black-grapes-portfolio.vercel.app' },
         { label: 'Proprietary Software Catalog', path: '/products' },
         { label: 'Client Case Studies', path: '/clients' },
         { label: 'IT & Technical Staffing', path: '/it-staffing' },
@@ -129,6 +130,7 @@ export default function Footer({ onOpenModal, onOpenInquiry }) {
     ? settings.footer_bottom_links
     : [
         { label: 'About Us', path: '/about' },
+        { label: 'Portfolio', path: 'https://black-grapes-portfolio.vercel.app' },
         { label: 'Services', path: '/services' },
         { label: 'Products', path: '/products' },
         { label: 'Careers', path: '/careers' },

@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              visibility 0.5s ease;
+    visibility 0.5s ease;
   overflow: hidden;
 }
 
@@ -151,11 +151,13 @@
     transform: scale(0.85) translateY(12px);
     filter: blur(8px);
   }
+
   60% {
     opacity: 1;
     transform: scale(1.02) translateY(0);
     filter: blur(0);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -164,10 +166,13 @@
 }
 
 @keyframes bgstLogoGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 25px rgba(248, 98, 0, 0.35), 0 0 50px rgba(147, 51, 234, 0.2);
     border-color: rgba(248, 98, 0, 0.4);
   }
+
   50% {
     box-shadow: 0 0 45px rgba(248, 98, 0, 0.65), 0 0 80px rgba(147, 51, 234, 0.4);
     border-color: rgba(248, 98, 0, 0.8);
@@ -178,6 +183,7 @@
   0% {
     transform: translateX(-150%) skewX(-20deg);
   }
+
   100% {
     transform: translateX(250%) skewX(-20deg);
   }
@@ -188,6 +194,7 @@
     opacity: 0;
     transform: translate3d(0, 16px, 0);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -195,19 +202,25 @@
 }
 
 @keyframes bgstFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }
 }
 
 @keyframes bgstPulseGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.8;
     transform: scale(1.08);
@@ -276,20 +289,49 @@
 .reveal-scale.is-revealed {
   opacity: 1 !important;
   transform: translate3d(0, 0, 0) scale(1) !important;
+  visibility: visible !important;
+}
+
+/* Guard hero elements from ever being hidden above the fold */
+.hero-content>* {
+  visibility: visible !important;
 }
 
 /* ========================================================
    4. STAGGER DELAYS
    ======================================================== */
 
-.stagger-1 { transition-delay: 0.08s !important; }
-.stagger-2 { transition-delay: 0.16s !important; }
-.stagger-3 { transition-delay: 0.24s !important; }
-.stagger-4 { transition-delay: 0.32s !important; }
-.stagger-5 { transition-delay: 0.40s !important; }
-.stagger-6 { transition-delay: 0.48s !important; }
-.stagger-7 { transition-delay: 0.56s !important; }
-.stagger-8 { transition-delay: 0.64s !important; }
+.stagger-1 {
+  transition-delay: 0.08s !important;
+}
+
+.stagger-2 {
+  transition-delay: 0.16s !important;
+}
+
+.stagger-3 {
+  transition-delay: 0.24s !important;
+}
+
+.stagger-4 {
+  transition-delay: 0.32s !important;
+}
+
+.stagger-5 {
+  transition-delay: 0.40s !important;
+}
+
+.stagger-6 {
+  transition-delay: 0.48s !important;
+}
+
+.stagger-7 {
+  transition-delay: 0.56s !important;
+}
+
+.stagger-8 {
+  transition-delay: 0.64s !important;
+}
 
 /* ========================================================
    5. AUTOMATED SCROLL REVEAL & UNIVERSAL CARD ENHANCEMENTS
@@ -299,7 +341,7 @@
   opacity: 0;
   transform: translate3d(0, 26px, 0);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -310,58 +352,78 @@
 
 /* Universal Card Transitions & Micro-Interactions */
 .service-card,
+.softech-card,
+.softech-service-card,
+.softech-spotlight-card,
 .project-card,
+.coverflow-card,
 .process-step-card,
 .why-us-capsule-card,
 .counter-card,
 .testimonial-card,
 .industry-card,
 .stat-strip-card,
+.stat-card,
+.stat-card-v2,
 .vm-card,
 .founder-card,
 .value-card,
 .domain-card,
 .timeline-card,
 .product-card,
+.product-glass-card,
 .client-logo-card,
 .client-case-card,
 .staffing-model-card,
 .talent-card,
 .hiring-step-card,
 .ecommerce-feature-card,
+.store-model-card,
 .contact-info-card,
 .partner-tier-card,
-.tendering-callout-card {
+.tendering-callout-card,
+.compliance-metric-box,
+.translucent-glass-card {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.35s ease,
-              border-color 0.3s ease,
-              background 0.3s ease !important;
+    box-shadow 0.35s ease,
+    border-color 0.3s ease,
+    background 0.3s ease !important;
   will-change: transform, box-shadow;
 }
 
 .service-card:hover,
+.softech-card:hover,
+.softech-service-card:hover,
+.softech-spotlight-card:hover,
 .project-card:hover,
 .process-step-card:hover,
+.why-us-capsule-card:hover,
 .counter-card:hover,
 .industry-card:hover,
 .stat-strip-card:hover,
+.stat-card:hover,
+.stat-card-v2:hover,
 .vm-card:hover,
 .founder-card:hover,
 .value-card:hover,
 .domain-card:hover,
 .timeline-card:hover,
 .product-card:hover,
+.product-glass-card:hover,
 .client-logo-card:hover,
 .client-case-card:hover,
 .staffing-model-card:hover,
 .talent-card:hover,
 .hiring-step-card:hover,
 .ecommerce-feature-card:hover,
+.store-model-card:hover,
 .contact-info-card:hover,
-.partner-tier-card:hover {
-  transform: translateY(-6px) scale(1.01) !important;
-  border-color: rgba(248, 98, 0, 0.55) !important;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 0 24px rgba(248, 98, 0, 0.2) !important;
+.partner-tier-card:hover,
+.compliance-metric-box:hover,
+.translucent-glass-card:hover {
+  transform: translateY(-6px) scale(1.012) !important;
+  border-color: rgba(248, 98, 0, 0.6) !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(248, 98, 0, 0.25) !important;
 }
 
 /* Image Zoom in Card Media */
@@ -384,24 +446,32 @@
 
 /* Dynamic Spotlight Glow on Pointer Tracking */
 .service-card::before,
+.softech-card::before,
+.softech-service-card::before,
+.softech-spotlight-card::before,
 .project-card::before,
 .product-card::before,
+.product-glass-card::before,
 .value-card::before,
 .domain-card::before,
 .timeline-card::before,
 .staffing-model-card::before,
 .talent-card::before,
 .ecommerce-feature-card::before,
-.partner-tier-card::before {
+.store-model-card::before,
+.partner-tier-card::before,
+.stat-card::before,
+.stat-card-v2::before,
+.founder-card::before,
+.compliance-metric-box::before,
+.translucent-glass-card::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(
-    500px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
-    rgba(248, 98, 0, 0.14),
-    transparent 70%
-  );
+  background: radial-gradient(500px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+      rgba(248, 98, 0, 0.14),
+      transparent 70%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -409,15 +479,25 @@
 }
 
 .service-card:hover::before,
+.softech-card:hover::before,
+.softech-service-card:hover::before,
+.softech-spotlight-card:hover::before,
 .project-card:hover::before,
 .product-card:hover::before,
+.product-glass-card:hover::before,
 .value-card:hover::before,
 .domain-card:hover::before,
 .timeline-card:hover::before,
 .staffing-model-card:hover::before,
 .talent-card:hover::before,
 .ecommerce-feature-card:hover::before,
-.partner-tier-card:hover::before {
+.store-model-card:hover::before,
+.partner-tier-card:hover::before,
+.stat-card:hover::before,
+.stat-card-v2:hover::before,
+.founder-card:hover::before,
+.compliance-metric-box:hover::before,
+.translucent-glass-card:hover::before {
   opacity: 1;
 }
 
@@ -434,9 +514,9 @@
   position: relative;
   overflow: hidden;
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.25s ease,
-              background 0.25s ease,
-              border-color 0.25s ease !important;
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease !important;
   will-change: transform;
 }
 
@@ -463,12 +543,10 @@
   left: 0;
   width: 40%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.22) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 100%);
   transform: translateX(-180%) skewX(-20deg);
   pointer-events: none;
 }
@@ -493,13 +571,216 @@ select:focus {
   transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
 }
 
-/* Floating Elements */
-.float-subtle {
-  animation: bgstFloat 4s ease-in-out infinite;
+/* ========================================================
+   TOP CYBER NAVIGATION PROGRESS BAR
+   ======================================================== */
+.top-cyber-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100vw;
+  z-index: 9999999;
+  pointer-events: none;
+  background: transparent;
+  overflow: hidden;
 }
 
+.top-cyber-progress-glow {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #9333ea 0%, #f86200 60%, #ffb080 100%);
+  box-shadow: 0 0 14px rgba(248, 98, 0, 0.9), 0 0 25px rgba(147, 51, 234, 0.6);
+  animation: routeProgressBar 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes routeProgressBar {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+
+  70% {
+    transform: translateX(-15%);
+    opacity: 1;
+  }
+
+  90% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+}
+
+/* ========================================================
+   FLOATING & CYBER BREATHING KEYFRAMES
+   ======================================================== */
+
+.float-subtle,
+.floating-elem {
+  animation: bgstFloat 5.5s ease-in-out infinite !important;
+}
+
+.float-reverse {
+  animation: bgstFloatReverse 5s ease-in-out infinite !important;
+}
+
+@keyframes bgstFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes bgstFloatReverse {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* Pulse Glow */
 .pulse-ambient {
   animation: bgstPulseGlow 5s ease-in-out infinite;
+}
+
+/* Radar Live Ping Dots */
+.live-ping-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: radarPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+@keyframes radarPing {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.badge-glow-dot {
+  animation: radarPingOrange 2s cubic-bezier(0, 0, 0.2, 1) infinite !important;
+}
+
+@keyframes radarPingOrange {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(248, 98, 0, 0.8);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 8px rgba(248, 98, 0, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(248, 98, 0, 0);
+  }
+}
+
+/* Why Choose Us Connector Lines Laser Flow */
+.why-us-connectors-overlay line {
+  stroke-dasharray: 6 5 !important;
+  animation: flowConnectors 1.2s linear infinite !important;
+}
+
+@keyframes flowConnectors {
+  from {
+    stroke-dashoffset: 22;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.why-us-center-svg {
+  animation: bgstFloat 6s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Badge Sparkle Animation */
+.badge-sparkle,
+.badge-icon,
+.section-badge svg {
+  display: inline-block;
+  animation: badgeSparkle 3s ease-in-out infinite;
+  color: #f86200;
+}
+
+@keyframes badgeSparkle {
+
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 4px rgba(248, 98, 0, 0.6));
+  }
+
+  50% {
+    transform: rotate(15deg) scale(1.2);
+    filter: drop-shadow(0 0 10px rgba(248, 98, 0, 0.9));
+  }
+}
+
+/* Universal Animated Counter Value */
+.animated-counter-value {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease, filter 0.3s ease;
+}
+
+.counter-card:hover .animated-counter-value,
+.stat-card:hover .animated-counter-value,
+.stat-card-v2:hover .animated-counter-value,
+.hero-metric-item:hover .animated-counter-value {
+  filter: drop-shadow(0 0 8px rgba(248, 98, 0, 0.8));
+}
+
+/* Subtle Shimmer on Primary Action Buttons */
+.btn-premium-action,
+.btn-primary {
+  box-shadow: 0 4px 18px rgba(248, 98, 0, 0.35);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease !important;
+}
+
+.btn-premium-action:hover,
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 10px 28px rgba(248, 98, 0, 0.55), 0 0 20px rgba(147, 51, 234, 0.3) !important;
 }
 
 /* ========================================================
@@ -508,9 +789,9 @@ select:focus {
 
 .main-navbar {
   transition: background 0.35s ease,
-              backdrop-filter 0.35s ease,
-              border-color 0.35s ease,
-              box-shadow 0.35s ease !important;
+    backdrop-filter 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
 }
 
 .main-navbar.navbar-scrolled {
@@ -537,7 +818,7 @@ select:focus {
   background: #f86200;
   border-radius: 2px;
   transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    left 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nav-link:hover::after,
@@ -551,10 +832,10 @@ select:focus {
 .social-icon-btn,
 .social-pill {
   transition: transform 0.25s ease,
-              color 0.25s ease,
-              background 0.25s ease,
-              border-color 0.25s ease,
-              box-shadow 0.25s ease !important;
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease !important;
 }
 
 .footer-social-link:hover,
@@ -568,10 +849,603 @@ select:focus {
 }
 
 /* ========================================================
+   HERO SECTION - SPECIALIZED LUXURY ANIMATIONS (SS1 & SS2)
+   ======================================================== */
+
+/* 1. Hero Badge Pill (Left Box) */
+.hero-badge-pill {
+  position: relative;
+  background: rgba(248, 98, 0, 0.08) !important;
+  border: 1px solid rgba(248, 98, 0, 0.38) !important;
+  box-shadow: 0 0 20px rgba(248, 98, 0, 0.16), inset 0 0 12px rgba(248, 98, 0, 0.08) !important;
+  animation: heroBadgeAura 4.5s ease-in-out infinite alternate !important;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease !important;
+}
+
+.hero-badge-pill:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  border-color: rgba(248, 98, 0, 0.75) !important;
+  box-shadow: 0 0 28px rgba(248, 98, 0, 0.45), inset 0 0 16px rgba(248, 98, 0, 0.2) !important;
+}
+
+@keyframes heroBadgeAura {
+  0% {
+    border-color: rgba(248, 98, 0, 0.35);
+    box-shadow: 0 0 16px rgba(248, 98, 0, 0.14);
+  }
+
+  50% {
+    border-color: rgba(248, 98, 0, 0.65);
+    box-shadow: 0 0 26px rgba(248, 98, 0, 0.32), 0 0 45px rgba(147, 51, 234, 0.15);
+  }
+
+  100% {
+    border-color: rgba(248, 98, 0, 0.4);
+    box-shadow: 0 0 18px rgba(248, 98, 0, 0.18);
+  }
+}
+
+/* 2. Hero Headline Dynamic Ambient Shimmer */
+.hero-headline-shimmer,
+.hero-brand-shimmer {
+  display: inline-block !important;
+  background-image: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #ffffff 35%,
+    #ff9d5c 48%,
+    #f86200 56%,
+    #ffb080 64%,
+    #ffffff 75%,
+    #ffffff 100%
+  ) !important;
+  background-size: 250% 100% !important;
+  background-position: 150% 0;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  -webkit-animation: textShineSweep 3.5s linear infinite !important;
+  animation: textShineSweep 3.5s linear infinite !important;
+  text-shadow: none !important;
+  will-change: background-position;
+}
+
+@-webkit-keyframes textShineSweep {
+  0% {
+    background-position: 150% 0;
+  }
+
+  100% {
+    background-position: -150% 0;
+  }
+}
+
+@keyframes textShineSweep {
+  0% {
+    background-position: 150% 0;
+  }
+
+  100% {
+    background-position: -150% 0;
+  }
+}
+
+/* ========================================================
+   HERO SPLIT ENTRANCE: LEFT CONTENT SLIDES FROM LEFT, RIGHT VISUAL FROM RIGHT
+   ======================================================== */
+
+/* Hero & Careers Elements Waiting State (while loading screen is active) */
+.hero-content-waiting,
+.hero-visual-waiting,
+.career-slide-waiting {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  animation: none !important;
+}
+
+/* While the initial HTML preloader is active, hold hero split animations */
+html.bgst-loading .hero-content-entrance,
+html.bgst-loading .hero-visual-entrance,
+html.bgst-loading .hero-content,
+html.bgst-loading .hero-visual,
+html.bgst-loading .products-hero-content,
+html.bgst-loading .products-hero-visual,
+html.bgst-loading .clients-hero-content,
+html.bgst-loading .clients-hero-visual,
+html.bgst-loading .service-hero-content,
+html.bgst-loading .service-hero-visual,
+html.bgst-loading .hero-left-v2,
+html.bgst-loading .hero-right-v2,
+html.bgst-loading .hero-visual-card,
+html.bgst-loading .about-section,
+html.bgst-loading .about-visual-col,
+html.bgst-loading .about-text-col,
+html.bgst-loading .careers-left-content,
+html.bgst-loading .career-form-card {
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+/* 1. Hero Left Content (Home, About, Products, Clients, Services, IT Staffing, Careers) */
+.hero-content,
+.hero-content-entrance,
+.products-hero-content,
+.clients-hero-content,
+.service-hero-content,
+.hero-left-v2,
+.careers-left-content.career-slide-left-active {
+  animation: heroSlideFromLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both !important;
+  will-change: transform, opacity;
+}
+
+@keyframes heroSlideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-85px, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes heroSlideFromLeft {
+    0% {
+      opacity: 0;
+      transform: translate3d(-35px, 0, 0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+/* 2. Hero Right Visual (Home, About, Products, Clients, Services, IT Staffing, Careers) */
+.hero-visual,
+.hero-visual-entrance,
+.hero-visual-card,
+.products-hero-visual,
+.clients-hero-visual,
+.service-hero-visual,
+.hero-right-v2,
+.career-form-card.career-slide-right-active {
+  animation: heroSlideFromRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both !important;
+  will-change: transform, opacity;
+}
+
+@keyframes heroSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(85px, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  @keyframes heroSlideFromRight {
+    0% {
+      opacity: 0;
+      transform: translate3d(35px, 0, 0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+/* ========================================================
+   HOME ABOUT SECTION CINEMATIC SCROLL-TRIGGERED SPLIT ENTRANCE
+   Left Image Column slides from Left, Right Narrative Column from Right
+   ======================================================== */
+
+/* 1. Initial State before scroll (hidden and shifted sideways) */
+.about-section:not(.about-split-active) .about-visual-col,
+.about-visual-col:not(.about-slide-left-active) {
+  opacity: 0 !important;
+  transform: translate3d(-90px, 0, 0) !important;
+}
+
+.about-section:not(.about-split-active) .about-text-col,
+.about-text-col:not(.about-slide-right-active) {
+  opacity: 0 !important;
+  transform: translate3d(90px, 0, 0) !important;
+}
+
+/* 2. Active Scroll Entrance Keyframes */
+.about-section.about-split-active .about-visual-col,
+.about-visual-col.about-slide-left-active {
+  animation: aboutSlideFromLeft 0.95s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+  will-change: transform, opacity;
+}
+
+@keyframes aboutSlideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-90px, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.about-section.about-split-active .about-text-col,
+.about-text-col.about-slide-right-active {
+  animation: aboutSlideFromRight 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both !important;
+  will-change: transform, opacity;
+}
+
+@keyframes aboutSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(90px, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* 3. Mobile Fluidity Adjustments (<= 768px: Safe 40px Offset, Zero Overflow) */
+@media (max-width: 768px) {
+
+  .about-section:not(.about-split-active) .about-visual-col,
+  .about-visual-col:not(.about-slide-left-active) {
+    transform: translate3d(-40px, 0, 0) !important;
+  }
+
+  .about-section:not(.about-split-active) .about-text-col,
+  .about-text-col:not(.about-slide-right-active) {
+    transform: translate3d(40px, 0, 0) !important;
+  }
+
+  @keyframes aboutSlideFromLeft {
+    0% {
+      opacity: 0;
+      transform: translate3d(-40px, 0, 0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes aboutSlideFromRight {
+    0% {
+      opacity: 0;
+      transform: translate3d(40px, 0, 0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .about-visual-col,
+  .about-text-col {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+.hero-glass-card-floating {
+  animation: bgstFloat 5.5s ease-in-out 1.05s infinite !important;
+}
+
+/* Hero Glass Terminal Card (Right Box) */
+.hero-glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(248, 98, 0, 0.2), 0 0 50px rgba(147, 51, 234, 0.12) !important;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+.hero-glass-card:hover {
+  transform: translateY(-5px) scale(1.01) !important;
+  border-color: rgba(248, 98, 0, 0.6) !important;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 45px rgba(248, 98, 0, 0.35), 0 0 65px rgba(147, 51, 234, 0.22) !important;
+}
+
+.window-dots:hover .dot {
+  animation: dotPulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes dotPulse {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  100% {
+    transform: scale(1.25);
+    filter: brightness(1.35);
+  }
+}
+
+/* 4. Terminal KPI Boxes Hover & Number Glow */
+.card-kpis .kpi-box {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-radius: 12px;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease !important;
+}
+
+.card-kpis .kpi-box:hover {
+  transform: translateY(-4px) scale(1.03) !important;
+  border-color: rgba(248, 98, 0, 0.6) !important;
+  background: rgba(248, 98, 0, 0.08) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7), 0 0 18px rgba(248, 98, 0, 0.3) !important;
+}
+
+.card-kpis .kpi-box:hover .kpi-val {
+  filter: drop-shadow(0 0 10px rgba(248, 98, 0, 0.85));
+}
+
+/* 5. Hero Floating Rocket Badge (Bottom-Left) */
+.floating-badge {
+  border: 1px solid rgba(248, 98, 0, 0.45) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 25px rgba(248, 98, 0, 0.3) !important;
+  animation: heroBadgeSlideFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both,
+    bgstFloatReverse 5s ease-in-out 1.35s infinite !important;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease !important;
+}
+
+@keyframes heroBadgeSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(50px, 20px, 0) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.floating-badge:hover {
+  transform: scale(1.06) translateY(-4px) !important;
+  border-color: rgba(248, 98, 0, 0.75) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(248, 98, 0, 0.5) !important;
+}
+
+.floating-badge .floating-icon {
+  display: inline-block;
+  animation: rocketBoost 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes rocketBoost {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    filter: drop-shadow(0 0 4px #f86200);
+  }
+
+  25% {
+    transform: translate(-1.5px, -2px) rotate(-6deg);
+    filter: drop-shadow(0 0 8px #ff8438);
+  }
+
+  50% {
+    transform: translate(1px, -3px) rotate(4deg);
+    filter: drop-shadow(0 0 12px #f86200);
+  }
+
+  75% {
+    transform: translate(1.5px, -1px) rotate(-3deg);
+    filter: drop-shadow(0 0 8px #ff8438);
+  }
+}
+
+/* ========================================================
+   HOME ABOUT SECTION - SPECIALIZED ANIMATIONS (SS3)
+   ======================================================== */
+
+/* 1. About Grapes Image Showcase Card */
+.about-image-card {
+  position: relative;
+  border-radius: 20px !important;
+  overflow: hidden;
+  border: 1px solid rgba(248, 98, 0, 0.32) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(248, 98, 0, 0.16) !important;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease !important;
+}
+
+.about-image-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(248, 98, 0, 0.65) !important;
+  box-shadow: 0 26px 65px rgba(0, 0, 0, 0.9), 0 0 42px rgba(248, 98, 0, 0.3) !important;
+}
+
+.about-main-img {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.about-image-card:hover .about-main-img {
+  transform: scale(1.06);
+
+}
+
+/* 2. About Floating Experience Badge (10+ Years of IT & Software Innovation) */
+.about-stat-floating-card {
+  border: 1px solid rgba(248, 98, 0, 0.5) !important;
+  background: rgba(16, 12, 28, 0.94) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 25px rgba(248, 98, 0, 0.28) !important;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease !important;
+}
+
+.about-stat-floating-card:hover {
+  transform: scale(1.05) translateY(-3px) !important;
+  border-color: rgba(248, 98, 0, 0.8) !important;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.95), 0 0 36px rgba(248, 98, 0, 0.45) !important;
+}
+
+.stat-floating-icon {
+  display: inline-block;
+  animation: trophyShine 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes trophyShine {
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 4px rgba(248, 98, 0, 0.6));
+  }
+
+  50% {
+    transform: scale(1.18) rotate(10deg);
+    filter: drop-shadow(0 0 16px #ffb080);
+  }
+}
+
+.about-stat-floating-card:hover .stat-floating-number {
+  filter: drop-shadow(0 0 10px rgba(248, 98, 0, 0.8));
+}
+
+/* 3. About Floating Tech Pill (Web • Mobile • Cloud • AI) */
+.about-tech-floating-pill {
+  border: 1px solid rgba(248, 98, 0, 0.45) !important;
+  background: rgba(8, 7, 13, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65), 0 0 18px rgba(248, 98, 0, 0.22) !important;
+  transition: transform 0.3s ease, border-color 0.3s ease !important;
+}
+
+.about-tech-floating-pill:hover {
+  transform: scale(1.05) translateY(-2px) !important;
+  border-color: rgba(248, 98, 0, 0.75) !important;
+}
+
+.about-tech-floating-pill .pill-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  margin-right: 6px;
+}
+
+/* 4. Section Title Gradient Separators */
+.title-gradient-separator {
+  display: inline-block;
+  color: #f86200 !important;
+  font-weight: 300;
+  animation: separatorGlow 2.5s ease-in-out infinite;
+  margin: 0 0.4rem;
+}
+
+@keyframes separatorGlow {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px #f86200);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px #f86200);
+    transform: scale(1.15);
+  }
+}
+
+/* 5. Right Narrative Card */
+.about-narrative-card {
+  position: relative;
+  transition: transform 0.35s ease !important;
+}
+
+.about-narrative-card:hover {
+  transform: translateY(-3px) !important;
+}
+
+.narrative-heading {
+  background: linear-gradient(135deg, #ffffff 65%, #ff9e42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* 6. Technology Visual Card (Below) */
+.about-tech-visual-card {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+.about-tech-visual-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: rgba(248, 98, 0, 0.55) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 28px rgba(248, 98, 0, 0.22) !important;
+}
+
+.about-tech-visual-card .tech-visual-img {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.about-tech-visual-card:hover .tech-visual-img {
+  transform: scale(1.05);
+}
+
+.tech-chip {
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease !important;
+}
+
+.tech-chip:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  border-color: #f86200 !important;
+  background: rgba(248, 98, 0, 0.22) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(248, 98, 0, 0.45) !important;
+}
+
+/* ========================================================
    7. ACCESSIBILITY: REDUCED MOTION PREFERENCE
    ======================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

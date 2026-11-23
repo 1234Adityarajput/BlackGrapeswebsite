@@ -11,7 +11,7 @@ export default function LoadingScreen() {
     if (typeof window !== 'undefined' && typeof window.__dismissBgstLoader === 'function') {
       const timer = setTimeout(() => {
         window.__dismissBgstLoader();
-      }, 1300);
+      }, 1200);
       return () => clearTimeout(timer);
     }
 
@@ -19,10 +19,16 @@ export default function LoadingScreen() {
     if (loaderElem) {
       const timer = setTimeout(() => {
         loaderElem.classList.add('loader-hidden');
+        document.documentElement.classList.remove('bgst-loading');
+        document.documentElement.classList.add('bgst-loaded');
+        window.__bgstLoaded = true;
+        try {
+          window.dispatchEvent(new CustomEvent('bgst:loaded'));
+        } catch (e) {}
         setTimeout(() => {
           if (loaderElem.parentNode) loaderElem.parentNode.removeChild(loaderElem);
         }, 650);
-      }, 1400);
+      }, 1250);
       return () => clearTimeout(timer);
     }
   }, []);

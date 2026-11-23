@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import dbService from './dbService.js';
 import MediaItem from './models/MediaItem.js';
 import { isCloudinaryReady, uploadToCloudinary, deleteFromCloudinary } from './config/cloudinary.js';
-import { sendEnquiryNotification, sendClientConfirmation } from './config/emailService.js';
+import { sendEnquiryNotification, sendClientConfirmation, testSmtpConnection } from './config/emailService.js';
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -120,7 +120,13 @@ router.post(['/inquiries', '/enquiries'], async (req, res) => {
     console.log(`[Black Grapes Lead] Ticket #${newEnquiry.ticket_id} created for ${payload.name} (${payload.phone || payload.email})`);
 
     // 📧 Real-Time SMTP Email Alert to blackgrapes.arpitjain@gmail.com
-    sendEnquiryNotification(newEnquiry).catch((e) => {
+    sendEnquiryNotification(newEnquiry).then((res) => {
+      if (res && res.success) {
+        console.log(`[SMTP Mail] ✅ Lead notification delivered for #${newEnquiry.ticket_id} (MessageId: ${res.messageId})`);
+      } else {
+        console.error(`[SMTP Mail] ❌ Failed to deliver lead notification for #${newEnquiry.ticket_id}:`, res?.error);
+      }
+    }).catch((e) => {
       console.error('[SMTP Notification Background Notice]:', e.message);
     });
 
@@ -137,6 +143,33 @@ router.post(['/inquiries', '/enquiries'], async (req, res) => {
     });
   } catch (err) {
     console.error('[Inquiry Error]:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// Diagnostic SMTP Test Route: GET /api/test-email
+router.get('/test-email', async (req, res) => {
+  try {
+    const testLead = {
+      name: 'System Diagnostic Test',
+      email: 'blackgrapes.arpitjain@gmail.com',
+      phone: '+91 99814 74747',
+      service: 'Diagnostic Email Verification',
+      message: 'Automated test from Render cloud backend to verify live SMTP delivery.',
+      source: 'Diagnostic API Test',
+      ticket_id: `DIAG-${Date.now().toString().slice(-4)}`
+    };
+    const sendResult = await sendEnquiryNotification(testLead);
+    const diag = await testSmtpConnection();
+    res.json({
+      success: sendResult.success,
+      message: sendResult.success
+        ? '✅ Email sent successfully! Please check blackgrapes.arpitjain@gmail.com inbox.'
+        : `❌ Email failed: ${sendResult.error}`,
+      dispatch: sendResult,
+      modes: diag.results
+    });
+  } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });

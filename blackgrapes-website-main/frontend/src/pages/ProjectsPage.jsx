@@ -98,6 +98,20 @@ export default function ProjectsPage({ onOpenModal }) {
               <span className="p-metric-sub">Countries Served</span>
             </div>
           </div>
+
+          {/* Direct Link to Standalone Portfolio App */}
+          <div style={{ marginTop: '1.75rem', display: 'flex', justifyContent: 'center' }}>
+            <a
+              href="https://black-grapes-portfolio.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary btn-lg"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}
+            >
+              <span>Explore Live Interactive Portfolio App</span>
+              <ExternalLink size={18} />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -242,14 +256,25 @@ export default function ProjectsPage({ onOpenModal }) {
             <p className="cta-subtitle">
               From MVP to multi-million user scale, our senior architects are ready to engineer your software with unmatched precision.
             </p>
-            <button
-              type="button"
-              className="btn btn-primary btn-lg"
-              onClick={() => onOpenModal && onOpenModal('Start Your Project')}
-            >
-              <span>Start Your Project With Us</span>
-              <ArrowRight size={18} />
-            </button>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '1.5rem' }}>
+              <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                onClick={() => onOpenModal && onOpenModal('Start Your Project')}
+              >
+                <span>Start Your Project With Us</span>
+                <ArrowRight size={18} />
+              </button>
+              <a
+                href="https://black-grapes-portfolio.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline btn-lg"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}
+              >
+                <span>Live Portfolio Showcase ↗</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

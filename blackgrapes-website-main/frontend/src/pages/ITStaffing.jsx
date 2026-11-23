@@ -31,10 +31,35 @@ import {
 } from 'lucide-react';
 import { useITStaffing } from '@backend/useContent';
 import { submitEnquiry } from '@backend/dataService';
+import AnimatedCounter from '../components/AnimatedCounter';
 import '../styles/CyberServices.css';
 
 export default function ITStaffingPage({ onOpenContact }) {
   const { staffingData } = useITStaffing();
+
+  // Sanitized Hero Content (prevents test data or duplicate accents from displaying)
+  const rawBadge = (staffingData?.badge || '').trim();
+  const heroBadge = (!rawBadge || rawBadge.toUpperCase().includes('TEST'))
+    ? 'BLACK GRAPES SOFTECH • IT STAFFING & MANPOWER SOLUTIONS'
+    : rawBadge;
+
+  const rawHeadline = (staffingData?.headline || '').trim();
+  const rawAccent = (staffingData?.headlineAccent || '').trim();
+  let heroHeadline = rawHeadline;
+  let heroAccent = rawAccent || 'hiring contractual staff';
+  if (!heroHeadline || heroHeadline.includes('hiring contractual staff') || heroHeadline.toUpperCase().includes('TEST')) {
+    heroHeadline = 'Stay on course with growth plans by';
+    heroAccent = 'hiring contractual staff';
+  }
+
+  const rawSubtitle = (staffingData?.subtitle || '').trim();
+  const heroSubtitle = (!rawSubtitle || rawSubtitle.toLowerCase().includes('test'))
+    ? 'Outsource your manpower needs with prompt.'
+    : rawSubtitle;
+
+  const heroDesc = (staffingData?.description && !staffingData.description.toLowerCase().includes('test'))
+    ? staffingData.description.trim()
+    : 'Deploy pre-vetted senior software engineers, technical squads, and bulk contractual staff across 28 Indian states with full statutory compliance, zero long-term liabilities, and guaranteed rapid onboarding.';
 
   const staffingServicesList = (Array.isArray(staffingData?.staffingServices) && staffingData.staffingServices.length > 0)
     ? staffingData.staffingServices
@@ -308,37 +333,6 @@ export default function ITStaffingPage({ onOpenContact }) {
       <div className="cyber-ambient-glow glow-grape-right" />
       <div className="cyber-ambient-glow glow-cyan-left" />
 
-      {/* Cyber Grape Theme Indicator Banner */}
-      <div className="cyber-theme-badge-bar">
-        <div className="content-wrapper theme-badge-inner">
-          <div className="cyber-status-pill">
-            <span className="pulsing-cyber-dot" />
-            <span className="theme-tech-name">CYBER GRAPE & NEON FLAME</span>
-            <span className="theme-tech-sep">•</span>
-            <span className="theme-tech-sub">Dark High-Tech Glassmorphism</span>
-          </div>
-
-          <div className="cyber-metrics-mini">
-            <span className="cyber-metric-chip">
-              <span className="chip-dot" style={{ background: '#f86200' }} />
-              <span>Neon Flame</span>
-            </span>
-            <span className="cyber-metric-chip">
-              <span className="chip-dot" style={{ background: '#9333ea' }} />
-              <span>Cyber Grape</span>
-            </span>
-            <span className="cyber-metric-chip">
-              <span className="chip-dot" style={{ background: '#38bdf8' }} />
-              <span>Cyan Blue</span>
-            </span>
-            <span className="cyber-metric-chip">
-              <span className="chip-dot" style={{ background: '#10b981' }} />
-              <span>Emerald</span>
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* =========================================================================
           HERO SECTION (2-Column High-Tech Glassmorphism Layout)
           ========================================================================= */}
@@ -351,26 +345,26 @@ export default function ITStaffingPage({ onOpenContact }) {
               <div className="hero-badge-wrap" style={{ textAlign: 'left', marginBottom: '1.25rem' }}>
                 <span className="hero-top-pill cyber-pill-flame">
                   <Flame size={14} color="#f86200" />
-                  <span>{staffingData?.badge || 'BLACK GRAPES SOFTECH • IT STAFFING & MANPOWER SOLUTIONS'}</span>
+                  <span>{heroBadge}</span>
                 </span>
               </div>
 
               <h1 className="staffing-h1">
-                {staffingData?.headline || 'Stay on course with growth plans by'}
-                {staffingData?.headlineAccent ? (
+                {heroHeadline}
+                {heroAccent ? (
                   <>
                     {' '}
-                    <span className="neon-flame-text">{staffingData.headlineAccent}</span>
+                    <span className="neon-flame-text">{heroAccent}</span>
                   </>
                 ) : null}
               </h1>
 
               <p className="staffing-lead-text">
-                {staffingData?.subtitle || 'Outsource your manpower needs with prompt.'}
+                {heroSubtitle}
               </p>
 
               <p className="staffing-sub-desc">
-                {staffingData?.description || 'Deploy pre-vetted senior software engineers, technical squads, and bulk contractual staff across 28 Indian states with full statutory compliance, zero long-term liabilities, and guaranteed rapid onboarding.'}
+                {heroDesc}
               </p>
 
               {/* Authentic Business Image with Cyber Grape High-Tech Frame & Floating Stats */}
@@ -573,7 +567,9 @@ export default function ITStaffingPage({ onOpenContact }) {
             const colorClass = colorClasses[idx % colorClasses.length];
             return (
               <div key={idx} className="stat-card-v2 translucent-glass-card">
-                <div className={`stat-card-num ${colorClass}`}>{stat.value || stat.number}</div>
+                <div className={`stat-card-num ${colorClass}`}>
+                  <AnimatedCounter value={stat.value || stat.number} duration={1800} />
+                </div>
                 <div className="stat-card-title">{stat.label || stat.title}</div>
                 <div className="stat-card-desc">{stat.desc || stat.sub}</div>
               </div>
@@ -965,7 +961,7 @@ export default function ITStaffingPage({ onOpenContact }) {
               return (
                 <div key={csIdx} className={`compliance-metric-box translucent-glass-card ${highlightClass}`}>
                   <div className={`compliance-stat-val ${cStat.color || 'neon-flame-text'}`}>
-                    {cStat.value}
+                    <AnimatedCounter value={cStat.value} duration={1600} />
                   </div>
                   <div className="compliance-stat-label">{cStat.label}</div>
                 </div>
@@ -1133,20 +1129,6 @@ export default function ITStaffingPage({ onOpenContact }) {
           </div>
         </div>
       )}
-
-      {/* =========================================================================
-          FLOATING WHATSAPP BUTTON (Authentic Widget)
-          ========================================================================= */}
-      <a
-        href="https://wa.me/917470997884?text=Hello%20Black%20Grapes%20Softech,%20I%20want%20to%20inquire%20about%20IT%20Staffing%20Services"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="floating-whatsapp-widget"
-        title="Chat on WhatsApp (+91 7470997884)"
-      >
-        <MessageCircle size={22} />
-        <span className="whatsapp-label">WhatsApp Us</span>
-      </a>
     </main>
   );
 }

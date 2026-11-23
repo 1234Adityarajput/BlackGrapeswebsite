@@ -1,15 +1,129 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useHomePage } from '@backend/useContent';
 import { resolveMediaUrl } from '@backend/dataService';
 import { ABOUT_CONTENT } from '../data/siteData';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function AboutSection({ onOpenModal }) {
   const [openFaq, setOpenFaq] = useState(0);
   const [activeValueTab, setActiveValueTab] = useState(0);
+  const [isInView, setIsInView] = useState(false);
+  const [animKey, setAnimKey] = useState(0);
+  const sectionRef = useRef(null);
   const { home } = useHomePage();
   const about = home?.aboutSection || {};
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsInView(true);
+      return;
+    }
+
+    const elem = sectionRef.current;
+    if (!elem) {
+      setIsInView(true);
+      return;
+    }
+
+    // Check if initial preloader is actively showing on screen
+    const isLoaderActive = () => {
+      const loader = document.getElementById('bgst-initial-loader');
+      return Boolean(loader && !loader.classList.contains('loader-hidden') && !window.__bgstLoaded);
+    };
+
+    // Viewport calculation & re-triggering engine
+    const updateVisibility = () => {
+      // Hold animation while preloader covers the screen on reload/initial paint
+      if (isLoaderActive()) return;
+
+      const rect = elem.getBoundingClientRect();
+      const inViewport = rect.top <= window.innerHeight * 0.82 && rect.bottom >= window.innerHeight * 0.18;
+
+      if (inViewport) {
+        setIsInView((prev) => {
+          if (!prev) {
+            setAnimKey((k) => k + 1);
+            return true;
+          }
+          return prev;
+        });
+      } else {
+        // Scrolled completely out of view (far above or far below): reset so it re-triggers on return
+        const isFarAway = rect.bottom < -80 || rect.top > window.innerHeight + 120;
+        if (isFarAway) {
+          setIsInView(false);
+        }
+      }
+    };
+
+    // If preloader is active, listen for its dismissal before enabling entrance
+    let loaderTimer = null;
+    const handleLoaderDismissed = () => {
+      setTimeout(() => {
+        updateVisibility();
+      }, 120);
+    };
+
+    if (isLoaderActive()) {
+      window.addEventListener('bgst:loaded', handleLoaderDismissed);
+      loaderTimer = setTimeout(() => {
+        updateVisibility();
+      }, 1600);
+    } else {
+      updateVisibility();
+    }
+
+    // IntersectionObserver with continuous enter/leave detection
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (isLoaderActive()) return;
+
+        if (entry.isIntersecting) {
+          setIsInView((prev) => {
+            if (!prev) {
+              setAnimKey((k) => k + 1);
+              return true;
+            }
+            return prev;
+          });
+        } else {
+          // Reset when scrolled completely away
+          if (entry.boundingClientRect.bottom < -80 || entry.boundingClientRect.top > window.innerHeight + 120) {
+            setIsInView(false);
+          }
+        }
+      },
+      { threshold: [0, 0.15], rootMargin: '0px 0px -40px 0px' }
+    );
+
+    observer.observe(elem);
+
+    // Scroll listener throttled via requestAnimationFrame to avoid mobile layout thrashing
+    let scrollTicking = false;
+    const onScroll = () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          updateVisibility();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('bgst:loaded', handleLoaderDismissed);
+      if (loaderTimer) clearTimeout(loaderTimer);
+    };
+  }, []);
 
   const badge = about.badge || ABOUT_CONTENT.badge || 'ABOUT BLACK GRAPES SOFTECH';
   const mainTitle = about.mainTitle || ABOUT_CONTENT.mainTitle || 'Your Strategic Partner for Digital Innovation & Enterprise Software';
@@ -45,7 +159,7 @@ export default function AboutSection({ onOpenModal }) {
   const lifecycleDesc = about.lifecycleDesc || 'From technical discovery to deployment and 24/7 proactive monitoring, we build software engineered to scale with your enterprise.';
 
   return (
-    <section id="about" className="section about-section">
+    <section id="about" ref={sectionRef} className={`section about-section ${isInView ? 'about-split-active' : ''}`}>
       <div className="container">
         {/* Section Header */}
         <div className="section-header text-center">
@@ -71,9 +185,9 @@ export default function AboutSection({ onOpenModal }) {
         </div>
 
         {/* Main 2-Column Content Grid */}
-        <div className="about-grid">
+        <div key={animKey} className="about-grid">
           {/* Left Column: Visual Infographic & Modern Technology Visual Card */}
-          <div className="about-visual-col">
+          <div className={`about-visual-col ${isInView ? 'about-slide-left-active' : ''}`}>
             {/* Top Showcase Card */}
             <div className="about-image-card">
               <div className="about-img-wrapper">
@@ -89,16 +203,18 @@ export default function AboutSection({ onOpenModal }) {
               </div>
 
               {/* Floating Experience Card */}
-              <div className="about-stat-floating-card">
+              <div className="about-stat-floating-card float-reverse">
                 <div className="stat-floating-icon">🏆</div>
                 <div className="stat-floating-content">
-                  <span className="stat-floating-number">{experienceYears}</span>
+                  <span className="stat-floating-number">
+                    <AnimatedCounter value={experienceYears} duration={1800} />
+                  </span>
                   <span className="stat-floating-label">{experienceLabel}</span>
                 </div>
               </div>
 
               {/* Floating Technology Badge */}
-              <div className="about-tech-floating-pill">
+              <div className="about-tech-floating-pill float-subtle">
                 <span className="pill-dot"></span>
                 <span>{techBadgeText}</span>
               </div>
@@ -154,7 +270,7 @@ export default function AboutSection({ onOpenModal }) {
           </div>
 
           {/* Right Column: Detailed Narrative & Interactive Values */}
-          <div className="about-text-col">
+          <div className={`about-text-col ${isInView ? 'about-slide-right-active' : ''}`}>
             <div className="about-narrative-card">
               <h3 className="narrative-heading">
                 {narrativeHeading}

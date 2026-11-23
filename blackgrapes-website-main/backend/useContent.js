@@ -36,6 +36,7 @@ import {
   DEFAULT_IT_STAFFING,
   DEFAULT_ECOMMERCE,
   DEFAULT_PARTNERSHIP,
+  DEFAULT_BUSINESS_PARTNERS,
   DEFAULT_CONTACT_PAGE,
   DEFAULT_CLIENTS_PAGE,
   DEFAULT_SERVICES_PAGE,
@@ -566,7 +567,7 @@ export function useProducts() {
 
 // 17. Business Partners Hook
 export function useBusinessPartners() {
-  const [partners, setPartners] = useState({ product_partners: [], service_partners: [] });
+  const [partners, setPartners] = useState(DEFAULT_BUSINESS_PARTNERS);
   const [loading, setLoading] = useState(true);
 
   const reload = useCallback(async (freshData) => {

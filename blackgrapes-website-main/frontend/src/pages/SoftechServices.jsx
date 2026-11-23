@@ -361,18 +361,6 @@ export default function SoftechServicesPage({ selectedServiceId = null, onSelect
           }}
         />
       )}
-
-      {/* Floating WhatsApp Us Button (Original Website Feature) */}
-      <a 
-        href="https://wa.me/917470997884?text=Hello%20Black%20Grapes%20Softech,%20I%20am%20interested%20in%20your%20services"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="floating-whatsapp-btn"
-        title="Chat on WhatsApp (+91 7470997884)"
-      >
-        <MessageCircle size={18} />
-        <span>WhatsApp Us</span>
-      </a>
     </main>
   );
 }

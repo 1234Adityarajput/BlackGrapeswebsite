@@ -278,6 +278,27 @@ export default function ProjectsSection({ onOpenModal }) {
           >
             <span>{viewMode === 'motion' ? 'Switch to Grid View' : 'Switch to 3D Motion'}</span>
           </button>
+
+          {/* External Live Portfolio App */}
+          <a
+            href="https://black-grapes-portfolio.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="motion-tab-btn"
+            style={{
+              marginLeft: 'auto',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              background: 'linear-gradient(135deg, rgba(248, 98, 0, 0.22) 0%, rgba(147, 51, 234, 0.22) 100%)',
+              borderColor: 'var(--brand-orange)',
+              color: '#ffffff',
+              textDecoration: 'none',
+              fontWeight: 600
+            }}
+          >
+            <span>Live Portfolio App ↗</span>
+          </a>
         </div>
 
         {/* ============================================================
@@ -486,13 +507,28 @@ export default function ProjectsSection({ onOpenModal }) {
         {/* Portfolio Bottom CTA Banner */}
         <div className="portfolio-bottom-cta">
           <p className="portfolio-cta-text">{bottomCtaText}</p>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => onOpenModal && onOpenModal('New Project Inquiry')}
-          >
-            {bottomCtaBtn}
-          </button>
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+            <a
+              href="https://black-grapes-portfolio.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}
+            >
+              <span>Explore Live Portfolio App</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="7" y1="17" x2="17" y2="7" />
+                <polyline points="7 7 17 7 17 17" />
+              </svg>
+            </a>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => onOpenModal && onOpenModal('New Project Inquiry')}
+            >
+              {bottomCtaBtn}
+            </button>
+          </div>
         </div>
       </div>
     </section>

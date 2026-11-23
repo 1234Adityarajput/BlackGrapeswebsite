@@ -21,8 +21,8 @@ import {
 } from 'lucide-react';
 import { usePageSections } from '@backend/useContent';
 import foundersImg from '../../assets/founders.jpg';
-import aboutHeroImg from '../../assets/about-hero.jpg';
 import workspaceImg from '../../assets/workspace.jpg';
+import AnimatedCounter from '../../components/AnimatedCounter';
 import './About.css';
 
 const DEFAULT_STATS = [
@@ -105,14 +105,23 @@ export default function About({ onOpenDemoModal }) {
   const finalCtaSec = sections?.final_cta?.content || {};
 
   // 1. Hero Content
-  const heroBadge = heroSec.badge || 'ABOUT BLACK GRAPES SOFTECH';
-  const heroTitle = heroSec.title || 'We Don’t Just Write Code —';
-  const heroTitleHighlight = heroSec.titleHighlight || 'We Engineer The Digital Future.';
+  const heroBadge = heroSec.badge ? heroSec.badge.trim() : 'ABOUT BLACK GRAPES SOFTECH';
+  const rawTitle = (heroSec.title || '').trim();
+  const heroTitle = (!rawTitle || rawTitle.includes('Empowering Businesses'))
+    ? 'We Don’t Just Write Code'
+    : rawTitle.replace(/\s*—\s*$/, '').trim();
+  const rawHighlight = (heroSec.titleHighlight || '').trim();
+  const heroTitleHighlight = rawHighlight
+    ? (rawHighlight.startsWith('—') ? rawHighlight : `— ${rawHighlight}`)
+    : '— We Engineer The Digital Future.';
   const heroLead = heroSec.lead || 'Headquartered in Indore, India, Black Grapes Softech is a premier software engineering & digital transformation agency. We translate complex business hurdles into elegant, high-impact digital products.';
   const heroPrimaryBtn = heroSec.primaryBtnText || 'Partner With Us';
   const heroSecondaryBtn = heroSec.secondaryBtnText || 'Meet Our Leadership';
   const heroSecondaryLink = heroSec.secondaryBtnLink || '#founders';
-  const heroImage = heroSec.image || aboutHeroImg;
+  const rawHeroImage = heroSec.image || '';
+  const heroImage = (!rawHeroImage || rawHeroImage.includes('about-hero'))
+    ? '/images/blackgrapes-1.png'
+    : rawHeroImage;
   const floatingStat1Num = heroSec.floatingStat1Num || '250+ Projects';
   const floatingStat1Sub = heroSec.floatingStat1Sub || 'Shipped Globally';
   const floatingStat2Num = heroSec.floatingStat2Num || '15+ Nations';
@@ -245,22 +254,26 @@ export default function About({ onOpenDemoModal }) {
                 className="hero-main-img"
               />
               <div className="visual-glass-overlay">
-                <div className="floating-stat-box floating-elem">
+                <div className="floating-stat-box floating-elem float-subtle">
                   <div className="stat-pill-icon">
                     <Rocket size={20} />
                   </div>
                   <div>
-                    <span className="stat-pill-title">{floatingStat1Num}</span>
+                    <span className="stat-pill-title">
+                      <AnimatedCounter value={floatingStat1Num} duration={1800} />
+                    </span>
                     <span className="stat-pill-sub">{floatingStat1Sub}</span>
                   </div>
                 </div>
 
-                <div className="floating-stat-box box-bottom">
+                <div className="floating-stat-box box-bottom float-reverse">
                   <div className="stat-pill-icon purple-icon">
                     <Globe size={20} />
                   </div>
                   <div>
-                    <span className="stat-pill-title">{floatingStat2Num}</span>
+                    <span className="stat-pill-title">
+                      <AnimatedCounter value={floatingStat2Num} duration={1800} />
+                    </span>
                     <span className="stat-pill-sub">{floatingStat2Sub}</span>
                   </div>
                 </div>
@@ -284,7 +297,9 @@ export default function About({ onOpenDemoModal }) {
                     <Icon size={24} />
                   </div>
                   <div className="stat-info">
-                    <span className="stat-number">{stat.number}</span>
+                    <span className="stat-number">
+                      <AnimatedCounter value={stat.number} duration={1800} />
+                    </span>
                     <span className="stat-label">{stat.label}</span>
                     <span className="stat-tag">{stat.highlight}</span>
                   </div>

@@ -19,12 +19,13 @@ export default function BusinessPartnersPage() {
     'Forging strategic alliances, distribution networks, and scalable tech integrations across global enterprise platforms.';
 
   // Product Partners Section
-  const productSectionTitle = partners?.product_intro?.sectionTitle ||
-    partners?.product_intro?.title ||
-    PRODUCT_PARTNERS_INTRO.sectionTitle;
+  const productSectionTitle = (!partners?.product_intro?.sectionTitle || partners?.product_intro?.sectionTitle === 'Products Companies Tie-up')
+    ? PRODUCT_PARTNERS_INTRO.sectionTitle
+    : partners.product_intro.sectionTitle;
 
-  const productParagraphs = (Array.isArray(partners?.product_intro?.paragraphs) && partners.product_intro.paragraphs.length > 0)
-    ? partners.product_intro.paragraphs
+  const rawProductParas = partners?.product_intro?.paragraphs;
+  const productParagraphs = (Array.isArray(rawProductParas) && rawProductParas.length > 0 && !rawProductParas[0].startsWith('Facilitating strategic alliances'))
+    ? rawProductParas
     : PRODUCT_PARTNERS_INTRO.paragraphs;
 
   const productSubHeading = partners?.product_intro?.subHeading ||
@@ -36,12 +37,13 @@ export default function BusinessPartnersPage() {
     : PRODUCT_PARTNERS;
 
   // Service Partners Section
-  const serviceSectionTitle = partners?.service_intro?.sectionTitle ||
-    partners?.service_intro?.title ||
-    SERVICE_PARTNERS_INTRO.sectionTitle;
+  const serviceSectionTitle = (!partners?.service_intro?.sectionTitle || partners?.service_intro?.sectionTitle === 'Services Companies Tie-up')
+    ? SERVICE_PARTNERS_INTRO.sectionTitle
+    : partners.service_intro.sectionTitle;
 
-  const serviceParagraphs = (Array.isArray(partners?.service_intro?.paragraphs) && partners.service_intro.paragraphs.length > 0)
-    ? partners.service_intro.paragraphs
+  const rawServiceParas = partners?.service_intro?.paragraphs;
+  const serviceParagraphs = (Array.isArray(rawServiceParas) && rawServiceParas.length > 0 && !rawServiceParas[0].startsWith('Strategic collaborations between service'))
+    ? rawServiceParas
     : SERVICE_PARTNERS_INTRO.paragraphs;
 
   const serviceSubHeading = partners?.service_intro?.subHeading ||

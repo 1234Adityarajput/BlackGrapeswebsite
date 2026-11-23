@@ -25,13 +25,32 @@ export const prefersReducedMotion = () => {
 export function initHeroAnimation() {
   if (typeof window === 'undefined' || prefersReducedMotion()) return;
 
+  // If initial preloader is active, defer animation choreography until loader dissolves
+  const isLoaderActive = typeof document !== 'undefined' && 
+    document.getElementById('bgst-initial-loader') && 
+    !document.getElementById('bgst-initial-loader').classList.contains('loader-hidden');
+
+  if (isLoaderActive) {
+    const runAfterLoad = () => {
+      window.removeEventListener('bgst:loaded', runAfterLoad);
+      setTimeout(initHeroAnimation, 80);
+    };
+    window.addEventListener('bgst:loaded', runAfterLoad);
+    return;
+  }
+
   const heroSelectors = [
     '.hero-section',
     '.about-hero-section',
     '.products-hero-section',
     '.clients-hero-section',
     '.portfolio-hero-section',
-    '.softech-hero'
+    '.softech-hero',
+    '.it-staffing-hero',
+    '.ecommerce-hero',
+    '.contact-hero',
+    '.partnership-hero',
+    '.business-partners-hero'
   ].join(', ');
 
   const heroContainers = document.querySelectorAll(heroSelectors);
@@ -41,42 +60,61 @@ export function initHeroAnimation() {
     container.dataset.heroAnimated = 'true';
 
     try {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const elements = [
+        container.querySelector('.hero-badge-pill, .hero-eyebrow, .hero-eyebrow-badge, .hero-badge-wrap, .hero-eyebrow-pill'),
+        container.querySelector('.hero-title, .products-hero-title, .portfolio-hero-title, .black-hero-title, .clients-hero-title, h1'),
+        container.querySelector('.hero-description, .products-hero-desc, .portfolio-hero-subtitle, .black-hero-subtitle, .hero-lead'),
+        container.querySelector('.hero-cta-group, .hero-cta-bar, .hero-cta-row'),
+        container.querySelector('.hero-visual, .hero-visual-card, .products-hero-visual, .hero-glass-card'),
+        container.querySelector('.hero-metrics-grid')
+      ].filter(Boolean);
 
-      const badge = container.querySelector(
-        '.hero-badge-pill, .hero-eyebrow, .hero-eyebrow-badge, .hero-badge-wrap, .hero-eyebrow-pill'
-      );
+      // Guarantee elements are never stuck invisible
+      elements.forEach(el => {
+        el.style.visibility = 'visible';
+        el.style.opacity = '1';
+      });
+
+      const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        onComplete: () => {
+          elements.forEach(el => {
+            gsap.set(el, { clearProps: 'opacity,filter,transform' });
+          });
+        }
+      });
+
+      const badge = elements[0];
       if (badge) {
-        tl.fromTo(badge, { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.1 });
+        tl.fromTo(badge, { x: -50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.55, delay: 0.05 });
       }
 
-      const title = container.querySelector(
-        '.hero-title, .products-hero-title, .portfolio-hero-title, .black-hero-title, .clients-hero-title, h1'
-      );
+      const title = elements[1];
       if (title) {
-        tl.fromTo(title, { y: 30, opacity: 0, filter: 'blur(6px)' }, { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8 }, '-=0.35');
+        tl.fromTo(title, { x: -65, opacity: 0 }, { x: 0, opacity: 1, duration: 0.65 }, '-=0.35');
       }
 
-      const desc = container.querySelector(
-        '.hero-description, .products-hero-desc, .portfolio-hero-subtitle, .black-hero-subtitle, .hero-lead'
-      );
+      const desc = elements[2];
       if (desc) {
-        tl.fromTo(desc, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.45');
+        tl.fromTo(desc, { x: -55, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6 }, '-=0.4');
       }
 
-      const cta = container.querySelector('.hero-cta-group, .hero-cta-bar, .hero-cta-row');
+      const cta = elements[3];
       if (cta && cta.children.length > 0) {
-        tl.fromTo(cta.children, { y: 16, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, stagger: 0.1 }, '-=0.35');
+        tl.fromTo(cta.children, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, stagger: 0.08 }, '-=0.35');
       }
 
-      const visual = container.querySelector(
-        '.hero-visual, .hero-visual-card, .products-hero-visual, .hero-glass-card'
-      );
+      const visual = elements[4];
       if (visual) {
-        tl.fromTo(visual, { x: 35, opacity: 0, scale: 0.96 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power2.out' }, '-=0.7');
+        tl.fromTo(visual, { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.85, ease: 'power3.out' }, '-=0.45');
       }
     } catch (e) {
       console.warn('[MotionEngine] Hero animation notice:', e);
+      const allHeroElements = container.querySelectorAll('.hero-content, .hero-badge-pill, .hero-title, .hero-description, .hero-cta-group, .hero-metrics-grid, .hero-visual');
+      allHeroElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.visibility = 'visible';
+      });
     }
   });
 }
@@ -98,19 +136,33 @@ export function initCardTilt() {
 
   const cardSelector = [
     '.service-card',
+    '.softech-card',
+    '.softech-service-card',
+    '.softech-spotlight-card',
     '.project-card',
     '.coverflow-card',
     '.process-step-card',
     '.why-us-capsule-card',
     '.industry-card',
     '.product-card',
+    '.product-glass-card',
     '.value-card',
     '.domain-card',
     '.timeline-card',
     '.staffing-model-card',
     '.talent-card',
+    '.hiring-step-card',
     '.ecommerce-feature-card',
-    '.partner-tier-card'
+    '.store-model-card',
+    '.partner-tier-card',
+    '.stat-card',
+    '.stat-card-v2',
+    '.counter-card',
+    '.founder-card',
+    '.contact-card',
+    '.contact-info-card',
+    '.compliance-metric-box',
+    '.translucent-glass-card'
   ].join(', ');
 
   document.addEventListener('mousemove', (e) => {
@@ -224,32 +276,45 @@ export function initScrollTriggers() {
 
   const selector = [
     '.section-header:not(._observed)',
-    '.hero-content:not(._observed)',
-    '.hero-visual:not(._observed)',
+    '.section-title:not(._observed)',
+    '.section-subtitle:not(._observed)',
+    '.section-badge:not(._observed)',
     '.service-card:not(._observed)',
+    '.softech-card:not(._observed)',
+    '.softech-service-card:not(._observed)',
+    '.softech-spotlight-card:not(._observed)',
     '.project-card:not(._observed)',
     '.process-step-card:not(._observed)',
     '.why-us-capsule-card:not(._observed)',
     '.counter-card:not(._observed)',
+    '.counters-banner:not(._observed)',
     '.testimonial-card:not(._observed)',
     '.industry-card:not(._observed)',
     '.stat-strip-card:not(._observed)',
+    '.stat-card:not(._observed)',
+    '.stat-card-v2:not(._observed)',
     '.vm-card:not(._observed)',
     '.founder-card:not(._observed)',
     '.value-card:not(._observed)',
     '.domain-card:not(._observed)',
     '.timeline-card:not(._observed)',
     '.product-card:not(._observed)',
+    '.product-glass-card:not(._observed)',
     '.client-logo-card:not(._observed)',
     '.client-case-card:not(._observed)',
     '.staffing-model-card:not(._observed)',
     '.talent-card:not(._observed)',
     '.hiring-step-card:not(._observed)',
     '.ecommerce-feature-card:not(._observed)',
+    '.store-model-card:not(._observed)',
     '.contact-info-card:not(._observed)',
+    '.contact-form-wrap:not(._observed)',
     '.partner-tier-card:not(._observed)',
     '.tendering-callout-card:not(._observed)',
-    '.cta-banner-box:not(._observed)'
+    '.cta-banner-box:not(._observed)',
+    '.cta-banner:not(._observed)',
+    '.compliance-metric-box:not(._observed)',
+    '.translucent-glass-card:not(._observed)'
   ].join(', ');
 
   const targets = document.querySelectorAll(selector);
@@ -257,24 +322,67 @@ export function initScrollTriggers() {
   targets.forEach((el) => {
     el.classList.add('_observed', 'reveal-init');
     const parentGrid = el.closest('.grid, .cards-grid, [class*="-grid"], [class*="-layout"]');
+    let delay = 0;
     if (parentGrid) {
       const siblingIndex = Array.from(parentGrid.children).indexOf(el);
       if (siblingIndex >= 0) {
-        const delay = Math.min((siblingIndex % 6) * 0.08, 0.48);
+        delay = Math.min((siblingIndex % 6) * 0.08, 0.48);
         el.style.transitionDelay = `${delay}s`;
       }
     }
-    scrollObserver.observe(el);
+
+    // If already in viewport on mount, reveal immediately with subtle stagger
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setTimeout(() => {
+        el.classList.add('is-revealed');
+      }, delay * 1000 + 40);
+    } else {
+      scrollObserver.observe(el);
+    }
   });
 }
 
 /**
- * 5. MASTER MOTION INITIALIZER
+ * 5. MOBILE TOUCH-SCROLL PERFORMANCE GOVERNOR (60-120fps lock)
+ * Pauses heavy raster animations and particle drawing while finger is dragging / during momentum scroll
+ */
+let isScrollGovernorInitialized = false;
+
+export function initScrollGovernor() {
+  if (typeof window === 'undefined' || isScrollGovernorInitialized) return;
+  isScrollGovernorInitialized = true;
+
+  const isTouchDevice = 'ontouchstart' in window || (typeof navigator !== 'undefined' && navigator.maxTouchPoints > 0);
+  if (!isTouchDevice) return;
+
+  let scrollTimeout = null;
+
+  const onScrollStart = () => {
+    if (document.body && !document.body.classList.contains('is-scrolling')) {
+      document.body.classList.add('is-scrolling');
+    }
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      if (document.body) {
+        document.body.classList.remove('is-scrolling');
+      }
+    }, 110);
+  };
+
+  window.addEventListener('scroll', onScrollStart, { passive: true });
+  window.addEventListener('touchmove', onScrollStart, { passive: true });
+  window.addEventListener('touchstart', onScrollStart, { passive: true });
+}
+
+/**
+ * 6. MASTER MOTION INITIALIZER
  * Safe, reliable, non-blocking initializer.
  */
 export function initMotionSystem() {
   if (typeof window === 'undefined') return () => {};
 
+  initScrollGovernor();
   initHeroAnimation();
   initCardTilt();
   initMagneticButtons();

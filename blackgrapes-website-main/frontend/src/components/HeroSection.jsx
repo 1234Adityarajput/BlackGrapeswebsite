@@ -3,6 +3,7 @@ import React from 'react';
 import { COMPANY_INFO } from '../data/siteData';
 import { useHomePage } from '@backend/useContent';
 import { resolveMediaUrl } from '@backend/dataService';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function HeroSection({ onOpenModal }) {
   const { home } = useHomePage();
@@ -11,11 +12,18 @@ export default function HeroSection({ onOpenModal }) {
   const heroImage = rawImage ? resolveMediaUrl(rawImage) : '';
 
   const badgeText = hero.badge || '10+ Years of Proven IT Excellence • Indore, India';
-  const headline = hero.headline || 'Engineering Scalable Software, Web & Mobile Platforms for Global Ambition';
-  const brandHighlight = hero.brand_highlight || 'BLACK GRAPES SOFTECH';
-  const description = hero.description || 'We architect high-performance custom software, mobile apps, enterprise CRMs, and modern websites for ambitious startups and global enterprises.';
-  const ctaPrimary = hero.cta_primary_text || 'Get Free Consultation';
-  const ctaSecondary = hero.cta_secondary_text || 'Explore Services';
+  const prefix = hero.prefix || 'INNOVATE. INTEGRATE. ELEVATE.';
+  const brandHighlight = (hero.brand_highlight || 'BLACK GRAPES SOFTECH').trim();
+  const titleLine1 = (hero.title_line1 || 'And Digitalize Your Ideas').trim();
+  const breakText = (hero.break_text || 'into Success via').trim();
+
+  // If hero.headline happens to be the old generic placeholder, ignore it
+  const isOldGenericHeadline = hero.headline && hero.headline.includes('Engineering Scalable Software');
+  const customHeadline = (!isOldGenericHeadline && hero.headline) ? hero.headline : null;
+
+  const description = hero.description || 'Get Free Consultation From Our Industry Experts. We engineer scalable custom software, iOS & Android mobile apps, enterprise CRMs, MLM platforms, and high-conversion websites for ambitious startups and global enterprises.';
+  const ctaPrimary = hero.cta_primary_text || 'Request a Demo';
+  const ctaSecondary = hero.cta_secondary_text || 'Get the offer';
 
   const defaultBadges = [
     { name: 'React', category: 'Frontend' },
@@ -32,24 +40,60 @@ export default function HeroSection({ onOpenModal }) {
 
   const techBadges = (hero.techBadges && hero.techBadges.length > 0) ? hero.techBadges : defaultBadges;
 
+  // Coordinate entrance animation with initial loading screen dismissal
+  const [isHeroReady, setIsHeroReady] = React.useState(() => {
+    if (typeof window === 'undefined') return true;
+    return Boolean(window.__bgstLoaded) || !document.getElementById('bgst-initial-loader');
+  });
+
+  React.useEffect(() => {
+    if (isHeroReady) return;
+
+    const handleLoaderDismissed = () => {
+      // Trigger smooth entrance right as loader starts dissolving
+      setTimeout(() => {
+        setIsHeroReady(true);
+      }, 80);
+    };
+
+    window.addEventListener('bgst:loaded', handleLoaderDismissed);
+
+    // Guaranteed fallback timer (never remains hidden)
+    const fallbackTimer = setTimeout(() => {
+      setIsHeroReady(true);
+    }, 1500);
+
+    return () => {
+      window.removeEventListener('bgst:loaded', handleLoaderDismissed);
+      clearTimeout(fallbackTimer);
+    };
+  }, [isHeroReady]);
+
   return (
     <section id="home" className="hero-section">
       <div className="container hero-container">
         {/* Left Column: Headline & Action CTAs */}
-        <div className="hero-content">
+        <div className={`hero-content ${isHeroReady ? 'hero-content-entrance' : 'hero-content-waiting'} is-revealed`}>
           <div className="hero-badge-pill reveal-fade-down is-revealed">
             <span className="badge-glow-dot"></span>
             <span className="badge-text">{badgeText}</span>
           </div>
 
           <h1 className="hero-title reveal-fade-up is-revealed stagger-1">
-            {hero.headline ? (
-              <span>{hero.headline}</span>
+            {customHeadline ? (
+              <span className="hero-headline-shimmer">{customHeadline}</span>
             ) : (
               <>
-                <span className="hero-prefix">{hero.prefix || 'Innovate & Scale With'} </span>
-                <span className="hero-gradient-brand">{brandHighlight}</span>
-                {hero.break_text && <span className="hero-break"> — {hero.break_text}</span>}
+                <span className="hero-prefix">{prefix}</span>
+                <span className="hero-title-line hero-title-line-1">
+                  <span className="hero-headline-shimmer">{titleLine1}</span>
+                </span>
+                <span className="hero-title-line hero-title-line-2">
+                  <span className="hero-headline-shimmer">{breakText}</span>
+                </span>
+                <span className="hero-title-line hero-title-line-3">
+                  <span className="hero-headline-shimmer hero-brand-shimmer">{brandHighlight}</span>
+                </span>
               </>
             )}
           </h1>
@@ -68,45 +112,67 @@ export default function HeroSection({ onOpenModal }) {
               <span>{ctaPrimary}</span>
             </button>
 
-            <a
-              href="#services"
-              className="btn btn-outline btn-lg btn-premium-action"
-            >
-              <span>{ctaSecondary}</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
+            {ctaSecondary === 'Get the offer' ? (
+              <button
+                type="button"
+                className="btn btn-outline btn-lg btn-premium-action"
+                onClick={() => onOpenModal(ctaSecondary)}
+              >
+                <span>{ctaSecondary}</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            ) : (
+              <a
+                href="#services"
+                className="btn btn-outline btn-lg btn-premium-action"
+              >
+                <span>{ctaSecondary}</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            )}
           </div>
 
           {/* Quick Metrics Bar */}
-          <div className="hero-metrics-grid reveal-fade-up is-revealed stagger-4">
+          <div key={isHeroReady ? 'hero-metrics-ready' : 'hero-metrics-waiting'} className="hero-metrics-grid reveal-fade-up is-revealed stagger-4">
             <div className="hero-metric-item">
-              <span className="metric-number">10+</span>
+              <span className="metric-number">
+                <AnimatedCounter target={10} duration={1600} suffix="+" />
+              </span>
               <span className="metric-label">Years Innovation</span>
             </div>
             <div className="hero-metric-divider"></div>
             <div className="hero-metric-item">
-              <span className="metric-number">150+</span>
+              <span className="metric-number">
+                <AnimatedCounter target={150} duration={1800} suffix="+" />
+              </span>
               <span className="metric-label">Global Clients</span>
             </div>
             <div className="hero-metric-divider"></div>
             <div className="hero-metric-item">
-              <span className="metric-number">250+</span>
+              <span className="metric-number">
+                <AnimatedCounter target={250} duration={2000} suffix="+" />
+              </span>
               <span className="metric-label">Projects Deployed</span>
             </div>
             <div className="hero-metric-divider"></div>
             <div className="hero-metric-item">
-              <span className="metric-number">99%</span>
+              <span className="metric-number">
+                <AnimatedCounter target={99} duration={1800} suffix="%" />
+              </span>
               <span className="metric-label">Retention Rate</span>
             </div>
           </div>
         </div>
 
         {/* Right Column: Interactive Tech Showcase Card / Custom Hero Visual */}
-        <div className="hero-visual reveal-slide-right is-revealed float-subtle">
-          <div className="hero-glass-card">
+        <div className={`hero-visual ${isHeroReady ? 'hero-visual-entrance' : 'hero-visual-waiting'}`}>
+          <div className="hero-glass-card hero-glass-card-floating">
             {/* Card Header with Mock Window Controls */}
             <div className="glass-card-header">
               <div className="window-dots">
@@ -163,7 +229,10 @@ export default function HeroSection({ onOpenModal }) {
                 <div className="tab-pane">
                   <div className="code-header">
                     <span className="code-lang">FullStackApp.tsx</span>
-                    <span className="code-status">● Live Production</span>
+                    <span className="code-status">
+                      <span className="live-ping-dot"></span>
+                      <span>Live Production</span>
+                    </span>
                   </div>
                   <pre className="code-block">
                     <code>{`// Modern React + Cloud Integration
@@ -182,7 +251,9 @@ export const EnterprisePortal = () => {
 
                   <div className="card-kpis">
                     <div className="kpi-box">
-                      <span className="kpi-val">99 / 100</span>
+                      <span className="kpi-val">
+                        <AnimatedCounter target={99} duration={1600} suffix=" / 100" />
+                      </span>
                       <span className="kpi-label">Lighthouse Score</span>
                     </div>
                     <div className="kpi-box">
@@ -190,7 +261,9 @@ export const EnterprisePortal = () => {
                       <span className="kpi-label">Load Time</span>
                     </div>
                     <div className="kpi-box">
-                      <span className="kpi-val">100%</span>
+                      <span className="kpi-val">
+                        <AnimatedCounter target={100} duration={1600} suffix="%" />
+                      </span>
                       <span className="kpi-label">Responsive</span>
                     </div>
                   </div>
@@ -200,10 +273,12 @@ export const EnterprisePortal = () => {
           </div>
 
           {/* Floating Badge */}
-          <div className="floating-badge badge-bottom-left">
+          <div key={isHeroReady ? 'hero-badge-ready' : 'hero-badge-waiting'} className="floating-badge badge-bottom-left">
             <span className="floating-icon">🚀</span>
             <div className="floating-text">
-              <strong>100+ Clients</strong>
+              <strong>
+                <AnimatedCounter target={100} duration={1800} suffix="+ Clients" />
+              </strong>
               <span>Global Deliveries</span>
             </div>
           </div>
