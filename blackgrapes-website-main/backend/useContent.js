@@ -19,7 +19,8 @@ import {
   getBusinessPartners,
   getServicesPage,
   getSoftechPage,
-  getProductsPage
+  getProductsPage,
+  getCareersPage
 } from './dataService';
 import {
   DEFAULT_SITE_SETTINGS,
@@ -39,7 +40,8 @@ import {
   DEFAULT_CLIENTS_PAGE,
   DEFAULT_SERVICES_PAGE,
   DEFAULT_SOFTECH_PAGE,
-  DEFAULT_PRODUCTS_PAGE
+  DEFAULT_PRODUCTS_PAGE,
+  DEFAULT_CAREERS_PAGE
 } from './defaultData';
 import { subscribeToWebSocket } from './wsClient';
 
@@ -74,8 +76,23 @@ function subscribeToUpdates(moduleName, onUpdate) {
     onUpdate(freshData);
   });
 
+  // 4. Tab visibility change & focus listener (Instant reload when switching tabs)
+  const handleVisibility = () => {
+    if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+      onUpdate();
+    }
+  };
+  if (typeof window !== 'undefined') {
+    window.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('focus', handleVisibility);
+  }
+
   return () => {
     window.removeEventListener('bgst_content_updated', handleWindow);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('focus', handleVisibility);
+    }
     if (syncChannel) {
       syncChannel.removeEventListener('message', handleSyncChannel);
       syncChannel.close();
@@ -664,4 +681,67 @@ export function useProductsPage() {
 
   return { productsPageData: data, loading, reload };
 }
+
+// 21. Careers & Job Openings Hook
+export function useCareersPage() {
+  const [data, setData] = useState(DEFAULT_CAREERS_PAGE);
+  const [loading, setLoading] = useState(true);
+
+  const reload = useCallback(async (freshData) => {
+    if (freshData && typeof freshData === 'object' && ('heroTitle' in freshData || 'openings' in freshData)) {
+      if (!freshData.heroTitle?.includes('Digital Engineering') && !freshData.heroBadge?.includes('WE ARE HIRING')) {
+        setData(freshData);
+        setLoading(false);
+        return;
+      }
+    }
+    try {
+      const res = await getCareersPage();
+      if (res && typeof res === 'object') {
+        const isObsolete = res.heroTitle?.includes('Digital Engineering') || res.heroBadge?.includes('WE ARE HIRING') || res.heroTitleAccent === 'Black Grapes Softech';
+        const base = isObsolete ? DEFAULT_CAREERS_PAGE : res;
+        const merged = {
+          ...DEFAULT_CAREERS_PAGE,
+          ...base,
+          heroBadge: (base.heroBadge && !base.heroBadge.includes('WE ARE HIRING')) ? base.heroBadge : DEFAULT_CAREERS_PAGE.heroBadge,
+          heroTitle: (base.heroTitle && !base.heroTitle.includes('Digital Engineering')) ? base.heroTitle : DEFAULT_CAREERS_PAGE.heroTitle,
+          heroTitleAccent: (base.heroTitleAccent && base.heroTitleAccent !== 'Black Grapes Softech') ? base.heroTitleAccent : DEFAULT_CAREERS_PAGE.heroTitleAccent,
+          heroSubtitle: (base.heroSubtitle && !base.heroSubtitle.includes('passionate team')) ? base.heroSubtitle : DEFAULT_CAREERS_PAGE.heroSubtitle,
+          whyJoin: {
+            ...DEFAULT_CAREERS_PAGE.whyJoin,
+            ...(base.whyJoin || {}),
+            pillars: (base.whyJoin?.pillars && base.whyJoin.pillars.length > 0)
+              ? base.whyJoin.pillars
+              : DEFAULT_CAREERS_PAGE.whyJoin.pillars,
+            contactCard: {
+              ...DEFAULT_CAREERS_PAGE.whyJoin.contactCard,
+              ...(base.whyJoin?.contactCard || {})
+            }
+          },
+          applicationForm: {
+            ...DEFAULT_CAREERS_PAGE.applicationForm,
+            ...(base.applicationForm || {})
+          },
+          openingsSection: {
+            ...DEFAULT_CAREERS_PAGE.openingsSection,
+            ...(base.openingsSection || {})
+          }
+        };
+        setData(merged);
+      }
+    } catch {
+      // fallback
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    reload();
+    return subscribeToUpdates('careers_page', (fresh) => reload(fresh));
+  }, [reload]);
+
+  return { careersData: data, loading, reload };
+}
+
 

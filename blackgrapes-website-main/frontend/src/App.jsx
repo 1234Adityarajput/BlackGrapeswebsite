@@ -25,6 +25,7 @@ import EcommercePage from './pages/Ecommerce';
 import ContactPage from './pages/Contact';
 import PartnershipPage from './pages/PartnershipPage';
 import BusinessPartnersPage from './pages/BusinessPartnersPage';
+import CareersPage from './pages/CareersPage';
 import './App.css';
 
 export default function App() {
@@ -213,6 +214,20 @@ export default function App() {
               <Route
                 path="/business-partners"
                 element={<BusinessPartnersPage onOpenModal={handleOpenModal} />}
+              />
+
+              {/* Careers & Jobs */}
+              <Route
+                path="/careers"
+                element={<CareersPage onOpenInquiry={handleOpenInquiry} />}
+              />
+              <Route
+                path="/career"
+                element={<CareersPage onOpenInquiry={handleOpenInquiry} />}
+              />
+              <Route
+                path="/jobs"
+                element={<CareersPage onOpenInquiry={handleOpenInquiry} />}
               />
 
               {/* Fallback to Home */}

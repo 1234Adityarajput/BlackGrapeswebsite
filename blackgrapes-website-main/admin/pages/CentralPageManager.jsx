@@ -25,7 +25,8 @@ import {
   Sliders,
   FileText,
   Plus,
-  Trash2
+  Trash2,
+  GraduationCap
 } from 'lucide-react';
 import {
   getHomePage,
@@ -127,6 +128,16 @@ const ALL_PAGES = [
     tagline: 'Contract developers, technical hiring squads, NAPS apprenticeship and rates',
     sectionsCount: 4,
     dedicatedManager: '/admin/it-staffing'
+  },
+  {
+    id: 'careers',
+    name: 'Careers & Hiring',
+    route: '/careers',
+    module: 'careers_page',
+    icon: GraduationCap,
+    tagline: 'Open tech vacancies, culture, recruitment workflow and candidate resumes',
+    sectionsCount: 5,
+    dedicatedManager: '/admin/careers'
   },
   {
     id: 'ecommerce',

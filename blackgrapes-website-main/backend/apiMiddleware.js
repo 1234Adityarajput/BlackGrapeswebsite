@@ -63,6 +63,9 @@ export function createApiMiddleware() {
     };
 
     const getBody = () => {
+      if (req.body && typeof req.body === 'object') {
+        return Promise.resolve(req.body);
+      }
       return new Promise((resolve) => {
         let body = '';
         req.on('data', (chunk) => (body += chunk));

@@ -118,6 +118,7 @@ export default function Footer({ onOpenModal, onOpenInquiry }) {
         { label: 'Proprietary Software Catalog', path: '/products' },
         { label: 'Client Case Studies', path: '/clients' },
         { label: 'IT & Technical Staffing', path: '/it-staffing' },
+        { label: 'Careers & Hiring', path: '/careers' },
         { label: 'E-Commerce & Hardware', path: '/ecommerce' },
         { label: 'Partner Program (ODC)', path: '/partnership' },
         { label: 'About Black Grapes', path: '/about' }
@@ -130,6 +131,7 @@ export default function Footer({ onOpenModal, onOpenInquiry }) {
         { label: 'About Us', path: '/about' },
         { label: 'Services', path: '/services' },
         { label: 'Products', path: '/products' },
+        { label: 'Careers', path: '/careers' },
         { label: 'Contact', path: '/contact' }
       ];
 

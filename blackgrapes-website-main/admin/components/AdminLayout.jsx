@@ -28,7 +28,8 @@ import {
   ShoppingBag,
   Handshake,
   Building2,
-  Sparkles
+  Sparkles,
+  GraduationCap
 } from 'lucide-react';
 import { getCurrentSession, logoutAdmin } from '@backend/authService';
 import { getEnquiries, checkBackendHealth } from '@backend/dataService';
@@ -95,6 +96,7 @@ export default function AdminLayout() {
         { label: 'Products & Projects', path: '/admin/projects', icon: Package },
         { label: 'Client Portfolio', path: '/admin/clients', icon: Building2 },
         { label: 'IT Staffing Solutions', path: '/admin/it-staffing', icon: Briefcase },
+        { label: 'Careers & Openings', path: '/admin/careers', icon: GraduationCap },
         { label: 'E-Commerce Platform', path: '/admin/ecommerce', icon: ShoppingBag },
         { label: 'Partnership & Alliances', path: '/admin/partnership', icon: Handshake },
         { label: 'Contact Coordinates', path: '/admin/contact', icon: MapPin },

@@ -79,11 +79,16 @@ export const DEFAULT_SITE_SETTINGS = {
 
 export const DEFAULT_MENUS = [
   { id: 'm-1', label: 'Home', path: '/', order_index: 1, is_active: true },
-  { id: 'm-2', label: 'About Us', path: '/about', order_index: 2, is_active: true },
+  { id: 'm-2', label: 'About Us', path: '/about-us', order_index: 2, is_active: true },
   { id: 'm-3', label: 'Services', path: '/services', order_index: 3, is_active: true },
-  { id: 'm-4', label: 'Our Products', path: '/products', order_index: 4, is_active: true },
-  { id: 'm-5', label: 'Our Clients', path: '/clients', order_index: 5, is_active: true },
-  { id: 'm-6', label: 'Contact', path: '/contact', order_index: 6, is_active: true }
+  { id: 'm-4', label: 'Portfolio', path: '/portfolio', order_index: 4, is_active: true },
+  { id: 'm-5', label: 'Our Products', path: '/our-products', order_index: 5, is_active: true },
+  { id: 'm-6', label: 'Ecommerce', path: '/ecommerce', order_index: 6, is_active: true },
+  { id: 'm-7', label: 'Our Clients', path: '/our-clients', order_index: 7, is_active: true },
+  { id: 'm-8', label: 'IT Staffing', path: '/it-staffing', order_index: 8, is_active: true },
+  { id: 'm-9', label: 'Partnership', path: '/partnership', order_index: 9, is_active: true },
+  { id: 'm-10', label: 'Careers', path: '/careers', order_index: 10, is_active: true },
+  { id: 'm-11', label: 'Contact', path: '/contact', order_index: 11, is_active: true }
 ];
 
 export const DEFAULT_HOME_PAGE = {
@@ -1390,22 +1395,122 @@ export const DEFAULT_SOFTECH_PAGE = {
 };
 
 export const DEFAULT_PRODUCTS_PAGE = {
-  badge: 'BLACK GRAPES SOFTECH PROPRIETARY SUITE',
-  title: 'Our Products:',
-  titleAccent: 'Engineered to Transform Modern Business',
-  subtitle: 'Explore our cutting-edge software solutions designed to transform the way you work and elevate your business to new heights. Our Products showcase a diverse range of powerful and user-friendly software applications tailored to meet the unique needs of modern businesses.',
+  badge: "BLACK GRAPES SOFTECH PROPRIETARY SUITE",
+  title: "Our Products:",
+  titleAccent: "Engineered to Transform Modern Business",
+  subtitle: "Explore our cutting-edge software solutions designed to transform the way you work and elevate your business to new heights. Our Products showcase a diverse range of powerful and user-friendly software applications tailored to meet the unique needs of modern businesses.",
   stats: [
-    { metric: '12+', label: 'Turnkey Products' },
-    { metric: '100%', label: 'Source Code Ownership' },
-    { metric: '7+', label: 'Core Industries' },
-    { metric: '5-7', label: 'Days Deployment' }
+    {
+      metric: "12+",
+      label: "Turnkey Products"
+    },
+    {
+      metric: "100%",
+      label: "Source Code Ownership"
+    },
+    {
+      metric: "7+",
+      label: "Core Industries"
+    },
+    {
+      metric: "5-7",
+      label: "Days Deployment"
+    }
   ],
-  primaryBtnText: 'Request Live Demo',
-  secondaryBtnText: 'Browse All Products',
-  pillTitle: 'Live Production Ready',
-  pillSub: 'Cloud Native • Web • iOS • Android',
-  pillBadge: 'WHITE-LABEL',
+  primaryBtnText: "Request Live Demo",
+  secondaryBtnText: "Browse All Products",
+  pillTitle: "Live Production Ready",
+  pillSub: "Cloud Native • Web • iOS • Android",
+  pillBadge: "WHITE-LABEL",
   isVisible: true
 };
 
+export const DEFAULT_CAREERS_PAGE = {
+  // Hero section (Screenshot 1)
+  heroBadge: '# CAREERS AT BLACK GRAPES SOFTECH',
+  heroTitle: 'Build Future-Defining Software',
+  heroTitleAccent: 'With Us',
+  heroSubtitle: 'Join an engineering-first technology powerhouse. We architect scalable enterprise systems, modern mobile platforms, and cloud AI ecosystems for global innovators.',
+
+  // Why Join Section (Left column from Screenshot 1 & 2)
+  whyJoin: {
+    badge: 'WHY JOIN BLACK GRAPES SOFTECH',
+    title: 'Where High-Velocity Talent Solves Real-World Engineering Scale',
+    paragraph: 'With 10+ years of proven IT excellence in Indore and deployments across 15+ countries, Black Grapes Softech is the launchpad for ambitious developers, creative UI/UX designers, and technology leaders. We provide challenging work, genuine autonomy, and an agile culture that rewards engineering curiosity.',
+    pillars: [
+      {
+        id: 'pillar-1',
+        title: 'Modern Tech Stack',
+        desc: 'Architect with React, Next.js, Flutter, Node.js, Python, AWS Cloud & scalable microservices.',
+        icon: 'Code'
+      },
+      {
+        id: 'pillar-2',
+        title: 'Rapid Career Velocity',
+        desc: 'Merit-driven progression, executive mentorship, and direct leadership opportunities.',
+        icon: 'TrendingUp'
+      },
+      {
+        id: 'pillar-3',
+        title: 'Global Impact & Deployments',
+        desc: 'Build high-scale enterprise platforms deployed across 15+ countries and India.',
+        icon: 'Globe'
+      },
+      {
+        id: 'pillar-4',
+        title: 'Continuous Tech Upgrades',
+        desc: 'Sponsored technical certifications, internal hackathons, and advanced learning support.',
+        icon: 'BookOpen'
+      }
+    ],
+    contactCard: {
+      title: 'Direct Talent Team Contact',
+      subtitle: 'Have questions about working with us? Reach out directly.',
+      email: 'careers@blackgrapessoftech.com',
+      whatsapp: '+91 7470997884',
+      whatsappLabel: 'WhatsApp HR →'
+    }
+  },
+
+  // Direct Career Application Form (Right column from Screenshot 1 & 2)
+  applicationForm: {
+    badge: 'DIRECT CAREER APPLICATION',
+    title: 'Drop Your Profile',
+    subtitle: 'Submit your credentials to join our engineering talent network. We evaluate every application thoroughly.',
+    domains: [
+      'Full Stack Engineer (MERN / Next.js)',
+      'Mobile App Developer (Flutter / React Native)',
+      'UI/UX Designer & Motion Creative',
+      'Python & AI Backend Engineer',
+      'QA Automation Engineer',
+      'Business Development / IT Sales',
+      'Digital Marketing & SEO Specialist',
+      'Other / General Application'
+    ],
+    experienceLevels: [
+      'Fresher / College Graduate',
+      '1 - 2 Years (Junior Developer)',
+      '2 - 5 Years (Mid-Level Engineer)',
+      '5+ Years (Senior / Technical Lead)'
+    ],
+    submitBtnText: 'Submit Job Application ✈'
+  },
+
+  // Explore Open Positions (Bottom Section from Screenshot 2)
+  openingsSection: {
+    badge: 'CURRENT OPENINGS',
+    title: 'Explore Open Positions',
+    subtitle: 'Discover public job vacancies and squad expansion opportunities at Black Grapes Softech.',
+    emptyState: {
+      title: 'No Specific Public Vacancies Listed Right Now',
+      desc: 'All our core engineering, mobile app, and design squads are currently staffed. However, exceptional talent always finds an opportunity at Black Grapes Softech! We prioritize candidates from our talent pool first whenever a new client mandate or team sprint begins.',
+      ctaText: 'Join Talent Pool Above ↗'
+    }
+  },
+
+  // Openings List (Can hold vacancies when created via Admin Panel)
+  openings: [],
+
+  isVisible: true
+};
 

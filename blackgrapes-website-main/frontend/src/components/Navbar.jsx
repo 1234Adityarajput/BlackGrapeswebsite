@@ -13,11 +13,31 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
   const { menus } = useMenus();
 
   // Dynamically derive active nav items ordered by admin panel order_index
-  const activeMenus = (menus && menus.length > 0)
+  const rawActiveMenus = (menus && menus.length > 0)
     ? menus
         .filter((m) => m.is_active !== false)
         .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
     : [];
+
+  // Ensure Careers and Portfolio exist in active nav items even if legacy cache exists
+  const activeMenus = [...rawActiveMenus];
+  if (activeMenus.length > 0) {
+    if (!activeMenus.some((m) => (m.path || '').toLowerCase().includes('career'))) {
+      const contactIdx = activeMenus.findIndex((m) => (m.path || '').toLowerCase().includes('contact'));
+      const careersItem = {
+        id: 'm-careers-auto',
+        label: 'Careers',
+        path: '/careers',
+        order_index: contactIdx !== -1 ? (activeMenus[contactIdx].order_index || 10) - 0.5 : 10,
+        is_active: true
+      };
+      if (contactIdx !== -1) {
+        activeMenus.splice(contactIdx, 0, careersItem);
+      } else {
+        activeMenus.push(careersItem);
+      }
+    }
+  }
 
   const navItems = activeMenus.length > 0
     ? activeMenus.map((m) => {
@@ -101,6 +121,9 @@ export default function Navbar({ onOpenModal, onOpenInquiry, onOpenDemoModal }) 
     }
     if (target === '/partnership') {
       return current === '/partnership' || current === '/business-partners';
+    }
+    if (target === '/careers') {
+      return current === '/careers' || current === '/career' || current === '/jobs';
     }
     if (target === '/contact-us') {
       return current === '/contact' || current === '/contact-us';

@@ -2425,6 +2425,249 @@
   ],
   "activity_logs": [
     {
+      "id": "log-1795426341456",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:32:21.456Z"
+    },
+    {
+      "id": "log-1795426341320",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:32:21.320Z"
+    },
+    {
+      "id": "log-1795426260257",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:31:00.257Z"
+    },
+    {
+      "id": "log-1795426260149",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:31:00.149Z"
+    },
+    {
+      "id": "log-1795426226381",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:30:26.381Z"
+    },
+    {
+      "id": "log-1795426226248",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:30:26.248Z"
+    },
+    {
+      "id": "log-1795426216080",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:30:16.080Z"
+    },
+    {
+      "id": "log-1795426215905",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:30:15.905Z"
+    },
+    {
+      "id": "log-1795426152516",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:29:12.516Z"
+    },
+    {
+      "id": "log-1795426152435",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:29:12.435Z"
+    },
+    {
+      "id": "log-1795426110326",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:28:30.326Z"
+    },
+    {
+      "id": "log-1795426110250",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:28:30.250Z"
+    },
+    {
+      "id": "log-1795426084901",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:28:04.901Z"
+    },
+    {
+      "id": "log-1795426084840",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:28:04.840Z"
+    },
+    {
+      "id": "log-1795426063628",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:27:43.628Z"
+    },
+    {
+      "id": "log-1795426063553",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:27:43.553Z"
+    },
+    {
+      "id": "log-1795426024288",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:27:04.289Z"
+    },
+    {
+      "id": "log-1795426024194",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:27:04.194Z"
+    },
+    {
+      "id": "log-1795426010591",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:26:50.591Z"
+    },
+    {
+      "id": "log-1795426010470",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:26:50.470Z"
+    },
+    {
+      "id": "log-1795425995641",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:26:35.641Z"
+    },
+    {
+      "id": "log-1795425995550",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:26:35.550Z"
+    },
+    {
+      "id": "log-1795425984075",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:26:24.075Z"
+    },
+    {
+      "id": "log-1795425983978",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:26:23.978Z"
+    },
+    {
+      "id": "log-1795425973765",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:26:13.765Z"
+    },
+    {
+      "id": "log-1795425973159",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:26:13.159Z"
+    },
+    {
+      "id": "log-1795425796317",
+      "action": "Updated Module",
+      "module": "careers_page",
+      "record_id": "careers_page",
+      "user_email": "admin@blackgrapessoftech.com",
+      "description": "Saved live modifications for module: careers_page",
+      "created_at": "2026-11-23T09:23:16.317Z"
+    },
+    {
       "id": "log-1794919256273",
       "action": "Updated Module",
       "module": "menus",
@@ -3080,249 +3323,6 @@
       "user_email": "admin@blackgrapessoftech.com",
       "description": "Saved live modifications for module: home_page",
       "created_at": "2026-11-17T09:20:15.840Z"
-    },
-    {
-      "id": "log-1794907215811",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:20:15.811Z"
-    },
-    {
-      "id": "log-1794907153320",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:19:13.320Z"
-    },
-    {
-      "id": "log-1794907153258",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:19:13.258Z"
-    },
-    {
-      "id": "log-1794906654945",
-      "action": "Updated Module",
-      "module": "blog_posts",
-      "record_id": "blog_posts",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: blog_posts",
-      "created_at": "2026-11-17T09:10:54.945Z"
-    },
-    {
-      "id": "log-1794906654907",
-      "action": "Updated Module",
-      "module": "blog_posts",
-      "record_id": "blog_posts",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: blog_posts",
-      "created_at": "2026-11-17T09:10:54.907Z"
-    },
-    {
-      "id": "log-1794906592983",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:09:52.983Z"
-    },
-    {
-      "id": "log-1794906592934",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:09:52.934Z"
-    },
-    {
-      "id": "log-1794906592609",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T09:09:52.609Z"
-    },
-    {
-      "id": "log-1794906592557",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T09:09:52.557Z"
-    },
-    {
-      "id": "log-1794906513170",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:08:33.170Z"
-    },
-    {
-      "id": "log-1794906513144",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:08:33.144Z"
-    },
-    {
-      "id": "log-1794906512690",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T09:08:32.690Z"
-    },
-    {
-      "id": "log-1794906512642",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T09:08:32.642Z"
-    },
-    {
-      "id": "log-1794906369723",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:06:09.724Z"
-    },
-    {
-      "id": "log-1794906369675",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T09:06:09.675Z"
-    },
-    {
-      "id": "log-1794906369377",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T09:06:09.377Z"
-    },
-    {
-      "id": "log-1794906369065",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T09:06:09.065Z"
-    },
-    {
-      "id": "log-1794905924794",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T08:58:44.794Z"
-    },
-    {
-      "id": "log-1794905924748",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T08:58:44.748Z"
-    },
-    {
-      "id": "log-1794905924447",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T08:58:44.447Z"
-    },
-    {
-      "id": "log-1794905924414",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T08:58:44.414Z"
-    },
-    {
-      "id": "log-1794905889137",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T08:58:09.137Z"
-    },
-    {
-      "id": "log-1794905889112",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T08:58:09.112Z"
-    },
-    {
-      "id": "log-1794905888861",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T08:58:08.861Z"
-    },
-    {
-      "id": "log-1794905888832",
-      "action": "Updated Module",
-      "module": "testimonials",
-      "record_id": "testimonials",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: testimonials",
-      "created_at": "2026-11-17T08:58:08.832Z"
-    },
-    {
-      "id": "log-1794905831272",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T08:57:11.272Z"
-    },
-    {
-      "id": "log-1794905831241",
-      "action": "Updated Module",
-      "module": "home_page",
-      "record_id": "home_page",
-      "user_email": "admin@blackgrapessoftech.com",
-      "description": "Saved live modifications for module: home_page",
-      "created_at": "2026-11-17T08:57:11.241Z"
     }
   ],
   "content_revisions": [],
@@ -3350,44 +3350,58 @@
     },
     {
       "id": "m-4",
-      "label": "Our Products",
-      "path": "/our-products",
+      "label": "Portfolio",
+      "path": "/portfolio",
       "order_index": 4,
       "is_active": true
     },
     {
       "id": "m-5",
-      "label": "Ecommerce",
-      "path": "/ecommerce",
+      "label": "Our Products",
+      "path": "/our-products",
       "order_index": 5,
       "is_active": true
     },
     {
       "id": "m-6",
-      "label": "Our Clients",
-      "path": "/our-clients",
+      "label": "Ecommerce",
+      "path": "/ecommerce",
       "order_index": 6,
       "is_active": true
     },
     {
       "id": "m-7",
-      "label": "IT Staffing",
-      "path": "/it-staffing",
+      "label": "Our Clients",
+      "path": "/our-clients",
       "order_index": 7,
       "is_active": true
     },
     {
       "id": "m-8",
-      "label": "Partnership",
-      "path": "/partnership",
+      "label": "IT Staffing",
+      "path": "/it-staffing",
       "order_index": 8,
       "is_active": true
     },
     {
       "id": "m-9",
+      "label": "Partnership",
+      "path": "/partnership",
+      "order_index": 9,
+      "is_active": true
+    },
+    {
+      "id": "m-10",
+      "label": "Careers",
+      "path": "/careers",
+      "order_index": 10,
+      "is_active": true
+    },
+    {
+      "id": "m-11",
       "label": "Contact",
       "path": "/contact",
-      "order_index": 9,
+      "order_index": 11,
       "is_active": true
     }
   ],
@@ -4946,5 +4960,83 @@
   },
   "ecommerce": {
     "title": "BG TEST ECOMMERCE 222"
+  },
+  "careers_page": {
+    "heroBadge": "# CAREERS AT BLACK GRAPES SOFTECH",
+    "heroTitle": "Build Future-Defining Software",
+    "heroTitleAccent": "With Us",
+    "heroSubtitle": "Join an engineering-first technology powerhouse. We architect scalable enterprise systems, modern mobile platforms, and cloud AI ecosystems for global innovators.",
+    "whyJoin": {
+      "badge": "WHY JOIN BLACK GRAPES SOFTECH",
+      "title": "Where High-Velocity Talent Solves Real-World Engineering Scale",
+      "paragraph": "With 10+ years of proven IT excellence in Indore and deployments across 15+ countries, Black Grapes Softech is the launchpad for ambitious developers, creative UI/UX designers, and technology leaders. We provide challenging work, genuine autonomy, and an agile culture that rewards engineering curiosity.",
+      "pillars": [
+        {
+          "id": "pillar-1",
+          "title": "Modern Tech Stack",
+          "desc": "Architect with React, Next.js, Flutter, Node.js, Python, AWS Cloud & scalable microservices.",
+          "icon": "Code"
+        },
+        {
+          "id": "pillar-2",
+          "title": "Rapid Career Velocity",
+          "desc": "Merit-driven progression, executive mentorship, and direct leadership opportunities.",
+          "icon": "TrendingUp"
+        },
+        {
+          "id": "pillar-3",
+          "title": "Global Impact & Deployments",
+          "desc": "Build high-scale enterprise platforms deployed across 15+ countries and India.",
+          "icon": "Globe"
+        },
+        {
+          "id": "pillar-4",
+          "title": "Continuous Tech Upgrades",
+          "desc": "Sponsored technical certifications, internal hackathons, and advanced learning support.",
+          "icon": "BookOpen"
+        }
+      ],
+      "contactCard": {
+        "title": "Direct Talent Team Contact",
+        "subtitle": "Have questions about working with us? Reach out directly.",
+        "email": "careers@blackgrapessoftech.com",
+        "whatsapp": "+91 7470997884",
+        "whatsappLabel": "WhatsApp HR →"
+      }
+    },
+    "applicationForm": {
+      "badge": "DIRECT CAREER APPLICATION",
+      "title": "Drop Your Profile",
+      "subtitle": "Submit your credentials to join our engineering talent network. We evaluate every application thoroughly.",
+      "domains": [
+        "Full Stack Engineer (MERN / Next.js)",
+        "Mobile App Developer (Flutter / React Native)",
+        "UI/UX Designer & Motion Creative",
+        "Python & AI Backend Engineer",
+        "QA Automation Engineer",
+        "Business Development / IT Sales",
+        "Digital Marketing & SEO Specialist",
+        "Other / General Application"
+      ],
+      "experienceLevels": [
+        "Fresher / College Graduate",
+        "1 - 2 Years (Junior Developer)",
+        "2 - 5 Years (Mid-Level Engineer)",
+        "5+ Years (Senior / Technical Lead)"
+      ],
+      "submitBtnText": "Submit Job Application ✈"
+    },
+    "openingsSection": {
+      "badge": "CURRENT OPENINGS",
+      "title": "Explore Open Positions",
+      "subtitle": "Discover public job vacancies and squad expansion opportunities at Black Grapes Softech.",
+      "emptyState": {
+        "title": "No Specific Public Vacancies Listed Right Now",
+        "desc": "All our core engineering, mobile app, and design squads are currently staffed. However, exceptional talent always finds an opportunity at Black Grapes Softech! We prioritize candidates from our talent pool first whenever a new client mandate or team sprint begins.",
+        "ctaText": "Join Talent Pool Above ↗"
+      }
+    },
+    "openings": [],
+    "isVisible": true
   }
 }

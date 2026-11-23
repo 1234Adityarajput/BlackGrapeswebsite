@@ -12,6 +12,7 @@ import ClientsManager from './pages/ClientsManager';
 import ITStaffingManager from './pages/ITStaffingManager';
 import EcommerceManager from './pages/EcommerceManager';
 import PartnershipManager from './pages/PartnershipManager';
+import CareersManager from './pages/CareersManager';
 import TeamManager from './pages/TeamManager';
 import TestimonialsManager from './pages/TestimonialsManager';
 import ContactManager from './pages/ContactManager';
@@ -50,6 +51,7 @@ export default function AdminApp() {
           <Route path="it-staffing" element={<ITStaffingManager />} />
           <Route path="ecommerce" element={<EcommerceManager />} />
           <Route path="partnership" element={<PartnershipManager />} />
+          <Route path="careers" element={<CareersManager />} />
           <Route path="team" element={<TeamManager />} />
           <Route path="testimonials" element={<TestimonialsManager />} />
           <Route path="contact" element={<ContactManager />} />

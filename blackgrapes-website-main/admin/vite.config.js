@@ -1,12 +1,21 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
+import { createApiMiddleware } from '../backend/apiMiddleware.js';
 
 const BACKEND_URL = process.env.VITE_API_URL || 'https://blackgrapeswebsite.onrender.com';
 
 // Standalone Vite Configuration for Black Grapes Admin Panel
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'local-api-middleware',
+      configureServer(server) {
+        server.middlewares.use(createApiMiddleware());
+      }
+    }
+  ],
   server: {
     port: 5174,
     open: false,

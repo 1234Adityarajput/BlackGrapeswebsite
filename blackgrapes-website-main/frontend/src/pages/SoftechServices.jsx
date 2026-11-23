@@ -21,7 +21,9 @@ import {
   Home,
   GraduationCap,
   UtensilsCrossed,
-  Stethoscope
+  Stethoscope,
+  Briefcase,
+  MessageCircle
 } from 'lucide-react';
 import '../styles/CyberServices.css';
 

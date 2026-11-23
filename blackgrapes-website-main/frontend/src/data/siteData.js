@@ -57,9 +57,11 @@ export const NAV_LINKS = [
     href: "/partnership",
     dropdown: [
       { name: "Partner with Us", desc: "Offshore development centre & resource sharing", href: "/partnership" },
-      { name: "Business Partners", desc: "Product companies tie-up & alliances", href: "/business-partners" }
+      { name: "Business Partners", desc: "Product companies tie-up & alliances", href: "/business-partners" },
+      { name: "Careers & Hiring", desc: "Join our Vijay Nagar, Indore tech team", href: "/careers" }
     ]
   },
+  { name: "Careers", href: "/careers" },
   { name: "Contact Us", href: "/contact-us" }
 ];
 

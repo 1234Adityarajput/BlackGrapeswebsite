@@ -22,7 +22,8 @@ import {
   DEFAULT_CLIENTS_PAGE,
   DEFAULT_SERVICES_PAGE,
   DEFAULT_SOFTECH_PAGE,
-  DEFAULT_PRODUCTS_PAGE
+  DEFAULT_PRODUCTS_PAGE,
+  DEFAULT_CAREERS_PAGE
 } from './defaultData';
 import { sendWsBroadcast } from './wsClient';
 
@@ -142,13 +143,13 @@ function deepMergeDefaults(source, target) {
   return target !== undefined ? target : source;
 }
 
-// API Helpers with dual-connection (Server port 5000 first, fallback to local origin)
+// API Helpers with local-first dev middleware and cloud fallback
 export async function fetchModuleApi(moduleName, defaultVal) {
   const cacheBust = `_t=${Date.now()}`;
 
-  // 1. Try central backend server on port 5000
+  // 1. Try local Vite dev server / API middleware first (< 1ms)
   try {
-    const res = await fetch(getApiUrl(`/api/content/${moduleName}?${cacheBust}`), {
+    const res = await fetch(`/api/content/${moduleName}?${cacheBust}`, {
       cache: 'no-store'
     });
     if (res.ok) {
@@ -160,16 +161,33 @@ export async function fetchModuleApi(moduleName, defaultVal) {
       }
     }
   } catch {
-    // try relative url
+    // try fallback
   }
 
-  // 2. Try relative Vite dev server
+  // 2. Try central backend server on port 5000 if running
   try {
-    const res2 = await fetch(`/api/content/${moduleName}?${cacheBust}`, {
+    const res5000 = await fetch(`http://localhost:5000/api/content/${moduleName}?${cacheBust}`, {
       cache: 'no-store'
     });
-    if (res2.ok) {
-      const json = await res2.json();
+    if (res5000.ok) {
+      const json = await res5000.json();
+      if (json.success && json.data !== undefined) {
+        const merged = deepMergeDefaults(defaultVal, json.data);
+        setLocal(`bgst_${moduleName}`, merged);
+        return merged;
+      }
+    }
+  } catch {
+    // try remote
+  }
+
+  // 3. Try configured BACKEND_URL (Render / Cloud)
+  try {
+    const resRemote = await fetch(getApiUrl(`/api/content/${moduleName}?${cacheBust}`), {
+      cache: 'no-store'
+    });
+    if (resRemote.ok) {
+      const json = await resRemote.json();
       if (json.success && json.data !== undefined) {
         const merged = deepMergeDefaults(defaultVal, json.data);
         setLocal(`bgst_${moduleName}`, merged);
@@ -192,18 +210,7 @@ export async function saveModuleApi(moduleName, data) {
 
   const bodyStr = JSON.stringify(data);
 
-  // 1. Save to central backend server port 5000
-  try {
-    await fetch(getApiUrl(`/api/content/${moduleName}`), {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'x-admin-email': userEmail },
-      body: bodyStr
-    });
-  } catch {
-    // ignore
-  }
-
-  // 2. Also save to local dev origin if different
+  // 1. Save to local Vite dev server / API middleware (writes directly to db.json)
   try {
     await fetch(`/api/content/${moduleName}`, {
       method: 'PUT',
@@ -214,10 +221,32 @@ export async function saveModuleApi(moduleName, data) {
     // ignore
   }
 
-  // 3. Broadcast over WebSocket
+  // 2. Save to port 5000 if running
+  try {
+    await fetch(`http://localhost:5000/api/content/${moduleName}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'x-admin-email': userEmail },
+      body: bodyStr
+    });
+  } catch {
+    // ignore
+  }
+
+  // 3. Save to central backend server / Render if online
+  try {
+    await fetch(getApiUrl(`/api/content/${moduleName}`), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'x-admin-email': userEmail },
+      body: bodyStr
+    });
+  } catch {
+    // ignore
+  }
+
+  // 4. Broadcast over WebSocket
   sendWsBroadcast(moduleName, data);
 
-  // 4. Broadcast over Broadcast Channel for instant cross-tab sync
+  // 5. Broadcast over Broadcast Channel for instant cross-tab sync
   if (syncChannel) {
     try {
       syncChannel.postMessage({ module: moduleName, timestamp: Date.now(), data });
@@ -1134,4 +1163,45 @@ export async function saveAnyPageContent(moduleName, data, displayName = '') {
   notifyContentUpdated(moduleName, data);
   return data;
 }
+
+// ==========================================
+// 27. CAREERS PAGE MANAGEMENT
+// ==========================================
+export async function getCareersPage() {
+  const data = await fetchModuleApi('careers_page', DEFAULT_CAREERS_PAGE);
+  // Auto-clean any obsolete dummy cache from previous testing versions
+  if (
+    data &&
+    (data.heroBadge?.includes('WE ARE HIRING') ||
+     data.heroTitle?.includes('Digital Engineering') ||
+     data.heroTitleAccent === 'Black Grapes Softech')
+  ) {
+    setLocal('bgst_careers_page', DEFAULT_CAREERS_PAGE);
+    return DEFAULT_CAREERS_PAGE;
+  }
+  return data;
+}
+
+export async function saveCareersPage(data) {
+  await saveModuleApi('careers_page', data);
+  logActivity('Careers Page Updated', 'Careers', 'careers_page', 'Saved live modifications to Careers & Job Openings');
+  notifyContentUpdated('careers_page', data);
+  return data;
+}
+
+export async function submitJobApplication(applicationData) {
+  const payload = {
+    name: applicationData.name,
+    email: applicationData.email,
+    phone: applicationData.phone,
+    service: `Job Application: ${applicationData.position || 'General Application'}`,
+    requirement: `Experience: ${applicationData.experience || 'Not specified'} | Current CTC: ${applicationData.currentCtc || 'N/A'} | Expected CTC: ${applicationData.expectedCtc || 'N/A'} | Notice: ${applicationData.noticePeriod || 'Immediate'}`,
+    message: `${applicationData.message || ''}\n\nPortfolio/LinkedIn: ${applicationData.portfolioUrl || 'N/A'}\nResume: ${applicationData.resumeUrl || 'N/A'}`,
+    scope: applicationData.position || 'General Application',
+    source: 'Careers Portal Application Form'
+  };
+
+  return await submitEnquiry(payload);
+}
+
 

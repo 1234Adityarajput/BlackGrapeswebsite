@@ -1,0 +1,618 @@
+/* ==========================================================================
+   BLACK GRAPES SOFTECH – CAREERS PAGE STYLES (MATCHES LIVE WEBSITE EXACTLY)
+   ========================================================================== */
+
+.careers-page-wrapper {
+  position: relative;
+  background-color: #07070c;
+  color: #f8fafc;
+  min-height: 100vh;
+  padding: 8rem 0 6rem;
+  overflow: hidden;
+}
+
+/* Background Ambient Glows */
+.careers-bg-glow-top {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(248, 98, 0, 0.12) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+}
+
+.careers-bg-glow-right {
+  position: absolute;
+  top: 30%;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(248, 98, 0, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+}
+
+.careers-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ==========================================================================
+   HERO HEADER
+   ========================================================================== */
+.careers-hero-section {
+  max-width: 860px;
+  margin: 0 auto 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.careers-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  border-radius: 9999px;
+  background: rgba(248, 98, 0, 0.1);
+  border: 1px solid rgba(248, 98, 0, 0.3);
+  color: #ff8c38;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.badge-sparkle-icon {
+  color: #f86200;
+}
+
+.badge-flame-icon {
+  color: #f86200;
+}
+
+.careers-hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.text-orange-gradient {
+  background: linear-gradient(135deg, #f86200 0%, #ff8c38 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.careers-hero-subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: #94a3b8;
+  line-height: 1.65;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   TWO-COLUMN GRID: WHY JOIN & DROP YOUR PROFILE FORM
+   ========================================================================== */
+.careers-grid-section {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+  align-items: flex-start;
+  margin-bottom: 6rem;
+}
+
+@media (max-width: 1024px) {
+  .careers-grid-section {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+/* LEFT COLUMN: Why Join Black Grapes */
+.careers-why-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.careers-sub-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #ff8c38;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.careers-why-heading {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.careers-why-lead {
+  font-size: 0.98rem;
+  color: #94a3b8;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+}
+
+/* 4 Feature Pillars Grid */
+.careers-pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .careers-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.careers-pillar-card {
+  background: rgba(18, 18, 28, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.careers-pillar-card:hover {
+  border-color: rgba(248, 98, 0, 0.35);
+  transform: translateY(-2px);
+  background: rgba(22, 22, 34, 0.85);
+}
+
+.pillar-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(248, 98, 0, 0.12);
+  border: 1px solid rgba(248, 98, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f86200;
+  margin-bottom: 1rem;
+}
+
+.pillar-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.pillar-desc {
+  font-size: 0.86rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Direct Talent Team Contact Box */
+.careers-direct-contact-card {
+  background: rgba(18, 18, 28, 0.6);
+  border: 1px dashed rgba(248, 98, 0, 0.3);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.direct-contact-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.25rem;
+}
+
+.direct-contact-sub {
+  font-size: 0.84rem;
+  color: #94a3b8;
+  margin: 0 0 1rem;
+}
+
+.direct-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.talent-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.talent-email-link {
+  color: #ff8c38;
+}
+
+.talent-email-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.talent-whatsapp-link {
+  color: #22c55e;
+}
+
+.talent-whatsapp-link:hover {
+  color: #4ade80;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: DROP YOUR PROFILE FORM CARD
+   ========================================================================== */
+.careers-form-column {
+  position: relative;
+}
+
+.careers-form-card {
+  position: relative;
+  background: rgba(14, 14, 22, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 2.2rem 2rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.form-card-glow-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f86200, #ff8c38, #a855f7);
+}
+
+.form-card-header {
+  margin-bottom: 1.75rem;
+}
+
+.form-badge {
+  margin-bottom: 0.5rem;
+}
+
+.form-card-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.form-card-sub {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.careers-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.careers-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .careers-field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.careers-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.careers-field-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.careers-field-input,
+.careers-field-select,
+.careers-field-textarea {
+  width: 100%;
+  background: rgba(8, 8, 14, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.72rem 0.95rem;
+  color: #ffffff;
+  font-size: 0.88rem;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.careers-field-input::placeholder,
+.careers-field-textarea::placeholder {
+  color: #64748b;
+}
+
+.careers-field-input:focus,
+.careers-field-select:focus,
+.careers-field-textarea:focus {
+  border-color: #f86200;
+  box-shadow: 0 0 0 3px rgba(248, 98, 0, 0.18);
+  background: rgba(12, 12, 20, 0.95);
+}
+
+.careers-field-select option {
+  background: #0f0f18;
+  color: #ffffff;
+}
+
+.careers-submit-btn {
+  background: linear-gradient(135deg, #f86200 0%, #ff8c38 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(248, 98, 0, 0.35);
+}
+
+.careers-submit-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(248, 98, 0, 0.45);
+}
+
+.careers-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.form-success-alert {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.form-success-alert h4 {
+  color: #10b981;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem;
+}
+
+.form-success-alert p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.form-error-banner {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+  padding: 0.65rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.84rem;
+}
+
+/* ==========================================================================
+   CURRENT OPENINGS SECTION (Screenshot 2)
+   ========================================================================== */
+.careers-openings-section {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.openings-section-header {
+  max-width: 680px;
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.openings-section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.65rem;
+}
+
+.openings-section-sub {
+  font-size: 0.98rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Empty State / Talent Pool Banner Card */
+.careers-talent-pool-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: rgba(14, 14, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 3.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.talent-pool-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(248, 98, 0, 0.12);
+  border: 1px solid rgba(248, 98, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f86200;
+  margin-bottom: 1.5rem;
+}
+
+.talent-pool-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.85rem;
+}
+
+.talent-pool-desc {
+  font-size: 0.92rem;
+  color: #94a3b8;
+  line-height: 1.65;
+  max-width: 620px;
+  margin: 0 auto 2rem;
+}
+
+.talent-pool-cta-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(248, 98, 0, 0.4);
+  color: #ff8c38;
+  padding: 0.75rem 1.6rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.talent-pool-cta-btn:hover {
+  background: #f86200;
+  color: #ffffff;
+  border-color: #f86200;
+  box-shadow: 0 4px 14px rgba(248, 98, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+/* If Openings are active */
+.careers-openings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.career-job-card {
+  background: rgba(14, 14, 22, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.career-job-card:hover {
+  border-color: rgba(248, 98, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.job-card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.job-dept-tag {
+  background: rgba(248, 98, 0, 0.15);
+  color: #f86200;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.job-type-tag {
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.job-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.job-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+}
+
+.job-meta-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.job-card-overview {
+  font-size: 0.86rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.job-apply-cta-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 0.65rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.job-apply-cta-btn:hover {
+  background: #f86200;
+  border-color: #f86200;
+}
